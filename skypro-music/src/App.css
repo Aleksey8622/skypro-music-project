@@ -304,10 +304,13 @@ body {
   border: 1px solid #ffffff;
   border-radius: 60px;
   padding: 6px 20px;
+  position: relative;
+
 }
 
 .filter__button:not(:last-child) {
   margin-right: 10px;
+
 }
 
 .content__title {
@@ -876,4 +879,78 @@ body {
 
 .volume__progress-line {
   width: 109px;
+}
+
+.menu-filter {
+  position: absolute;
+  top: calc(100% - -10px);
+  left: 35px;
+  width: 250px;
+  padding: 25px;
+  background-color: #272727;
+  border: 1px solid #d9b6ff;
+  border-radius: 10px;
+
+}
+
+.menu-filter_active {
+  left: 10px;
+}
+
+.menu-list {
+  overflow-y: scroll;
+  height: 180px;
+}
+
+.menu-list::-webkit-scrollbar,
+.menu-list::-webkit-scrollbar,
+.menu-list::-webkit-scrollbar-thumb {
+  width: 12px;
+  background-color: black;
+  border-radius: 10px;
+  border: 1px solid #d9b6ff;
+
+}
+
+._btn-text_active {
+  cursor: pointer;
+  border-color: #d9b6ff;
+  color: #d9b6ff;
+  cursor: pointer;
+}
+
+.menu-filter::before,
+.menu-filter::after {
+  display: block;
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 25px;
+  border: 10px solid transparent;
+}
+
+.menu-filter::before {
+  top: -20px;
+  border-bottom: 10px solid #d9b6ff;
+}
+
+.menu-filter::after {
+  top: -19px;
+  border-bottom: 10px solid #272727;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+.menu-item:hover {
+  color: #d9b6ff;
 }
