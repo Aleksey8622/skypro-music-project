@@ -1,5 +1,16 @@
 import "../App.css";
+import React from "react";
+import { useState, useEffect } from "react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 function MainSidebar() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+  }, []);
   return (
     <div className="main__sidebar sidebar">
       <div className="sidebar__personal">
@@ -10,35 +21,66 @@ function MainSidebar() {
           </svg>
         </div>
       </div>
+
       <div className="sidebar__block">
         <div className="sidebar__list">
-          <div className="sidebar__item">
-            <a className="sidebar__link" href="/#">
-              <img
-                className="sidebar__img"
-                src="img/Frame5.png"
-                alt="day's playlist"
+          {isLoading ? (
+            <SkeletonTheme highlightColor="#696969" baseColor="#272727">
+              <Skeleton
+                width={100}
+                height={200}
+                style={{ marginBottom: "30px" }}
               />
-            </a>
-          </div>
-          <div className="sidebar__item">
-            <a className="sidebar__link" href="/#">
-              <img
-                className="sidebar__img"
-                src="/img/Frame3.png"
-                alt="day's playlist"
+            </SkeletonTheme>
+          ) : (
+            <div className="sidebar__item">
+              <a className="sidebar__link" href="/#">
+                <img
+                  className="sidebar__img"
+                  src="img/Frame5.png"
+                  alt="day's playlist"
+                />
+              </a>
+            </div>
+          )}
+          {isLoading ? (
+            <SkeletonTheme highlightColor="#696969" baseColor="#272727">
+              <Skeleton
+                width={100}
+                height={200}
+                style={{ marginBottom: "30px" }}
               />
-            </a>
-          </div>
-          <div className="sidebar__item">
-            <a className="sidebar__link" href="/#">
-              <img
-                className="sidebar__img"
-                src="img/Frame4.png"
-                alt="day's playlist"
+            </SkeletonTheme>
+          ) : (
+            <div className="sidebar__item">
+              <a className="sidebar__link" href="/#">
+                <img
+                  className="sidebar__img"
+                  src="/img/Frame3.png"
+                  alt="day's playlist"
+                />
+              </a>
+            </div>
+          )}
+          {isLoading ? (
+            <SkeletonTheme highlightColor="#696969" baseColor="#272727">
+              <Skeleton
+                width={100}
+                height={200}
+                style={{ marginBottom: "30px" }}
               />
-            </a>
-          </div>
+            </SkeletonTheme>
+          ) : (
+            <div className="sidebar__item">
+              <a className="sidebar__link" href="/#">
+                <img
+                  className="sidebar__img"
+                  src="img/Frame4.png"
+                  alt="day's playlist"
+                />
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>

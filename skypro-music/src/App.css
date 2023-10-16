@@ -953,4 +953,9 @@ body {
 
 .menu-item:hover {
   color: #d9b6ff;
+  text-decoration: underline;
+}
+
+.skeleton {
+  padding: 20px;
 }
