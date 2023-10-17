@@ -3,7 +3,6 @@ import BlockFilter from "./BlockFilter";
 import BlockSearch from "./BlockSearch";
 import React from "react";
 import { useState, useEffect } from "react";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import SkeletonTrack from "./SkeletonTrack";
 function PlayList() {
