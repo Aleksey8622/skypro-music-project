@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import SkeletonSidebar from "./SkeletonSidebar";
 function MainSidebar() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -25,13 +26,7 @@ function MainSidebar() {
       <div className="sidebar__block">
         <div className="sidebar__list">
           {isLoading ? (
-            <SkeletonTheme highlightColor="#696969" baseColor="#272727">
-              <Skeleton
-                width={100}
-                height={200}
-                style={{ marginBottom: "30px" }}
-              />
-            </SkeletonTheme>
+            <SkeletonSidebar />
           ) : (
             <div className="sidebar__item">
               <a className="sidebar__link" href="/#">
@@ -44,13 +39,7 @@ function MainSidebar() {
             </div>
           )}
           {isLoading ? (
-            <SkeletonTheme highlightColor="#696969" baseColor="#272727">
-              <Skeleton
-                width={100}
-                height={200}
-                style={{ marginBottom: "30px" }}
-              />
-            </SkeletonTheme>
+            <SkeletonSidebar />
           ) : (
             <div className="sidebar__item">
               <a className="sidebar__link" href="/#">
@@ -63,13 +52,7 @@ function MainSidebar() {
             </div>
           )}
           {isLoading ? (
-            <SkeletonTheme highlightColor="#696969" baseColor="#272727">
-              <Skeleton
-                width={100}
-                height={200}
-                style={{ marginBottom: "30px" }}
-              />
-            </SkeletonTheme>
+            <SkeletonSidebar />
           ) : (
             <div className="sidebar__item">
               <a className="sidebar__link" href="/#">
