@@ -1,6 +1,6 @@
 import "../App.css";
-import BlockFilter from "./BlockFilter";
-import BlockSearch from "./BlockSearch";
+import BlockFilter from "./BlockFilter/BlockFilter";
+import BlockSearch from "./BlockSearch/BlockSearch";
 import React from "react";
 import { useState, useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
