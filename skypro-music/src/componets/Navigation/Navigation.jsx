@@ -5,7 +5,7 @@ import * as S from "./NavigationStyle";
 const { useState } = React;
 
 function Navigation() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   const showMenu = () => setShow(!show);
   return (

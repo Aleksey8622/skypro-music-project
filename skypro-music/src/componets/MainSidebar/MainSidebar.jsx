@@ -46,7 +46,7 @@ function MainSidebar() {
             <SkeletonSidebar />
           ) : (
             <S.SidebarItem>
-              <S.SidebarLink c href="/#">
+              <S.SidebarLink href="/#">
                 <S.SidebarImg src="img/Frame4.png" alt="day's playlist" />
               </S.SidebarLink>
             </S.SidebarItem>

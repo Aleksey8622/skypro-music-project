@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 export const BurgerMenuList = styled.ul`
   padding: 18px 0 10px 0;
+  cursor: pointer;
 `;
 
 export const MenuItem = styled.li`
