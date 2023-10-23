@@ -3,21 +3,22 @@ import "./App.css";
 import React from "react";
 import Player from "./componets/Player/Player";
 import Navigation from "./componets/Navigation/Navigation";
-import PlayList from "./componets/PlayList";
+import PlayList from "./componets/PlayList/PlayList";
 import MainSidebar from "./componets/MainSidebar/MainSidebar";
+import * as S from "./AppStyle";
 function App() {
   return (
-    <div className="wrapper">
-      <div className="container">
-        <main className="main">
+    <S.Wrapper>
+      <S.Container>
+        <S.Main>
           <Navigation />
           <PlayList />
           <MainSidebar />
-        </main>
+        </S.Main>
         <Player />
         <footer className="footer"></footer>
-      </div>
-    </div>
+      </S.Container>
+    </S.Wrapper>
   );
 }
 export default App;
