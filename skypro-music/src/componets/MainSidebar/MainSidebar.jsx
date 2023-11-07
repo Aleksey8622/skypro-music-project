@@ -1,9 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
-import SkeletonSidebar from "../SkeletonSidebar";
+
+import SkeletonSidebar from "../Skeletons/SkeletonSidebar";
 import * as S from "./MainSidebarStyle";
-function MainSidebar() {
+function MainSidebar({ user, cancelHandler }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ function MainSidebar() {
     <S.MainSidebar>
       <S.SidebarPersonal>
         <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
-        <S.SidebarIcon>
+        <S.SidebarIcon onClick={user !== null && cancelHandler}>
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout"></use>
           </svg>
@@ -28,25 +29,25 @@ function MainSidebar() {
             <SkeletonSidebar />
           ) : (
             <S.SidebarItem>
-              <S.SidebarLink href="/#">
+              <S.SidebarLink to={"/category/1"}>
                 <S.SidebarImg src="img/Frame5.png" alt="day's playlist" />
               </S.SidebarLink>
             </S.SidebarItem>
-          )}
+          )}{" "}
           {isLoading ? (
             <SkeletonSidebar />
           ) : (
             <S.SidebarItem>
-              <S.SidebarLink href="/#">
+              <S.SidebarLink to={"/category/2"}>
                 <S.SidebarImg src="/img/Frame3.png" alt="day's playlist" />
               </S.SidebarLink>
             </S.SidebarItem>
-          )}
+          )}{" "}
           {isLoading ? (
             <SkeletonSidebar />
           ) : (
             <S.SidebarItem>
-              <S.SidebarLink href="/#">
+              <S.SidebarLink to={"/category/3"}>
                 <S.SidebarImg src="img/Frame4.png" alt="day's playlist" />
               </S.SidebarLink>
             </S.SidebarItem>

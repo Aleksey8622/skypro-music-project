@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import SkeletonPlayer from "../SkeletonPlayer";
+import SkeletonPlayer from "../Skeletons/SkeletonPlayer";
 import * as S from "./PlayerStyle";
 // const S.Bar = S..div``
 

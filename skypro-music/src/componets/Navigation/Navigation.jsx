@@ -4,7 +4,7 @@ import * as S from "./NavigationStyle";
 
 const { useState } = React;
 
-function Navigation() {
+function Navigation({user, cancelHandler}) {
   const [show, setShow] = useState(false);
 
   const showMenu = () => setShow(!show);
@@ -20,7 +20,7 @@ function Navigation() {
       </S.NavBurger>
       {show && (
         <S.NavMenu>
-          <BurgerMenu />
+          <BurgerMenu user={user} cancelHandler={cancelHandler} />
         </S.NavMenu>
       )}
     </S.Nav>
