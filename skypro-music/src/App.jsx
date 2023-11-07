@@ -1,12 +1,9 @@
 // import logo from "./logo.svg";
 import "./App.css";
-
+import { AppRoutes } from "./routes";
 function App() {
   return (
-    <div className="App">
-      <code>Здесь скоро будет Skypro.Music</code>
-    </div>
+    <AppRoutes/>
   );
 }
-
 export default App;
