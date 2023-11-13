@@ -8,12 +8,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import * as S from "./PlayListStyle";
 import { getTrack } from "../../api";
 
-function PlayList({
-  currentTrack,
-  setCurrentTrack,
-  showPlayer,
-  setShowPlayer,
-}) {
+function PlayList({ setCurrentTrack }) {
   // const tracks = [
   //   {
   //     id: 1,
@@ -138,11 +133,10 @@ function PlayList({
             return (
               <Track
                 setCurrentTrack={setCurrentTrack}
-                currentTrack={currentTrack}
                 key={item.id}
                 name={item.name}
                 author={item.author}
-                duration_in_seconds={item.duration_in_seconds}
+                duration_in_seconds={item.duration}
                 album={item.album}
               />
             );

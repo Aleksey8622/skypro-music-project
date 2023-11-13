@@ -4,7 +4,7 @@ import SkeletonTrack from "../../Skeletons/SkeletonTrack";
 import { useState, useEffect } from "react";
 import * as S from "../PlayListStyle";
 
-const Track = ({ currentTrack, setCurrentTrack }) => {
+const Track = ({ name, author, album, duration, setCurrentTrack }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Track = ({ currentTrack, setCurrentTrack }) => {
   }, []);
 
   return (
-    <S.PlaylistItem onClick={setCurrentTrack({})}>
+    <S.PlaylistItem onClick={setCurrentTrack({ name, author, album })}>
       <S.PlaylistTrack>
         <S.TrackTitle>
           <S.TrackTitleImage>
@@ -28,7 +28,7 @@ const Track = ({ currentTrack, setCurrentTrack }) => {
               <SkeletonTrack />
             ) : (
               <S.TrackTitleLink>
-                {currentTrack.name}
+                {name}
                 <S.TrackTitleSpan></S.TrackTitleSpan>
               </S.TrackTitleLink>
             )}
@@ -39,7 +39,7 @@ const Track = ({ currentTrack, setCurrentTrack }) => {
           {isLoading ? (
             <SkeletonTrack />
           ) : (
-            <S.TrackAuthorLink>{currentTrack.author}</S.TrackAuthorLink>
+            <S.TrackAuthorLink>{author}</S.TrackAuthorLink>
           )}
         </S.TrackAuthor>
 
@@ -47,14 +47,14 @@ const Track = ({ currentTrack, setCurrentTrack }) => {
           {isLoading ? (
             <SkeletonTrack />
           ) : (
-            <S.TrackAlbumLink>{currentTrack.album}</S.TrackAlbumLink>
+            <S.TrackAlbumLink>{album}</S.TrackAlbumLink>
           )}
         </S.TrackAlbum>
         <div className="track__time">
           <S.TrackTimeSvg alt="time">
             <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
           </S.TrackTimeSvg>
-          <S.TrackTimeText>{currentTrack.duration_in_seconds}</S.TrackTimeText>
+          <S.TrackTimeText>{duration}</S.TrackTimeText>
         </div>
       </S.PlaylistTrack>
     </S.PlaylistItem>

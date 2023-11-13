@@ -4,7 +4,7 @@ import SkeletonPlayer from "../Skeletons/SkeletonPlayer";
 import * as S from "./PlayerStyle";
 // const S.Bar = S..div``
 
-function Player({ currentTrack, showPlayer }) {
+function Player({ currentTrack }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

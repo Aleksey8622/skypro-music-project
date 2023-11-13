@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export function Main({ user, cancelHandler }) {
   const [currentTrack, setCurrentTrack] = useState(null);
-  const [showPlayer, setShowPlayer] = useState(false);
+
   return (
     <S.Wrapper>
       <S.Container>
@@ -18,18 +18,10 @@ export function Main({ user, cancelHandler }) {
           <PlayList
             currentTrack={currentTrack}
             setCurrentTrack={setCurrentTrack}
-            showPlayer={showPlayer}
-            setShowPlayer={setShowPlayer}
           />
           <MainSidebar user={user} cancelHandler={cancelHandler} />
         </S.Main>
-        {currentTrack && (
-          <Player
-            currentTrack={currentTrack}
-            showPlayer={showPlayer}
-            setShowPlayer={setShowPlayer}
-          />
-        )}
+        {currentTrack && <Player currentTrack={currentTrack} />}
 
         <footer className="footer"></footer>
       </S.Container>
