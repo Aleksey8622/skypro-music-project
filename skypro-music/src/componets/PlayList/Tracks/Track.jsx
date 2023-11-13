@@ -14,7 +14,7 @@ const Track = ({ name, author, album, duration, setCurrentTrack }) => {
   }, []);
 
   return (
-    <S.PlaylistItem onClick={setCurrentTrack({ name, author, album })}>
+    <S.PlaylistItem onClick={() => setCurrentTrack({ name, author, album })}>
       <S.PlaylistTrack>
         <S.TrackTitle>
           <S.TrackTitleImage>
