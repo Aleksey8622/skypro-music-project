@@ -18,19 +18,18 @@ export const AppRoutes = () => {
   };
 
   return (
-    <Routes>
+    <Routes >
       <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
         <Route
           path="/"
-          element={<Main user={user} cancelHandler={cancelHandler} />}
+          element={<Main  user={user} cancelHandler={cancelHandler} />}
         />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/category/:id" element={<Category />} />
       </Route>
       <Route path="/login" element={<Login user={user} setUser={setUser} />} />
-      <Route path="/registracion" element={<Registracion/>} />
+      <Route path="/registracion" element={<Registracion />} />
       <Route path="*" element={<NotFound />} />
-      
     </Routes>
   );
 };

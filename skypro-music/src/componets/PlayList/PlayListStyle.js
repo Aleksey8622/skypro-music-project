@@ -67,6 +67,7 @@ export const PlaylistTitleSvg = styled.svg`
   fill: transparent;
   stroke: #696969;
 `;
+
 export const ContentPlaylist = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
@@ -75,7 +76,8 @@ export const ContentPlaylist = styled.div`
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  overflow-y: auto;
+  overflow-y: scroll;
+  
 `;
 export const PlaylistItem = styled.div`
   width: 100%;

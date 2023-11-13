@@ -4,7 +4,7 @@ import SkeletonPlayer from "../Skeletons/SkeletonPlayer";
 import * as S from "./PlayerStyle";
 // const S.Bar = S..div``
 
-function Player() {
+function Player({ currentTrack, showPlayer }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -48,31 +48,33 @@ function Player() {
             </S.BarPlayerControls>
 
             <S.PlayerTrackPlay>
-              <S.TrackPlayerContain>
-                <S.TrackPlayImg>
-                  <S.TrackPlaySvg alt="music">
-                    <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-                  </S.TrackPlaySvg>
-                </S.TrackPlayImg>
-                <S.TrackPlayerAuthor>
-                  {isLoading ? (
-                    <SkeletonPlayer />
-                  ) : (
-                    <S.TrackPlayerAuthorLink href="http://">
-                      Ты та...
-                    </S.TrackPlayerAuthorLink>
-                  )}
-                </S.TrackPlayerAuthor>
-                <S.TrackPlayAlbum>
-                  {isLoading ? (
-                    <SkeletonPlayer />
-                  ) : (
-                    <S.TrackPlayAlbumLink href="http://">
-                      Баста
-                    </S.TrackPlayAlbumLink>
-                  )}
-                </S.TrackPlayAlbum>
-              </S.TrackPlayerContain>
+              
+                <S.TrackPlayerContain>
+                  <S.TrackPlayImg>
+                    <S.TrackPlaySvg alt="music">
+                      <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                    </S.TrackPlaySvg>
+                  </S.TrackPlayImg>
+                  <S.TrackPlayerAuthor>
+                    {isLoading ? (
+                      <SkeletonPlayer />
+                    ) : (
+                      <S.TrackPlayerAuthorLink>
+                        {currentTrack.name}
+                      </S.TrackPlayerAuthorLink>
+                    )}
+                  </S.TrackPlayerAuthor>
+                  <S.TrackPlayAlbum>
+                    {isLoading ? (
+                      <SkeletonPlayer />
+                    ) : (
+                      <S.TrackPlayAlbumLink>
+                        {currentTrack.author}
+                      </S.TrackPlayAlbumLink>
+                    )}
+                  </S.TrackPlayAlbum>
+                </S.TrackPlayerContain>
+              
 
               <S.TrackPlayLikeDis>
                 <S.TrackPlayLike>
