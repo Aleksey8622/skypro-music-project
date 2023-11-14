@@ -1,4 +1,4 @@
-import "../../App.css";
+// import "../../App.js";
 
 import * as S from "../Main/MainStyle";
 

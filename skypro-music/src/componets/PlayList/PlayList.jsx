@@ -99,13 +99,18 @@ function PlayList({ setCurrentTrack }) {
   //     isLike: false,
   //   },
   // ];
-
+  const [errorTrack, setErrorTrack] = useState(null);
   const [allTracks, setTracks] = useState([]);
   useEffect(() => {
-    getTrack().then((tracks) => {
-      console.log(tracks);
-      setTracks(tracks);
-    });
+    getTrack()
+      .then((tracks) => {
+        console.log(tracks);
+        setTracks(tracks);
+      })
+      .catch((error) => {
+        console.log(error);
+        setErrorTrack(error.message);
+      });
   }, []);
   // const handelPlayer = () => setShowPlayer(!showPlayer);
 
@@ -128,6 +133,9 @@ function PlayList({ setCurrentTrack }) {
             </S.PlaylistTitleSvg>
           </S.TitleCol4>
         </S.ContentTitle>
+        {errorTrack ? (
+          <p>Не удалось загрузить плейлист, попробуйте позже</p>
+        ) : null}
         <S.ContentPlaylist>
           {allTracks.map((item) => {
             return (

@@ -7,6 +7,9 @@ export const getTrack = async () =>{
             Authorization: `Bearer${assessToken}`,
         }
     })
+    if (!response) {
+        throw new Error("Ошибка сервера")
+    }
     const data = await response.json();
     return data;
 }

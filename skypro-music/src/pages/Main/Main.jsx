@@ -1,4 +1,4 @@
-import "../../App.css";
+// import "../../App.js";
 // import React, { useState } from "react";
 import Player from "../../componets/Player/Player";
 import Navigation from "../../componets/Navigation/Navigation";

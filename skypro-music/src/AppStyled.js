@@ -1,3 +1,6 @@
+import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyled = createGlobalStyle`
 * {
   margin: 0;
   padding: 0;
@@ -18,10 +21,10 @@ a:visited {
   cursor: pointer;
 }
 
-button,
+/* button,
 ._btn {
   cursor: pointer;
-}
+} */
 
 ul li {
   list-style: none;
@@ -63,11 +66,4 @@ body {
   fill: #696969;
   stroke: #ffffff;
   cursor: pointer;
-}
-
-.main {
-  background-color: aqua;
-  color: black;
-
-  
-}
+}`;
