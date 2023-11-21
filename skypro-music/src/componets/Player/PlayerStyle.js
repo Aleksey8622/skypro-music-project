@@ -67,6 +67,7 @@ export const BarPlayerBtn = styled.div`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  cursor: pointer;
 `;
 export const BarPlayerBtnPrev = styled(BarPlayerBtn)`
   margin-right: 23px;
@@ -279,4 +280,5 @@ export const VolumeProgress = styled.div`
 `;
 export const VolumeProgressLine = styled.input`
   width: 109px;
+  cursor: pointer;
 `;

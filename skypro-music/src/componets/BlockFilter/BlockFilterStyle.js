@@ -93,11 +93,11 @@ export const MenuList = styled.ul`
     border-radius: 10px;
     border: 1px solid #d9b6ff;
   }
-  &::-webkit-scrollbar {
-    width: 12px;
-    background-color: black;
+  &::-webkit-scrollbar-track {
+    background: black;
     border-radius: 10px;
     border: 1px solid #d9b6ff;
+    scrollbar-width: auto;
   }
   &::-webkit-scrollbar-thumb {
     width: 12px;

@@ -1,18 +1,27 @@
 import React from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import SkeletonTrack from "../../Skeletons/SkeletonTrack";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import * as S from "../PlayListStyle";
+import moment from "moment"
 
-const Track = ({ name, author, album, duration, setCurrentTrack }) => {
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-  }, []);
+const Track = ({
+  name,
+  author,
+  album,
+  duration_in_seconds,
+  setCurrentTrack,
+  isLoading
+}) => {
+ 
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 5000);
+  // }, []);
+  const formattedDuration = moment.utc(duration_in_seconds * 1000).format("mm:ss") 
   return (
     <S.PlaylistItem onClick={() => setCurrentTrack({ name, author, album })}>
       <S.PlaylistTrack>
@@ -54,7 +63,7 @@ const Track = ({ name, author, album, duration, setCurrentTrack }) => {
           <S.TrackTimeSvg alt="time">
             <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
           </S.TrackTimeSvg>
-          <S.TrackTimeText>{duration}</S.TrackTimeText>
+          <S.TrackTimeText>{formattedDuration}</S.TrackTimeText>
         </div>
       </S.PlaylistTrack>
     </S.PlaylistItem>

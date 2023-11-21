@@ -22,6 +22,7 @@ export const CenterblockContent = styled.div`
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+
 `;
 export const ContentTitle = styled.div`
   display: -webkit-box;
@@ -76,8 +77,6 @@ export const ContentPlaylist = styled.div`
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  overflow-y: scroll;
-  
 `;
 export const PlaylistItem = styled.div`
   width: 100%;
@@ -182,6 +181,7 @@ export const TrackTimeSvg = styled.svg`
   margin-right: 17px;
   fill: transparent;
   stroke: #696969;
+  cursor: pointer;
 `;
 export const TrackTimeText = styled.span`
   font-style: normal;

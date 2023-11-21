@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyled = createGlobalStyle`
+
 * {
   margin: 0;
   padding: 0;
@@ -45,6 +46,7 @@ body {
   height: 100%;
   font-family: "StratosSkyeng", sans-serif;
   color: #ffffff;
+
 }
 
 
@@ -66,4 +68,7 @@ body {
   fill: #696969;
   stroke: #ffffff;
   cursor: pointer;
-}`;
+}
+
+
+`;

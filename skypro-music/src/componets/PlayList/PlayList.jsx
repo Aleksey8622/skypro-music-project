@@ -100,17 +100,23 @@ function PlayList({ setCurrentTrack }) {
   //   },
   // ];
   const [errorTrack, setErrorTrack] = useState(null);
+
   const [allTracks, setTracks] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(true);
+  // const [serchTrack, setSearchTrack] = useState(allTracks)
+  // console.log(serchTrack);
+
   useEffect(() => {
     getTrack()
       .then((tracks) => {
-        console.log(tracks);
         setTracks(tracks);
       })
+
       .catch((error) => {
-        console.log(error);
         setErrorTrack(error.message);
       });
+    setIsLoading(false);
   }, []);
   // const handelPlayer = () => setShowPlayer(!showPlayer);
 
@@ -140,12 +146,15 @@ function PlayList({ setCurrentTrack }) {
           {allTracks.map((item) => {
             return (
               <Track
+                isLoading={isLoading}
                 setCurrentTrack={setCurrentTrack}
                 key={item.id}
-                name={item.name}
-                author={item.author}
-                duration_in_seconds={item.duration}
-                album={item.album}
+                // name={item.name}
+                // author={item.author}
+                // duration_in_seconds={item.duration_in_seconds
+                // }
+                // album={item.album}
+                {...item}
               />
             );
           })}
