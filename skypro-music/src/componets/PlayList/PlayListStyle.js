@@ -5,6 +5,7 @@ export const MainCenterblock = styled.div`
   -ms-flex-positive: 3;
   flex-grow: 3;
   padding: 20px 40px 20px 111px;
+
 `;
 export const CenterblockHeading = styled.div`
   font-style: normal;
@@ -60,7 +61,7 @@ export const TitleCol3 = styled(PlaylistTitleCol)`
 `;
 export const TitleCol4 = styled(PlaylistTitleCol)`
   width: 60px;
-  text-align: end;
+  text-align: center;
 `;
 export const PlaylistTitleSvg = styled.svg`
   width: 12px;
@@ -77,11 +78,16 @@ export const ContentPlaylist = styled.div`
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+
 `;
 export const PlaylistItem = styled.div`
   width: 100%;
   display: block;
   margin-bottom: 12px;
+  
 `;
 export const PlaylistTrack = styled.div`
   display: -webkit-box;

@@ -111,12 +111,12 @@ function PlayList({ setCurrentTrack }) {
     getTrack()
       .then((tracks) => {
         setTracks(tracks);
+        setIsLoading(false);
       })
 
       .catch((error) => {
         setErrorTrack(error.message);
       });
-    setIsLoading(false);
   }, []);
   // const handelPlayer = () => setShowPlayer(!showPlayer);
 

@@ -12,7 +12,8 @@ const Track = ({
   album,
   duration_in_seconds,
   setCurrentTrack,
-  isLoading
+  isLoading,
+  track_file
 }) => {
  
 
@@ -23,7 +24,7 @@ const Track = ({
   // }, []);
   const formattedDuration = moment.utc(duration_in_seconds * 1000).format("mm:ss") 
   return (
-    <S.PlaylistItem onClick={() => setCurrentTrack({ name, author, album })}>
+    <S.PlaylistItem onClick={() => setCurrentTrack({ name, author, album, track_file })}>
       <S.PlaylistTrack>
         <S.TrackTitle>
           <S.TrackTitleImage>

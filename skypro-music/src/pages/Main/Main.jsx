@@ -21,7 +21,7 @@ export function Main({ user, cancelHandler }) {
           />
           <MainSidebar user={user} cancelHandler={cancelHandler} />
         </S.Main>
-        {currentTrack && <Player currentTrack={currentTrack} />}
+        {currentTrack && <Player currentTrack={currentTrack}  />}
 
         <footer className="footer"></footer>
       </S.Container>

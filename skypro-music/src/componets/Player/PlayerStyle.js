@@ -16,11 +16,116 @@ export const BarContent = styled.div`
   -ms-flex-direction: column;
   flex-direction: column;
 `;
-export const BarPlayerProgress = styled.div`
+export const BarPlayerProgress = styled.input`
+  --progress-height: 8px;
+  --progress-color: #b672ff;
+  --progress-color: ${(props) => props.$color ?? "#b672ff"};
+
+  --progress-bg-color: #2e2e2e;
+
+  margin: 0;
   width: 100%;
-  height: 5px;
-  background: #2e2e2e;
+  height: var(--progress-height);
+  -webkit-appearance: none;
+  cursor: pointer;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+
+  &::-webkit-slider-runnable-track {
+    position: relative;
+    height: var(--progress-height);
+    background: var(--progress-bg-color);
+  }
+  &::-webkit-slider-thumb {
+    --thumb-height: 1px;
+    --thumb-width: 1px;
+    position: relative;
+    -webkit-appearance: none;
+    width: var(--thumb-width, var(--thumb-height));
+    box-shadow: calc(-100vmax - var(--thumb-width, var(--thumb-height))) 0 0
+      100vmax var(--progress-color);
+  }
+
+  &::-webkit-slider-runnable-track {
+    background: var(--progress-bg-color);
+  }
+
+  /* FF */
+  &::-moz-range-track {
+    width: 100%;
+    height: var(--progress-height);
+    background: var(--progress-bg-color);
+    border: none;
+    border-radius: 0px;
+  }
+  &::-moz-range-thumb {
+    border: none;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background: transparent;
+  }
+  &::-moz-range-progress {
+    background-color: var(--progress-color);
+    height: var(--progress-height);
+  }
 `;
+export const TimeTrack = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5px;
+  padding-bottom: 3px;
+`;
+// export const ProgressBarCover = styled.div`
+//   background-color: #696969;
+//   width: 100%;
+//   height: var(--progress-bar-height);
+//   display: block;
+//   position: absolute;
+//   border-radius: 10px;
+//   top: 50%;
+//   transform: translateY(-50%);
+//   z-index: 1;
+//   user-select: none;
+//   pointer-events: none;
+// `;
+
+// export const Thumb = styled.div`
+//   width: var(--thumb-width);
+//   height: var(--thumb-height);
+//   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.753);
+//   z-index: 3;
+//   background: rgb(255, 255, 255);
+//   position: absolute;
+//   border-radius: 50%;
+//   top: 50%;
+//   transform: translate(0%, -50%);
+//   pointer-events: none;
+//   user-select: none;
+
+// `;
+
+// export const Range = styled.input`
+//   -webkit-appearance: none;
+//   background-color: rgba(240, 9, 9, 0.397);
+//   height: 10px;
+//   width: 100%;
+//   cursor: pointer;
+//   opacity: 0;
+//   margin: 0 auto;
+
+//   &::-webkit-slider-thumb {
+//     width: var(--thumb-width);
+//     height: var(--thumb-height);
+
+//     background: #350f2d;
+//     border: 1px solid #000000;
+//     border-radius: 50%;
+//     cursor: pointer;
+//     -webkit-appearance: none;
+// `;
+
 export const BarPlayerBlock = styled.div`
   height: 73px;
   display: -webkit-box;
@@ -103,10 +208,11 @@ export const BarPlayerBtnIconHover = styled(
 )`
   &:hover svg {
     fill: transparent;
-    stroke: #acacac;
+    stroke: #ffffff;
     cursor: pointer;
   }
 `;
+
 export const BarPlayerBtnPlaySvg = styled.svg`
   width: 22px;
   height: 20px;
@@ -125,6 +231,18 @@ export const BarPlayerBtnRepeatSvg = styled.svg`
   height: 12px;
   fill: transparent;
   stroke: #696969;
+`;
+export const BarPlayerBtnRepeatSvgActive = styled.svg`
+  width: 18px;
+  height: 12px;
+  fill: transparent;
+  stroke: #ffffff;
+  cursor: pointer;
+  &:active svg {
+    fill: transparent;
+    stroke: ##ffffff;
+    cursor: pointer;
+  }
 `;
 export const BarPlayerBtnShuffleSvg = styled.svg`
   width: 19px;
