@@ -1,17 +1,17 @@
 import React from "react";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 
-import SkeletonSidebar from "../Skeletons/SkeletonSidebar";
+// import SkeletonSidebar from "../Skeletons/SkeletonSidebar";
 import * as S from "./MainSidebarStyle";
 function MainSidebar({ user, cancelHandler }) {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 5000);
+  // }, []);
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
@@ -25,33 +25,23 @@ function MainSidebar({ user, cancelHandler }) {
 
       <S.SidebarBlock>
         <S.SidebarList>
-          {isLoading ? (
-            <SkeletonSidebar />
-          ) : (
-            <S.SidebarItem>
-              <S.SidebarLink to={"/category/1"}>
-                <S.SidebarImg src="img/Frame5.png" alt="day's playlist" />
-              </S.SidebarLink>
-            </S.SidebarItem>
-          )}{" "}
-          {isLoading ? (
-            <SkeletonSidebar />
-          ) : (
-            <S.SidebarItem>
-              <S.SidebarLink to={"/category/2"}>
-                <S.SidebarImg src="/img/Frame3.png" alt="day's playlist" />
-              </S.SidebarLink>
-            </S.SidebarItem>
-          )}{" "}
-          {isLoading ? (
-            <SkeletonSidebar />
-          ) : (
-            <S.SidebarItem>
-              <S.SidebarLink to={"/category/3"}>
-                <S.SidebarImg src="img/Frame4.png" alt="day's playlist" />
-              </S.SidebarLink>
-            </S.SidebarItem>
-          )}
+          <S.SidebarItem>
+            <S.SidebarLink to={"/category/1"}>
+              <S.SidebarImg src="img/Frame5.png" alt="day's playlist" />
+            </S.SidebarLink>
+          </S.SidebarItem>
+
+          <S.SidebarItem>
+            <S.SidebarLink to={"/category/2"}>
+              <S.SidebarImg src="/img/Frame3.png" alt="day's playlist" />
+            </S.SidebarLink>
+          </S.SidebarItem>
+
+          <S.SidebarItem>
+            <S.SidebarLink to={"/category/3"}>
+              <S.SidebarImg src="img/Frame4.png" alt="day's playlist" />
+            </S.SidebarLink>
+          </S.SidebarItem>
         </S.SidebarList>
       </S.SidebarBlock>
     </S.MainSidebar>
