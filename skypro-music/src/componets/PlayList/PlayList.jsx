@@ -4,7 +4,7 @@ import React from "react";
 import Track from "./Tracks/Track";
 import { useState, useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
-// import SkeletonTrack from "../Skeletons/SkeletonTrack";
+import SkeletonTrack from "../Skeletons/SkeletonTrack";
 import * as S from "./PlayListStyle";
 import { getTrack } from "../../api";
 
@@ -143,21 +143,25 @@ function PlayList({ setCurrentTrack }) {
           <p>Не удалось загрузить плейлист, попробуйте позже</p>
         ) : null}
         <S.ContentPlaylist>
-          {allTracks.map((item) => {
-            return (
-              <Track
-                isLoading={isLoading}
-                setCurrentTrack={setCurrentTrack}
-                key={item.id}
-                // name={item.name}
-                // author={item.author}
-                // duration_in_seconds={item.duration_in_seconds
-                // }
-                // album={item.album}
-                {...item}
-              />
-            );
-          })}
+          {isLoading ? (
+            <SkeletonTrack /> 
+          ) : (
+            allTracks.map((item) => {
+              return (
+                <Track
+                  isLoading={isLoading}
+                  setCurrentTrack={setCurrentTrack}
+                  key={item.id}
+                  // name={item.name}
+                  // author={item.author}
+                  // duration_in_seconds={item.duration_in_seconds
+                  // }
+                  // album={item.album}
+                  {...item}
+                />
+              );
+            })
+          )}
         </S.ContentPlaylist>
       </S.CenterblockContent>
     </S.MainCenterblock>

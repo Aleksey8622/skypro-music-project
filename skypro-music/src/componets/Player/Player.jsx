@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import React from "react";
-import SkeletonPlayer from "../Skeletons/SkeletonPlayer";
+// import SkeletonPlayer from "../Skeletons/SkeletonPlayer";
 import moment from "moment";
 import * as S from "./PlayerStyle";
 // const S.Bar = S..div``
 
 function Player({ currentTrack }) {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   // const [position, setPosition] = useState(0);
   // const [marginLeft, setMarginLeft] = useState(0);
@@ -47,7 +47,7 @@ function Player({ currentTrack }) {
     const newVolume = event.target.value;
     console.log(newVolume);
     audioRef.current.volume = newVolume;
-    console.log(audioRef.current.volume );
+    console.log(audioRef.current.volume);
     setVolume(newVolume);
   };
   // useEffect(() => {
@@ -91,21 +91,17 @@ function Player({ currentTrack }) {
     }
   }, [currentTrack]);
 
-  const shuffeleHandel = () =>{
-    alert("Еще не реализовано")
-  }
-  const prevHandel = () =>{
-    alert("Еще не реализовано")
-  }
-  const nextHandel = () =>{
-    alert("Еще не реализовано")
-  }
+  const shuffeleHandel = () => {
+    alert("Еще не реализовано");
+  };
+  const prevHandel = () => {
+    alert("Еще не реализовано");
+  };
+  const nextHandel = () => {
+    alert("Еще не реализовано");
+  };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-  }, []);
+
 
   return (
     <>
@@ -174,22 +170,14 @@ function Player({ currentTrack }) {
                     </S.TrackPlaySvg>
                   </S.TrackPlayImg>
                   <S.TrackPlayerAuthor>
-                    {isLoading ? (
-                      <SkeletonPlayer />
-                    ) : (
-                      <S.TrackPlayerAuthorLink>
-                        {currentTrack.name}
-                      </S.TrackPlayerAuthorLink>
-                    )}
+                    <S.TrackPlayerAuthorLink>
+                      {currentTrack.name}
+                    </S.TrackPlayerAuthorLink>
                   </S.TrackPlayerAuthor>
                   <S.TrackPlayAlbum>
-                    {isLoading ? (
-                      <SkeletonPlayer />
-                    ) : (
-                      <S.TrackPlayAlbumLink>
-                        {currentTrack.author}
-                      </S.TrackPlayAlbumLink>
-                    )}
+                    <S.TrackPlayAlbumLink>
+                      {currentTrack.author}
+                    </S.TrackPlayAlbumLink>
                   </S.TrackPlayAlbum>
                 </S.TrackPlayerContain>
 

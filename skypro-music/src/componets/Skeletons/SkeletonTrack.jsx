@@ -4,8 +4,13 @@ import "react-loading-skeleton/dist/skeleton.css";
 function SkeletonTrack() {
   return (
     <SkeletonTheme highlightColor="#696969" baseColor="#272727">
-      <Skeleton width={250} height={20} />
+      <Skeleton
+        width={1080}
+        height={20}
+        count={29}
+        style={{ marginBottom: "25px" }}
+      />
     </SkeletonTheme>
   );
 }
-export default SkeletonTrack
+export default SkeletonTrack;
