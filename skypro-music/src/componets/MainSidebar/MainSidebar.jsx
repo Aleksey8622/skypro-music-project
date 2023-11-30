@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 // import { useState, useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
-
+import { AuthContext } from "../../store/AuthContext";
 // import SkeletonSidebar from "../Skeletons/SkeletonSidebar";
 import * as S from "./MainSidebarStyle";
-function MainSidebar({ user, cancelHandler }) {
+function MainSidebar() {
+  const { user, logout } = useContext(AuthContext);
   // const [isLoading, setIsLoading] = useState(true);
 
   // useEffect(() => {
@@ -15,8 +16,8 @@ function MainSidebar({ user, cancelHandler }) {
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
-        <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
-        <S.SidebarIcon onClick={user !== null && cancelHandler}>
+        <S.SidebarPersonalName>{user.username}</S.SidebarPersonalName>
+        <S.SidebarIcon onClick={() => logout()}>
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout"></use>
           </svg>

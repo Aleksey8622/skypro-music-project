@@ -1,6 +1,8 @@
 import * as S from "./BurgerStyle";
-
-function BurgerMenu({ user, cancelHandler }) {
+import {AuthContext} from "../../store/AuthContext"
+import { useContext } from "react";
+function BurgerMenu() {
+  const { logout } = useContext(AuthContext);
   return (
     <S.BurgerMenuList>
       <S.MenuItem>
@@ -17,7 +19,7 @@ function BurgerMenu({ user, cancelHandler }) {
         <S.MenuLink to={"/favorites"}>Мой плейлист</S.MenuLink>
       </S.MenuItem>
       <S.MenuItem>
-        <S.MenuLink to={"/login"} onClick={user !== null && cancelHandler}>
+        <S.MenuLink onClick={()=> logout()}>
           Выйти
         </S.MenuLink>
       </S.MenuItem>

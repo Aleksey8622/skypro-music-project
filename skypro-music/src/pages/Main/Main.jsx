@@ -7,19 +7,19 @@ import MainSidebar from "../../componets/MainSidebar/MainSidebar";
 import * as S from "./MainStyle";
 import { useState } from "react";
 
-export function Main({ user, cancelHandler }) {
+export function Main() {
   const [currentTrack, setCurrentTrack] = useState(null);
 
   return (
     <S.Wrapper>
       <S.Container>
         <S.Main>
-          <Navigation user={user} cancelHandler={cancelHandler} />
+          <Navigation  />
           <PlayList
             currentTrack={currentTrack}
             setCurrentTrack={setCurrentTrack}
           />
-          <MainSidebar user={user} cancelHandler={cancelHandler} />
+          <MainSidebar  />
         </S.Main>
         {currentTrack && <Player currentTrack={currentTrack}  />}
 

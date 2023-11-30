@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import SkeletonTrack from "../Skeletons/SkeletonTrack";
 import * as S from "./PlayListStyle";
-import { getTrack } from "../../api";
+import { getTrack } from "../../api/api";
 
 function PlayList({ setCurrentTrack }) {
   // const tracks = [
