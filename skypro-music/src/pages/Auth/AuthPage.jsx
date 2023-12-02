@@ -5,7 +5,7 @@ import { loginUser, registerUser } from "../../api/auth";
 import { getUserToken } from "../../api/auth";
 import { AuthContext } from "../../store/AuthContext";
 export default function AuthPage({ isLoginMode = false }) {
-  const { login,  user } = useContext(AuthContext);
+  const { login, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
@@ -13,18 +13,52 @@ export default function AuthPage({ isLoginMode = false }) {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
+  // const checkValidation = () => {
+
+  //   return
+  // };
+
   const handleLogin = async ({ email, password }) => {
+    if (email === "" && password === "") {
+      setError("Заполните почту и пароль");
+      return;
+    }
+
+    if (email === "") {
+      setError("Заполните почту");
+      return;
+    }
+    if (password === "") {
+      setError("Заполните пароль");
+      return;
+    }
     const userData = await loginUser({ email, password });
     console.log(userData);
-    login(userData)
+    login(userData);
     navigate("/");
     setError("Неизвестная ошибка входа");
-    localStorage.setItem("key", "user")
-    const myValue = localStorage.getItem("key")
-    console.log(myValue);
   };
 
   const handleRegister = async () => {
+    if (email === "" && password === "") {
+      setError("Заполните почту и пароль");
+      return;
+    }
+
+    if (email === "") {
+      setError("Заполните почту");
+      return;
+    }
+    if (password === "") {
+      setError("Заполните пароль");
+      return;
+    }
+
+    if (password !== repeatPassword) {
+      setError("Пароли не совпадают");
+      return;
+    }
+
     const user = await registerUser({ email, password, username: email });
 
     const token = await getUserToken({ email, password });
@@ -37,7 +71,6 @@ export default function AuthPage({ isLoginMode = false }) {
 
   useEffect(() => {
     console.log(user);
-    
   }, [user]);
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
@@ -109,7 +142,7 @@ export default function AuthPage({ isLoginMode = false }) {
               <S.ModalInput
                 type="password"
                 name="repeat-password"
-                placeholder="Повторите почту"
+                placeholder="Повторите пароль"
                 value={repeatPassword}
                 onChange={(event) => {
                   setRepeatPassword(event.target.value);

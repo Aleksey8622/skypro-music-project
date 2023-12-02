@@ -1,6 +1,7 @@
 const registerUrl = "https://skypro-music-api.skyeng.tech/user/signup/";
 
 export const registerUser = async ({ email, password, username }) => {
+
   const response = await fetch(registerUrl, {
     method: "POST",
     body: JSON.stringify({
@@ -12,8 +13,12 @@ export const registerUser = async ({ email, password, username }) => {
       "content-type": " application/json",
     },
   });
+  if (response === 400) {
+    throw new Error( "Пользователь с таким адрес электронной почты уже существует.")
+  }
   return response.json();
-};
+} 
+
 
 const loginUrl = "https://skypro-music-api.skyeng.tech/user/login/";
 export const loginUser = async ({ email, password }) => {
