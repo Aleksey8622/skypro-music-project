@@ -7,6 +7,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import SkeletonTrack from "../Skeletons/SkeletonTrack";
 import * as S from "./PlayListStyle";
 import { getTrack } from "../../api/api";
+import { useThemeContext } from "../../pages/Theme/ThemeContext";
 
 function PlayList({ setCurrentTrack }) {
   // const tracks = [
@@ -119,7 +120,7 @@ function PlayList({ setCurrentTrack }) {
       });
   }, []);
   // const handelPlayer = () => setShowPlayer(!showPlayer);
-
+  const { theme } = useThemeContext();
   return (
     <S.MainCenterblock>
       <BlockSearch />
@@ -128,7 +129,7 @@ function PlayList({ setCurrentTrack }) {
       {/* <h1 onClick={handelTrack}>Нажать</h1> */}
 
       <BlockFilter />
-      <S.CenterblockContent>
+      <S.CenterblockContent theme={theme}  style={{ backgroundColor: theme.background, color: theme.color }}>
         <S.ContentTitle>
           <S.TitleCol1>Трек</S.TitleCol1>
           <S.TitleCol2>ИСПОЛНИТЕЛЬ</S.TitleCol2>
@@ -142,7 +143,7 @@ function PlayList({ setCurrentTrack }) {
         {errorTrack ? (
           <p>Не удалось загрузить плейлист, попробуйте позже</p>
         ) : null}
-        <S.ContentPlaylist>
+        <S.ContentPlaylist >
           {isLoading ? (
             <SkeletonTrack /> 
           ) : (

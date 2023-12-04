@@ -5,7 +5,7 @@ export const Bar = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(28, 28, 28, 0.5);
+  background: ${(props) => props.theme.background};
 `;
 export const BarContent = styled.div`
   display: -webkit-box;
@@ -273,7 +273,7 @@ export const TrackPlayerContain = styled.div`
 export const TrackPlayImg = styled.div`
   width: 51px;
   height: 51px;
-  background-color: #313131;
+  background-color: ${props => props.theme.backgroundColorNote};
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -306,7 +306,7 @@ export const TrackPlayerAuthorLink = styled.a`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: ${(props) => props.theme.color};
   white-space: nowrap;
 `;
 export const TrackPlayAlbum = styled.div`
@@ -320,7 +320,7 @@ export const TrackPlayAlbumLink = styled.a`
   font-weight: 400;
   font-size: 13px;
   line-height: 24px;
-  color: #ffffff;
+  color: ${(props) => props.theme.color};
 `;
 export const TrackPlayLikeDis = styled.div`
   display: -webkit-box;

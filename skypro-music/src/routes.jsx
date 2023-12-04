@@ -5,12 +5,17 @@ import { Category } from "./pages/Category/Category";
 import { NotFound } from "./pages/NotFound/NotFound";
 // import { Login } from "./pages/Login/Login";
 import { ProtectedRoute } from "./componets/protected-route/protected";
-// import { useState } from "react";
+import { useState } from "react";
 // import { Registracion } from "./pages/Registration/Registration";
 import AuthPage from "./pages/Auth/AuthPage";
 import { AuthProvider } from "../src/store/AuthContext";
 
+import { ThemeContext, themes } from "../src/pages/Theme/ThemeContext";
+
+
+
 export const AppRoutes = () => {
+  
   // const [user, setUser] = useState(null);
 
   // const cancelHandler = () => {
@@ -19,8 +24,20 @@ export const AppRoutes = () => {
   //   setUser(null);
   // };
 
+  const [currentTheme, setCurrentTheme] = useState(themes.dark);
+
+  const toggleTheme = () => {
+    if (currentTheme === themes.dark) {
+      setCurrentTheme(themes.light);
+      return;
+    }
+
+    setCurrentTheme(themes.dark);
+  };
+  
   return (
     <AuthProvider>
+      <ThemeContext.Provider value={{ toggleTheme, theme: currentTheme }}>
       <Routes>
         <Route element={<ProtectedRoute  />}>
           <Route
@@ -32,9 +49,9 @@ export const AppRoutes = () => {
         </Route>
         <Route path="/login" element={<AuthPage isLoginMode={true} />} />
         <Route path="/register" element={<AuthPage />} />
-
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </ThemeContext.Provider>
     </AuthProvider>
   );
 };

@@ -4,6 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 // import { useState, useEffect } from "react";
 import * as S from "../PlayListStyle";
 import moment from "moment";
+import { useThemeContext } from "../../../pages/Theme/ThemeContext";
 
 const Track = ({
   name,
@@ -19,6 +20,7 @@ const Track = ({
   //     setIsLoading(false);
   //   }, 5000);
   // }, []);
+  const { theme } = useThemeContext();
   const formattedDuration = moment
     .utc(duration_in_seconds * 1000)
     .format("mm:ss");
@@ -28,14 +30,14 @@ const Track = ({
     >
       <S.PlaylistTrack>
         <S.TrackTitle>
-          <S.TrackTitleImage>
+          <S.TrackTitleImage theme={theme}>
             <S.TrackTitleSvg alt="music">
               <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
             </S.TrackTitleSvg>
           </S.TrackTitleImage>
 
           <div className="track__title-text">
-            <S.TrackTitleLink>
+            <S.TrackTitleLink theme={theme}>
               {name}
               <S.TrackTitleSpan></S.TrackTitleSpan>
             </S.TrackTitleLink>
@@ -43,11 +45,11 @@ const Track = ({
         </S.TrackTitle>
 
         <S.TrackAuthor>
-          <S.TrackAuthorLink>{author}</S.TrackAuthorLink>
+          <S.TrackAuthorLink theme={theme}>{author}</S.TrackAuthorLink>
         </S.TrackAuthor>
 
         <S.TrackAlbum>
-          <S.TrackAlbumLink>{album}</S.TrackAlbumLink>
+          <S.TrackAlbumLink theme={theme}>{album}</S.TrackAlbumLink>
         </S.TrackAlbum>
         <div className="track__time">
           <S.TrackTimeSvg alt="time">

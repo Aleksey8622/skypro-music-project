@@ -8,7 +8,7 @@ export default function AuthPage({ isLoginMode = false }) {
   const { login, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-
+  const [isLodingButton, setIsLodingButton] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -19,52 +19,64 @@ export default function AuthPage({ isLoginMode = false }) {
   // };
 
   const handleLogin = async ({ email, password }) => {
-    if (email === "" && password === "") {
-      setError("Заполните почту и пароль");
-      return;
-    }
+    try {
+      if (email === "" && password === "") {
+        setError("Заполните почту и пароль");
+        return;
+      }
 
-    if (email === "") {
-      setError("Заполните почту");
-      return;
+      if (email === "") {
+        setError("Заполните почту");
+        return;
+      }
+      if (password === "") {
+        setError("Заполните пароль");
+        return;
+      }
+      setIsLodingButton(true);
+      const userData = await loginUser({ email, password });
+      console.log(userData);
+      login(userData);
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsLodingButton(false);
     }
-    if (password === "") {
-      setError("Заполните пароль");
-      return;
-    }
-    const userData = await loginUser({ email, password });
-    console.log(userData);
-    login(userData);
-    navigate("/");
-    setError("Неизвестная ошибка входа");
   };
 
   const handleRegister = async () => {
-    if (email === "" && password === "") {
-      setError("Заполните почту и пароль");
-      return;
-    }
+    try {
+      if (email === "" && password === "") {
+        setError("Заполните почту и пароль");
+        return;
+      }
 
-    if (email === "") {
-      setError("Заполните почту");
-      return;
-    }
-    if (password === "") {
-      setError("Заполните пароль");
-      return;
-    }
+      if (email === "") {
+        setError("Заполните почту");
+        return;
+      }
+      if (password === "") {
+        setError("Заполните пароль");
+        return;
+      }
 
-    if (password !== repeatPassword) {
-      setError("Пароли не совпадают");
-      return;
+      if (password !== repeatPassword) {
+        setError("Пароли не совпадают");
+        return;
+      }
+      setIsLodingButton(true);
+      const user = await registerUser({ email, password, username: email });
+
+      const token = await getUserToken({ email, password });
+      console.log(token);
+      login(user);
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsLodingButton(false);
     }
-
-    const user = await registerUser({ email, password, username: email });
-
-    const token = await getUserToken({ email, password });
-    console.log(token);
-    login(user);
-    navigate("/");
 
     // setError("Неизвестная ошибка регистрации");
   };
@@ -109,10 +121,15 @@ export default function AuthPage({ isLoginMode = false }) {
               />
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
-            <S.Buttons>
-              <S.PrimaryButton onClick={() => handleLogin({ email, password })}>
-                Войти
-              </S.PrimaryButton>
+            <S.Buttons
+              disabled={isLodingButton}
+              onClick={() => handleLogin({ email, password })}
+            >
+              {isLodingButton ? (
+                <S.PrimaryButtonDisabled>Входим...</S.PrimaryButtonDisabled>
+              ) : (
+                <S.PrimaryButton>Войти</S.PrimaryButton>
+              )}
               <Link to="/register">
                 <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
               </Link>
@@ -150,10 +167,14 @@ export default function AuthPage({ isLoginMode = false }) {
               />
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
-            <S.Buttons>
-              <S.PrimaryButton onClick={handleRegister}>
-                Зарегистрироваться
-              </S.PrimaryButton>
+            <S.Buttons onClick={handleRegister} disabled={isLodingButton}>
+              {isLodingButton ? (
+                <S.PrimaryButtonDisabled>
+                  Регестрируемся...
+                </S.PrimaryButtonDisabled>
+              ) : (
+                <S.PrimaryButton>Зарегистрироваться</S.PrimaryButton>
+              )}
             </S.Buttons>
           </>
         )}

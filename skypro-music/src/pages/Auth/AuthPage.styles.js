@@ -79,6 +79,17 @@ export const PrimaryButton = styled(Button)`
     background-color: #271a58;
   }
 `;
+export const PrimaryButtonDisabled = styled(Button)`
+  color: #ffffff;
+  background-color: #303030;
+  // &:hover {
+  //   background-color: #3f007d;
+  // }
+
+  // &:active {
+  //   background-color: #271a58;
+  // }
+`;
 export const SecondaryButton = styled(Button)`
   color: #000000;
   background-color: transparent;
@@ -115,4 +126,5 @@ export const Error = styled.div`
   line-height: 24px;
   margin-top: 20px;
   text-align: left;
+  word-wrap: break-word;
 `;

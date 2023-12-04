@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 // import { useState, useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { AuthContext } from "../../store/AuthContext";
 // import SkeletonSidebar from "../Skeletons/SkeletonSidebar";
 import * as S from "./MainSidebarStyle";
 function MainSidebar() {
   const { user, logout } = useContext(AuthContext);
+  const { theme } = useThemeContext();
   // const [isLoading, setIsLoading] = useState(true);
 
   // useEffect(() => {
@@ -17,9 +19,9 @@ function MainSidebar() {
     <S.MainSidebar>
       <S.SidebarPersonal>
         <S.SidebarPersonalName>{user.username}</S.SidebarPersonalName>
-        <S.SidebarIcon onClick={() => logout()}>
+        <S.SidebarIcon theme={theme} onClick={() => logout()}>
           <svg alt="logout">
-            <use xlinkHref="img/icon/sprite.svg#logout"></use>
+            <use xlinkHref={theme.iconLogout}></use>
           </svg>
         </S.SidebarIcon>
       </S.SidebarPersonal>

@@ -3,9 +3,11 @@ import React from "react";
 // import SkeletonPlayer from "../Skeletons/SkeletonPlayer";
 import moment from "moment";
 import * as S from "./PlayerStyle";
+import { useThemeContext } from "../../pages/Theme/ThemeContext";
 // const S.Bar = S..div``
 
 function Player({ currentTrack }) {
+  const { theme } = useThemeContext();
   // const [isLoading, setIsLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   // const [position, setPosition] = useState(0);
@@ -101,13 +103,11 @@ function Player({ currentTrack }) {
     alert("Еще не реализовано");
   };
 
-
-
   return (
     <>
       <audio loop={false} ref={audioRef} src={currentTrack.track_file}></audio>
 
-      <S.Bar>
+      <S.Bar theme={theme}>
         <S.TimeTrack>
           {formatedCurrentTime}/{formatedDuration}
         </S.TimeTrack>
@@ -164,18 +164,18 @@ function Player({ currentTrack }) {
 
               <S.PlayerTrackPlay>
                 <S.TrackPlayerContain>
-                  <S.TrackPlayImg>
+                  <S.TrackPlayImg theme={theme}>
                     <S.TrackPlaySvg alt="music">
                       <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
                     </S.TrackPlaySvg>
                   </S.TrackPlayImg>
                   <S.TrackPlayerAuthor>
-                    <S.TrackPlayerAuthorLink>
+                    <S.TrackPlayerAuthorLink theme={theme}>
                       {currentTrack.name}
                     </S.TrackPlayerAuthorLink>
                   </S.TrackPlayerAuthor>
                   <S.TrackPlayAlbum>
-                    <S.TrackPlayAlbumLink>
+                    <S.TrackPlayAlbumLink theme={theme}>
                       {currentTrack.author}
                     </S.TrackPlayAlbumLink>
                   </S.TrackPlayAlbum>
@@ -199,7 +199,7 @@ function Player({ currentTrack }) {
               <S.VolumeContent>
                 <S.VolumeImage>
                   <S.VolumeSvg alt="volume">
-                    <use xlinkHref="img/icon/volume#icon-volume"></use>
+                    <use xlinkHref="img/icon/sprite#icon-volume"></use>
                   </S.VolumeSvg>
                 </S.VolumeImage>
                 <S.VolumeProgress>
