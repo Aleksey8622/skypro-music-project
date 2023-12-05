@@ -10,14 +10,14 @@ function Navigation({user, cancelHandler}) {
   const {theme} = useThemeContext()
   const showMenu = () => setShow(!show);
   return (
-    <S.Nav theme={theme}  style={{ backgroundColor: theme.background, color: theme.color }}>
+    <S.Nav theme={theme}>
       <S.Logo>
         <S.LogoImg src={theme.iconLogo} alt="logo" />
       </S.Logo>
       <S.NavBurger onClick={showMenu}>
-        <S.NavBurgerLine></S.NavBurgerLine>
-        <S.NavBurgerLine></S.NavBurgerLine>
-        <S.NavBurgerLine></S.NavBurgerLine>
+        <S.NavBurgerLine theme={theme}></S.NavBurgerLine>
+        <S.NavBurgerLine theme={theme}></S.NavBurgerLine>
+        <S.NavBurgerLine theme={theme}></S.NavBurgerLine>
       </S.NavBurger>
       {show && (
         <S.NavMenu>

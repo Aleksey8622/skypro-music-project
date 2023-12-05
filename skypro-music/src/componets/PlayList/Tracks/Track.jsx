@@ -12,7 +12,6 @@ const Track = ({
   album,
   duration_in_seconds,
   setCurrentTrack,
-  isLoading,
   track_file,
 }) => {
   // useEffect(() => {

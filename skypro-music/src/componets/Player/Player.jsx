@@ -108,11 +108,12 @@ function Player({ currentTrack }) {
       <audio loop={false} ref={audioRef} src={currentTrack.track_file}></audio>
 
       <S.Bar theme={theme}>
-        <S.TimeTrack>
+        <S.TimeTrack theme={theme}>
           {formatedCurrentTime}/{formatedDuration}
         </S.TimeTrack>
         <S.BarContent>
           <S.BarPlayerProgress
+            theme={theme}
             type="range"
             step="0.01"
             value={currentTime}
@@ -124,33 +125,33 @@ function Player({ currentTrack }) {
             <S.BarPlayer>
               <S.BarPlayerControls>
                 <S.BarPlayerBtnPrev onClick={prevHandel}>
-                  <S.BarBtnPrevSvg alt="prev">
-                    <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
+                  <S.BarBtnPrevSvg theme={theme} alt="prev">
+                    <use xlinkHref={theme.iconPrev}></use>
                   </S.BarBtnPrevSvg>
                 </S.BarPlayerBtnPrev>
                 <S.BarPlayerBtnPlay>
-                  <S.BarPlayerBtnPlaySvg alt="play" onClick={togglePlay}>
+                  <S.BarPlayerBtnPlaySvg theme={theme} alt="play" onClick={togglePlay}>
                     <use
                       xlinkHref={
                         isPlaying
-                          ? "img/icon/sprite.svg#icon-pause"
-                          : "img/icon/sprite.svg#icon-play"
+                          ? theme.iconPause
+                          : theme.iconPlay
                       }
                     ></use>
                   </S.BarPlayerBtnPlaySvg>
                 </S.BarPlayerBtnPlay>
                 <S.BarPlayerBtnNext onClick={nextHandel}>
-                  <S.BarPlayerBtnNextSvg alt="next">
-                    <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
+                  <S.BarPlayerBtnNextSvg theme={theme} alt="next">
+                    <use xlinkHref={theme.iconNext}></use>
                   </S.BarPlayerBtnNextSvg>
                 </S.BarPlayerBtnNext>
-                <S.BarPlayerBtnIconHover onClick={toggleLoop}>
+                <S.BarPlayerBtnIconHover theme={theme} onClick={toggleLoop}>
                   {isLoop ? (
-                    <S.BarPlayerBtnRepeatSvgActive alt="repeat">
+                    <S.BarPlayerBtnRepeatSvgActive theme={theme} alt="repeat">
                       <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
                     </S.BarPlayerBtnRepeatSvgActive>
                   ) : (
-                    <S.BarPlayerBtnRepeatSvg alt="repeat">
+                    <S.BarPlayerBtnRepeatSvg theme={theme} alt="repeat">
                       <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
                     </S.BarPlayerBtnRepeatSvg>
                   )}

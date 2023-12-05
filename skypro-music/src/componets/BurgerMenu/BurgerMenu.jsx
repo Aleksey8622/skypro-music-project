@@ -7,35 +7,34 @@ function BurgerMenu() {
   const { theme, toggleTheme } = useThemeContext();
   return (
     <S.BurgerMenuList style={{ color: theme.color }}>
-      <S.MenuItem >
+      <S.MenuItem>
         <S.MenuLink
-        theme={theme}
+          theme={theme}
           to="/"
           style={({ isActive }) => ({
             textDecoration: isActive ? "underline" : "none",
-        
           })}
         >
           Главное
         </S.MenuLink>
       </S.MenuItem>
       <S.MenuItem>
-        <S.MenuLink
-        theme={theme}
-          to={"/favorites"}
-        >
+        <S.MenuLink theme={theme} to={"/favorites"}>
           Мой плейлист
         </S.MenuLink>
       </S.MenuItem>
       <S.MenuItem>
-        <S.MenuLink 
-        theme={theme}
-          onClick={() => logout()}
-        >
+        <S.MenuLink theme={theme} onClick={() => logout()}>
           Выйти
         </S.MenuLink>
       </S.MenuItem>
-      <S.MenuItem onClick={toggleTheme}>{theme.iconTheme}</S.MenuItem>
+      <S.MenuItem>
+        <S.MenuLink onClick={toggleTheme}>
+          <S.IconSearchSvg theme={theme}>
+            <use xlinkHref={theme.iconTheme}></use>
+          </S.IconSearchSvg>
+        </S.MenuLink>
+      </S.MenuItem>
     </S.BurgerMenuList>
   );
 }

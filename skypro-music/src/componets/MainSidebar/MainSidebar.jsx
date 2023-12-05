@@ -16,9 +16,9 @@ function MainSidebar() {
   //   }, 5000);
   // }, []);
   return (
-    <S.MainSidebar>
+    <S.MainSidebar theme={theme}>
       <S.SidebarPersonal>
-        <S.SidebarPersonalName>{user.username}</S.SidebarPersonalName>
+        <S.SidebarPersonalName theme={theme}>{user.username}</S.SidebarPersonalName>
         <S.SidebarIcon theme={theme} onClick={() => logout()}>
           <svg alt="logout">
             <use xlinkHref={theme.iconLogout}></use>

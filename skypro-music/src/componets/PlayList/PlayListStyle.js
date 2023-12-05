@@ -13,6 +13,7 @@ export const CenterblockHeading = styled.div`
   line-height: 72px;
   letter-spacing: -0.8px;
   margin-bottom: 45px;
+  color: ${props => props.theme.color}
 `;
 export const CenterblockContent = styled.div`
   display: -webkit-box;
@@ -38,6 +39,7 @@ export const ContentTitle = styled.div`
   -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 24px;
+  
 `;
 export const PlaylistTitleCol = styled.div`
   font-style: normal;
@@ -79,6 +81,27 @@ export const ContentPlaylist = styled.div`
   max-height: 1370px;
   overflow-y: auto;
   padding-right: 10px;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 0px;
+    background-color: black;
+    border-radius: 10px;
+    border: 1px solid #d9b6ff;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: ${(props) => props.theme.backgroundScrollbar};
+    border-radius: 10px;
+    border: 1px solid #d9b6ff;
+    scrollbar-width: auto;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 12px;
+    background-color: ${(props) => props.theme.backgroundScrollbarThumb};
+    border-radius: 10px;
+    border: 1px solid #d9b6ff;
+  }
 `;
 export const PlaylistItem = styled.div`
   width: 100%;

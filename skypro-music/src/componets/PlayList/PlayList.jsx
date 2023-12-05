@@ -125,12 +125,12 @@ function PlayList({ setCurrentTrack }) {
     <S.MainCenterblock>
       <BlockSearch />
 
-      <S.CenterblockHeading>Треки</S.CenterblockHeading>
+      <S.CenterblockHeading theme={theme}>Треки</S.CenterblockHeading>
       {/* <h1 onClick={handelTrack}>Нажать</h1> */}
 
       <BlockFilter />
-      <S.CenterblockContent theme={theme}  style={{ backgroundColor: theme.background, color: theme.color }}>
-        <S.ContentTitle>
+      <S.CenterblockContent>
+        <S.ContentTitle >
           <S.TitleCol1>Трек</S.TitleCol1>
           <S.TitleCol2>ИСПОЛНИТЕЛЬ</S.TitleCol2>
           <S.TitleCol3>АЛЬБОМ</S.TitleCol3>
@@ -143,9 +143,9 @@ function PlayList({ setCurrentTrack }) {
         {errorTrack ? (
           <p>Не удалось загрузить плейлист, попробуйте позже</p>
         ) : null}
-        <S.ContentPlaylist >
+        <S.ContentPlaylist theme={theme}>
           {isLoading ? (
-            <SkeletonTrack /> 
+            <SkeletonTrack />
           ) : (
             allTracks.map((item) => {
               return (

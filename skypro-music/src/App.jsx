@@ -2,6 +2,7 @@
 import { GlobalStyled } from "./AppStyled.js";
 // import "./App.js";
 import { AppRoutes } from "./routes";
+
 function App() {
   return (
     <>

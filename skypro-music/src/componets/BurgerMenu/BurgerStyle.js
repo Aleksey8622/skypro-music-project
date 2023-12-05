@@ -9,9 +9,18 @@ export const MenuItem = styled.li`
   padding: 5px 0;
   margin-bottom: 16px;
 `;
+
 export const MenuLink = styled(NavLink)`
   color: ${props => props.theme.color};
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
 `;
+export const IconSearchSvg = styled.svg`
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+  stroke: ${(props) => props.theme.color};
+  
+`;
+

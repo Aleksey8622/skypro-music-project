@@ -25,13 +25,13 @@ export const SidebarPersonalName = styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: ${(props) => props.theme.color};
   margin-right: 16px;
 `;
 export const SidebarIcon = styled.div`
   width: 43px;
   height: 43px;
-  background-color: ${props => props.theme.backgroundColorIcon};
+  background-color: ${(props) => props.theme.backgroundColorIcon};
   border-radius: 50%;
   cursor: pointer;
 `;

@@ -12,6 +12,7 @@ export const CenterBlockFilter = styled.div`
   -ms-flex-align: center;
   align-items: center;
   margin-bottom: 51px;
+  color: ${(props) => props.theme.color};
 `;
 
 export const FilterTitle = styled.div`
@@ -30,26 +31,27 @@ export const FilterButton = styled.div`
   border-radius: 60px;
   padding: 6px 20px;
   position: relative;
+  border-color: ${(props) => props.theme.borderColorButton};
 
   &:hover {
-    border-color: #d9b6ff;
-    color: #d9b6ff;
+    border-color: ${(props) => props.theme.borderColorButton};
+    color: ${(props) => props.theme.colorBtnHover};
     cursor: pointer;
   }
   &:not(:last-child) {
     margin-right: 10px;
   }
   &:active {
-    border-color: #ad61ff;
-    color: #ad61ff;
+    border-color: ${(props) => props.theme.borderColorButton};
+    color: ${(props) => props.theme.colorBtnHover};
     cursor: pointer;
   }
 `;
 
 export const BtnActive = styled(FilterButton)`
   cursor: pointer;
-  border-color: #d9b6ff;
-  color: #d9b6ff;
+  border-color: ${(props) => props.theme.borderColorButton};
+  color: ${(props) => props.theme.colorBtnHover};
   cursor: pointer;
 `;
 export const MenuFilter = styled.nav`
@@ -58,7 +60,7 @@ export const MenuFilter = styled.nav`
   left: 35px;
   width: 250px;
   padding: 25px;
-  background-color: #272727;
+  background-color: ${(props) => props.theme.backgroundColor};
   border: 1px solid #d9b6ff;
   border-radius: 10px;
   &::before {
@@ -94,14 +96,14 @@ export const MenuList = styled.ul`
     border: 1px solid #d9b6ff;
   }
   &::-webkit-scrollbar-track {
-    background: black;
+    background: ${(props) => props.theme.backgroundScrollbar};
     border-radius: 10px;
     border: 1px solid #d9b6ff;
     scrollbar-width: auto;
   }
   &::-webkit-scrollbar-thumb {
     width: 12px;
-    background-color: black;
+    background-color: ${(props) => props.theme.backgroundScrollbarThumb};
     border-radius: 10px;
     border: 1px solid #d9b6ff;
   }
@@ -117,9 +119,9 @@ export const MenuItem = styled.li`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: ${(props) => props.theme.color};
   &:hover {
-    color: #d9b6ff;
+    color: ${(props) => props.theme.colorBtnHover};
     text-decoration: underline;
   }
 `;

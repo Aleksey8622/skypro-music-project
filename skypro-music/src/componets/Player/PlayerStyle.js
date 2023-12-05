@@ -21,7 +21,7 @@ export const BarPlayerProgress = styled.input`
   --progress-color: #b672ff;
   --progress-color: ${(props) => props.$color ?? "#b672ff"};
 
-  --progress-bg-color: #2e2e2e;
+  --progress-bg-color: ${(props) => props.theme.progressBgColor};
 
   margin: 0;
   width: 100%;
@@ -76,6 +76,7 @@ export const TimeTrack = styled.div`
   justify-content: flex-end;
   padding-right: 5px;
   padding-bottom: 3px;
+  color: ${props=> props.theme.color}
 `;
 // export const ProgressBarCover = styled.div`
 //   background-color: #696969;
@@ -217,6 +218,7 @@ export const BarPlayerBtnPlaySvg = styled.svg`
   width: 22px;
   height: 20px;
   fill: #d9d9d9;
+  stroke: #d9d9d9;
 `;
 
 export const BarPlayerBtnNextSvg = styled.svg`
@@ -238,11 +240,6 @@ export const BarPlayerBtnRepeatSvgActive = styled.svg`
   fill: transparent;
   stroke: #ffffff;
   cursor: pointer;
-  &:active svg {
-    fill: transparent;
-    stroke: ##ffffff;
-    cursor: pointer;
-  }
 `;
 export const BarPlayerBtnShuffleSvg = styled.svg`
   width: 19px;
@@ -273,7 +270,7 @@ export const TrackPlayerContain = styled.div`
 export const TrackPlayImg = styled.div`
   width: 51px;
   height: 51px;
-  background-color: ${props => props.theme.backgroundColorNote};
+  background-color: ${(props) => props.theme.backgroundColorNote};
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

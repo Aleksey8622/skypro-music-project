@@ -33,6 +33,7 @@ export const SearchText = styled.input`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+  outline: none;
   color: ${(props) => props.theme.color};
   &::-webkit-input-placeholder {
     background-color: transparent;

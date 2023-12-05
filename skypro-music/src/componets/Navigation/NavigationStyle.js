@@ -3,6 +3,7 @@ export const Nav = styled.nav`
   width: 244px;
   background-color: #181818;
   padding: 20px 0 20px 36px;
+  background: ${(props) => props.theme.background};
 `;
 
 export const Logo = styled.div`
@@ -38,7 +39,7 @@ export const NavBurgerLine = styled.span`
   display: inline-block;
   width: 100%;
   height: 1px;
-  background-color: #d3d3d3;
+  background-color: ${(props) => props.theme.backgroundBurgerLine};
 `;
 
 export const NavMenu = styled.nav`

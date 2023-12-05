@@ -70,19 +70,4 @@ body {
   cursor: pointer;
 }
 
-&::-webkit-scrollbar {
-  width: 8px;
-  height: 0px;
-  background-color: black;
-  border-radius: 10px;
-  border: 1px solid #d9b6ff;
-}
-
-&::-webkit-scrollbar-thumb {
-  width: 12px;
-  height: 0px;
-  background-color: black;
-  border-radius: 10px;
-  border: 1px solid #d9b6ff;
-}
 `;
