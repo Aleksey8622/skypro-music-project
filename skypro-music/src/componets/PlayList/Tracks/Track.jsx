@@ -1,31 +1,30 @@
-import React from "react";
+
 import "react-loading-skeleton/dist/skeleton.css";
 // import SkeletonTrack from "../../Skeletons/SkeletonTrack";
 // import { useState, useEffect } from "react";
 import * as S from "../PlayListStyle";
 import moment from "moment";
 import { useThemeContext } from "../../../pages/Theme/ThemeContext";
+import { useDispatch } from "react-redux";
+import { getTrack } from "../../../store/slice";
 
 const Track = ({
   name,
   author,
   album,
   duration_in_seconds,
-  setCurrentTrack,
   track_file,
 }) => {
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 5000);
-  // }, []);
+  const dispach = useDispatch();
+
   const { theme } = useThemeContext();
   const formattedDuration = moment
     .utc(duration_in_seconds * 1000)
     .format("mm:ss");
   return (
     <S.PlaylistItem
-      onClick={() => setCurrentTrack({ name, author, album, track_file })}
+      // onClick={() => setCurrentTrack({ name, author, album, track_file })}
+      onClick={() => dispach(getTrack({ name, author, album, track_file }))}
     >
       <S.PlaylistTrack>
         <S.TrackTitle>

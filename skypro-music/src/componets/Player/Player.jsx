@@ -4,23 +4,23 @@ import React from "react";
 import moment from "moment";
 import * as S from "./PlayerStyle";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
+import { useDispatch, useSelector } from "react-redux";
+import { getPauseTrack, getPlayTrack } from "../../store/slice";
 // const S.Bar = S..div``
 
-function Player({ currentTrack }) {
+function Player() {
+  const currentTrack = useSelector((state) => state.app.currentTrack);
+  const isPlaying = useSelector((state) => state.app.isPlaying);
+  const dispatch = useDispatch();
   const { theme } = useThemeContext();
-  // const [isLoading, setIsLoading] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
-  // const [position, setPosition] = useState(0);
-  // const [marginLeft, setMarginLeft] = useState(0);
+
+  // const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [isLoop, setIsLoop] = useState(false);
   const [volume, setVolume] = useState(1);
   const formatedDuration = moment.utc(duration * 1000).format("mm:ss");
   const formatedCurrentTime = moment.utc(currentTime * 1000).format("mm:ss");
-  // const onChange = (event) =>{
-  //   setPercentage(event.target.value)
-  // }
 
   const onChange = (event) => {
     const newCurrentTime = event.target.value;
@@ -52,23 +52,19 @@ function Player({ currentTrack }) {
     console.log(audioRef.current.volume);
     setVolume(newVolume);
   };
-  // useEffect(() => {
-  //   const thumbWidth = 20;
-  //   const thumbCenter = (thumbWidth / 100) * percentage * -1;
-  //   setPosition(percentage);
-  //   setMarginLeft(thumbCenter);
-  // }, [percentage]);
 
   const audioRef = useRef(null);
 
   const startHandel = () => {
     audioRef.current.play();
     console.log(audioRef.current.play());
-    setIsPlaying(true);
+    dispatch(getPlayTrack());
+    // setIsPlaying(true);
   };
   const stopHandel = () => {
     audioRef.current.pause();
-    setIsPlaying(false);
+    dispatch(getPauseTrack());
+    // setIsPlaying(false);
   };
 
   const handelLoop = () => {
@@ -130,13 +126,13 @@ function Player({ currentTrack }) {
                   </S.BarBtnPrevSvg>
                 </S.BarPlayerBtnPrev>
                 <S.BarPlayerBtnPlay>
-                  <S.BarPlayerBtnPlaySvg theme={theme} alt="play" onClick={togglePlay}>
+                  <S.BarPlayerBtnPlaySvg
+                    theme={theme}
+                    alt="play"
+                    onClick={togglePlay}
+                  >
                     <use
-                      xlinkHref={
-                        isPlaying
-                          ? theme.iconPause
-                          : theme.iconPlay
-                      }
+                      xlinkHref={isPlaying ? theme.iconPause : theme.iconPlay}
                     ></use>
                   </S.BarPlayerBtnPlaySvg>
                 </S.BarPlayerBtnPlay>

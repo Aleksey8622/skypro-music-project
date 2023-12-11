@@ -6,7 +6,7 @@ function BurgerMenu() {
   const { logout } = useContext(AuthContext);
   const { theme, toggleTheme } = useThemeContext();
   return (
-    <S.BurgerMenuList style={{ color: theme.color }}>
+    <S.BurgerMenuList>
       <S.MenuItem>
         <S.MenuLink
           theme={theme}
@@ -30,9 +30,9 @@ function BurgerMenu() {
       </S.MenuItem>
       <S.MenuItem>
         <S.MenuLink onClick={toggleTheme}>
-          <S.IconSearchSvg theme={theme}>
+          <S.IconThemeSvg theme={theme}>
             <use xlinkHref={theme.iconTheme}></use>
-          </S.IconSearchSvg>
+          </S.IconThemeSvg>
         </S.MenuLink>
       </S.MenuItem>
     </S.BurgerMenuList>
