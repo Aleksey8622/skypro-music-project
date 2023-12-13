@@ -4,7 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import * as S from "../PlayListStyle";
 import moment from "moment";
 import { useThemeContext } from "../../../pages/Theme/ThemeContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllTrack } from "../../../store/slice";
 
 const Track = ({
@@ -14,14 +14,18 @@ const Track = ({
   duration_in_seconds,
   track_file,
   id,
-  allTracks
+  allTracks,
+  item,
 }) => {
   const dispach = useDispatch();
-
+  const isPlaying = useSelector((state) => state.music.isPlaying);
+  const currentTrack = useSelector((state) => state.music.currentTrack);
   const { theme } = useThemeContext();
   const formattedDuration = moment
     .utc(duration_in_seconds * 1000)
     .format("mm:ss");
+
+
   return (
     <S.PlaylistItem
       // onClick={() => setCurrentTrack({ name, author, album, track_file })}
@@ -33,17 +37,21 @@ const Track = ({
             album,
             track_file,
             id,
-            allTracks
+            allTracks,
           })
         )
       }
     >
-      <S.PlaylistTrack>
+      <S.PlaylistTrack key={item.id}>
         <S.TrackTitle>
           <S.TrackTitleImage theme={theme}>
-            <S.TrackTitleSvg alt="music">
-              <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-            </S.TrackTitleSvg>
+            {currentTrack && currentTrack.id === item.id ? (
+              <S.TrackPlayingDot isPlaying={isPlaying}></S.TrackPlayingDot>
+            ) : (
+              <S.TrackTitleSvg alt="music">
+                <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+              </S.TrackTitleSvg>
+            )}
           </S.TrackTitleImage>
 
           <div className="track__title-text">

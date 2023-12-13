@@ -67,6 +67,7 @@ function PlayList() {
                 <Track
                   isLoading={isLoading}
                   key={item.id}
+                  item={item}
                   // name={item.name}
                   // author={item.author}
                   // duration_in_seconds={item.duration_in_seconds

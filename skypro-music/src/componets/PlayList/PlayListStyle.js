@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { css, keyframes, styled } from "styled-components";
 export const MainCenterblock = styled.div`
   width: auto;
   -webkit-box-flex: 3;
@@ -13,7 +13,7 @@ export const CenterblockHeading = styled.div`
   line-height: 72px;
   letter-spacing: -0.8px;
   margin-bottom: 45px;
-  color: ${props => props.theme.color}
+  color: ${(props) => props.theme.color};
 `;
 export const CenterblockContent = styled.div`
   display: -webkit-box;
@@ -39,7 +39,6 @@ export const ContentTitle = styled.div`
   -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 24px;
-  
 `;
 export const PlaylistTitleCol = styled.div`
   font-style: normal;
@@ -89,7 +88,7 @@ export const ContentPlaylist = styled.div`
     border-radius: 10px;
     border: 1px solid #d9b6ff;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: ${(props) => props.theme.backgroundScrollbar};
     border-radius: 10px;
@@ -140,7 +139,7 @@ export const TrackTitleImage = styled.div`
   width: 51px;
   height: 51px;
   padding: 16px;
-  background: ${props => props.theme.backgroundColorNote};
+  background: ${(props) => props.theme.backgroundColorNote};
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -164,7 +163,7 @@ export const TrackTitleLink = styled.a`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: ${props => props.theme.color};
+  color: ${(props) => props.theme.color};
 `;
 export const TrackTitleSpan = styled.span`
   font-style: normal;
@@ -187,7 +186,7 @@ export const TrackAuthorLink = styled.a`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: ${props => props.theme.color};
+  color: ${(props) => props.theme.color};
   text-align: left;
 `;
 export const TrackAlbum = styled.div`
@@ -216,3 +215,26 @@ export const TrackTimeText = styled.span`
   text-align: right;
   color: #696969;
 `;
+
+export const TrackPlayingDot = styled.div`
+  width: 16px;
+  height: 16px;
+  background-color: #b672ff;
+  border-radius: 8px;
+  display: block;
+  animation: ${(props) =>
+    props.isPlaying
+      ? css`
+          ${bubble_out} 0.6s ease-in-out infinite both
+        `
+      : null};
+`;
+export const bubble_out = keyframes`
+  0%,
+  to {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1);
+  }
+}`;

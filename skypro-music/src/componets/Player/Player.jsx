@@ -10,7 +10,7 @@ import {
   getPlayTrack,
   getNextTrack,
   getPrevTrack,
-  getTracksListShuffled
+  getTracksListShuffled,
 } from "../../store/slice";
 // const S.Bar = S..div``
 
@@ -41,8 +41,7 @@ function Player() {
   };
 
   const shuffeleHandel = () => {
-    
-    dispatch(getTracksListShuffled())
+    dispatch(getTracksListShuffled());
   };
 
   const onChange = (event) => {
@@ -63,11 +62,16 @@ function Player() {
         setCurrentTime(0);
       }
     };
+    const getEndedTrack = () => {
+      dispatch(getNextTrack());
+    };
     audio.addEventListener("timeupdate", updateTime);
+    audio.addEventListener("ended", getEndedTrack);
     return () => {
       audio.removeEventListener("timeupdate", updateTime);
+      audio.removeEventListener("ended", getEndedTrack);
     };
-  }, []);
+  }, [dispatch]);
   const updateVolume = (event) => {
     const newVolume = event.target.value;
     console.log(newVolume);
@@ -80,7 +84,6 @@ function Player() {
 
   const startHandel = () => {
     audioRef.current.play();
-    console.log(audioRef.current.play());
     dispatch(getPlayTrack());
     // setIsPlaying(true);
   };
@@ -111,7 +114,6 @@ function Player() {
       stopHandel();
     }
   }, [currentTrack]);
-
 
   // const prevHandel = () => {
   //   alert("Еще не реализовано");
