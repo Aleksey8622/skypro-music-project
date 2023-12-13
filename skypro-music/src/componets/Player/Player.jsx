@@ -16,7 +16,7 @@ import {
 
 function Player() {
   const currentTrack = useSelector((state) => state.music.currentTrack);
-  const isPlaying = useSelector((state) => state.music.isPlaying);
+  const $isPlaying = useSelector((state) => state.music.$isPlaying);
   const isShuffledTrackList = useSelector(
     (state) => state.music.isShuffledTrackList
   );
@@ -105,7 +105,7 @@ function Player() {
 
   const toggleLoop = isLoop ? handeStopLoop : handelLoop;
 
-  const togglePlay = isPlaying ? stopHandel : startHandel;
+  const togglePlay = $isPlaying ? stopHandel : startHandel;
 
   useEffect(() => {
     if (currentTrack) {
@@ -155,7 +155,7 @@ function Player() {
                     onClick={togglePlay}
                   >
                     <use
-                      xlinkHref={isPlaying ? theme.iconPause : theme.iconPlay}
+                      xlinkHref={$isPlaying ? theme.iconPause : theme.iconPlay}
                     ></use>
                   </S.BarPlayerBtnPlaySvg>
                 </S.BarPlayerBtnPlay>

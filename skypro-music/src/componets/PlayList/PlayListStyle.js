@@ -223,7 +223,7 @@ export const TrackPlayingDot = styled.div`
   border-radius: 8px;
   display: block;
   animation: ${(props) =>
-    props.isPlaying
+    props.$isPlaying
       ? css`
           ${bubble_out} 0.6s ease-in-out infinite both
         `

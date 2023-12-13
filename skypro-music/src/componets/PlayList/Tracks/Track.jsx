@@ -18,7 +18,7 @@ const Track = ({
   item,
 }) => {
   const dispach = useDispatch();
-  const isPlaying = useSelector((state) => state.music.isPlaying);
+  const $isPlaying = useSelector((state) => state.music.$isPlaying);
   const currentTrack = useSelector((state) => state.music.currentTrack);
   const { theme } = useThemeContext();
   const formattedDuration = moment
@@ -46,7 +46,7 @@ const Track = ({
         <S.TrackTitle>
           <S.TrackTitleImage theme={theme}>
             {currentTrack && currentTrack.id === item.id ? (
-              <S.TrackPlayingDot isPlaying={isPlaying}></S.TrackPlayingDot>
+              <S.TrackPlayingDot $isPlaying={$isPlaying}></S.TrackPlayingDot>
             ) : (
               <S.TrackTitleSvg alt="music">
                 <use xlinkHref="img/icon/sprite.svg#icon-note"></use>

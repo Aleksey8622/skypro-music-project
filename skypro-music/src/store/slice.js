@@ -5,7 +5,7 @@ const initialState = {
   currentTrack: null,
   shuffledList: [],
   isShuffledTrackList: false,
-  isPlaying: false,
+  $isPlaying: false,
 };
 
 export const sliceTrackList = createSlice({
@@ -19,10 +19,10 @@ export const sliceTrackList = createSlice({
       console.log((state.currentTrack = action.payload));
     },
     getPlayTrack: (state) => {
-      state.isPlaying = true;
+      state.$isPlaying = true;
     },
     getPauseTrack: (state) => {
-      state.isPlaying = false;
+      state.$isPlaying = false;
     },
     getNextTrack: (state) => {
       const allTrackList = state.isShuffledTrackList
