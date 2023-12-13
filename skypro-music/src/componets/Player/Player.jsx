@@ -5,12 +5,22 @@ import moment from "moment";
 import * as S from "./PlayerStyle";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useDispatch, useSelector } from "react-redux";
-import { getPauseTrack, getPlayTrack } from "../../store/slice";
+import {
+  getPauseTrack,
+  getPlayTrack,
+  getNextTrack,
+  getPrevTrack,
+  getTracksListShuffled
+} from "../../store/slice";
 // const S.Bar = S..div``
 
 function Player() {
-  const currentTrack = useSelector((state) => state.app.currentTrack);
-  const isPlaying = useSelector((state) => state.app.isPlaying);
+  const currentTrack = useSelector((state) => state.music.currentTrack);
+  const isPlaying = useSelector((state) => state.music.isPlaying);
+  const isShuffledTrackList = useSelector(
+    (state) => state.music.isShuffledTrackList
+  );
+  // const nextTrack = useSelector((state)=> state.music.trax)
   const dispatch = useDispatch();
   const { theme } = useThemeContext();
 
@@ -21,6 +31,19 @@ function Player() {
   const [volume, setVolume] = useState(1);
   const formatedDuration = moment.utc(duration * 1000).format("mm:ss");
   const formatedCurrentTime = moment.utc(currentTime * 1000).format("mm:ss");
+
+  const handelNextTrack = () => {
+    dispatch(getNextTrack());
+  };
+
+  const handelPrevTrack = () => {
+    dispatch(getPrevTrack());
+  };
+
+  const shuffeleHandel = () => {
+    
+    dispatch(getTracksListShuffled())
+  };
 
   const onChange = (event) => {
     const newCurrentTime = event.target.value;
@@ -89,15 +112,13 @@ function Player() {
     }
   }, [currentTrack]);
 
-  const shuffeleHandel = () => {
-    alert("Еще не реализовано");
-  };
-  const prevHandel = () => {
-    alert("Еще не реализовано");
-  };
-  const nextHandel = () => {
-    alert("Еще не реализовано");
-  };
+
+  // const prevHandel = () => {
+  //   alert("Еще не реализовано");
+  // };
+  // const nextHandel = () => {
+  //   alert("Еще не реализовано");
+  // };
 
   return (
     <>
@@ -120,7 +141,7 @@ function Player() {
           <S.BarPlayerBlock>
             <S.BarPlayer>
               <S.BarPlayerControls>
-                <S.BarPlayerBtnPrev onClick={prevHandel}>
+                <S.BarPlayerBtnPrev onClick={handelPrevTrack}>
                   <S.BarBtnPrevSvg theme={theme} alt="prev">
                     <use xlinkHref={theme.iconPrev}></use>
                   </S.BarBtnPrevSvg>
@@ -136,7 +157,7 @@ function Player() {
                     ></use>
                   </S.BarPlayerBtnPlaySvg>
                 </S.BarPlayerBtnPlay>
-                <S.BarPlayerBtnNext onClick={nextHandel}>
+                <S.BarPlayerBtnNext onClick={handelNextTrack}>
                   <S.BarPlayerBtnNextSvg theme={theme} alt="next">
                     <use xlinkHref={theme.iconNext}></use>
                   </S.BarPlayerBtnNextSvg>
@@ -153,9 +174,15 @@ function Player() {
                   )}
                 </S.BarPlayerBtnIconHover>
                 <S.BarPlayerBtnIconHover onClick={shuffeleHandel}>
-                  <S.BarPlayerBtnShuffleSvg alt="shuffle">
-                    <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
-                  </S.BarPlayerBtnShuffleSvg>
+                  {isShuffledTrackList ? (
+                    <S.BarPlayerBtnShuffleSvgActive alt="shuffle">
+                      <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+                    </S.BarPlayerBtnShuffleSvgActive>
+                  ) : (
+                    <S.BarPlayerBtnShuffleSvg alt="shuffle">
+                      <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+                    </S.BarPlayerBtnShuffleSvg>
+                  )}
                 </S.BarPlayerBtnIconHover>
               </S.BarPlayerControls>
 

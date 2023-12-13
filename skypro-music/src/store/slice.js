@@ -9,11 +9,14 @@ const initialState = {
 };
 
 export const sliceTrackList = createSlice({
-  name: "app",
+  name: "music",
   initialState,
   reducers: {
-    getTrack: (state, action) => {
+    getAllTrack: (state, action) => {
       state.currentTrack = action.payload;
+      state.trackList = action.payload.allTracks;
+      state.shuffledList = action.payload.allTracks;
+      console.log((state.currentTrack = action.payload));
     },
     getPlayTrack: (state) => {
       state.isPlaying = true;
@@ -21,8 +24,46 @@ export const sliceTrackList = createSlice({
     getPauseTrack: (state) => {
       state.isPlaying = false;
     },
+    getNextTrack: (state) => {
+      const allTrackList = state.isShuffledTrackList
+        ? state.shuffledList.sort(() => Math.random() - 0.5)
+        : state.trackList;
+
+      const tracksIndex = allTrackList.findIndex((track) => {
+        console.log(track.id);
+        return track.id === state.currentTrack.id;
+      });
+
+      if (allTrackList[tracksIndex + 1]) {
+        state.currentTrack = allTrackList[tracksIndex + 1];
+      }
+    },
+    getPrevTrack: (state) => {
+      const allTrackList = state.isShuffledTrackList
+        ? state.shuffledList
+        : state.trackList;
+
+      const tracksIndex = allTrackList.findIndex((track) => {
+        console.log(track.id);
+        return track.id === state.currentTrack.id;
+      });
+
+      if (allTrackList[tracksIndex - 1]) {
+        state.currentTrack = allTrackList[tracksIndex - 1];
+      }
+    },
+    getTracksListShuffled: (state) => {
+      state.isShuffledTrackList = !state.isShuffledTrackList;
+    },
   },
 });
 
-export const { getTrack, getPlayTrack, getPauseTrack } = sliceTrackList.actions;
+export const {
+  getAllTrack,
+  getPlayTrack,
+  getPauseTrack,
+  getNextTrack,
+  getPrevTrack,
+  getTracksListShuffled,
+} = sliceTrackList.actions;
 export default sliceTrackList.reducer;

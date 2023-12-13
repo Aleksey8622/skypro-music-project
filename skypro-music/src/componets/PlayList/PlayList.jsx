@@ -9,12 +9,7 @@ import * as S from "./PlayListStyle";
 import { getTrack } from "../../api/api";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
 
-
 function PlayList() {
- 
-
- 
-
   const [errorTrack, setErrorTrack] = useState(null);
 
   const [allTracks, setTracks] = useState([]);
@@ -22,6 +17,10 @@ function PlayList() {
   const [isLoading, setIsLoading] = useState(true);
   // const [serchTrack, setSearchTrack] = useState(allTracks)
   // console.log(serchTrack);
+
+  useEffect(() => {
+    console.log(allTracks);
+  }, [allTracks]);
 
   useEffect(() => {
     getTrack()
@@ -36,6 +35,7 @@ function PlayList() {
   }, []);
   // const handelPlayer = () => setShowPlayer(!showPlayer);
   const { theme } = useThemeContext();
+
   return (
     <S.MainCenterblock>
       <BlockSearch />
@@ -67,13 +67,13 @@ function PlayList() {
                 <Track
                   isLoading={isLoading}
                   key={item.id}
-                  item={item}
                   // name={item.name}
                   // author={item.author}
                   // duration_in_seconds={item.duration_in_seconds
                   // }
                   // album={item.album}
                   {...item}
+                  allTracks={allTracks}
                 />
               );
             })

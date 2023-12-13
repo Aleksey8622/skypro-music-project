@@ -76,7 +76,7 @@ export const TimeTrack = styled.div`
   justify-content: flex-end;
   padding-right: 5px;
   padding-bottom: 3px;
-  color: ${props=> props.theme.color}
+  color: ${(props) => props.theme.color};
 `;
 // export const ProgressBarCover = styled.div`
 //   background-color: #696969;
@@ -246,6 +246,13 @@ export const BarPlayerBtnShuffleSvg = styled.svg`
   height: 12px;
   fill: transparent;
   stroke: #696969;
+`;
+export const BarPlayerBtnShuffleSvgActive = styled.svg`
+  width: 19px;
+  height: 12px;
+  fill: transparent;
+  stroke: #ffffff;
+  cursor: pointer;
 `;
 export const PlayerTrackPlay = styled.div`
   display: -webkit-box;

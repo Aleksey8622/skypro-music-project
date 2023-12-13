@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 export function Main() {
-  const currentTrack = useSelector((state) => state.app.currentTrack);
+  const currentTrack = useSelector((state) => state.music.currentTrack);
 
   useEffect(() => {
     console.log(currentTrack);
