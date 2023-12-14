@@ -26,12 +26,18 @@ function PlayList() {
     getTrack()
       .then((tracks) => {
         setTracks(tracks);
-        setIsLoading(false);
+        // setIsLoading(false);
       })
 
       .catch((error) => {
         setErrorTrack(error.message);
-      });
+        
+      }).finally(()=>{
+        setIsLoading(false);
+      })
+
+      
+
   }, []);
   // const handelPlayer = () => setShowPlayer(!showPlayer);
   const { theme } = useThemeContext();

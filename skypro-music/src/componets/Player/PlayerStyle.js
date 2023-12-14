@@ -23,7 +23,7 @@ export const BarPlayerProgress = styled.input`
 
   --progress-bg-color: ${(props) => props.theme.progressBgColor};
 
-  margin: 0;
+  margin: 5px;
   width: 100%;
   height: var(--progress-height);
   -webkit-appearance: none;
@@ -304,6 +304,7 @@ export const TrackPlayerAuthor = styled.div`
   -ms-grid-column: 2;
   grid-area: author;
   min-width: 49px;
+  min-height: 40px;
 `;
 export const TrackPlayerAuthorLink = styled.a`
   font-style: normal;
@@ -318,12 +319,14 @@ export const TrackPlayAlbum = styled.div`
   -ms-grid-column: 2;
   grid-area: album;
   min-width: 49px;
+  min-height: 40px;
 `;
 export const TrackPlayAlbumLink = styled.a`
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 24px;
+  white-space: nowrap;
   color: ${(props) => props.theme.color};
 `;
 export const TrackPlayLikeDis = styled.div`

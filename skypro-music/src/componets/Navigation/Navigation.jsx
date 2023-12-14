@@ -14,7 +14,7 @@ function Navigation({user, cancelHandler}) {
       <S.Logo>
         <S.LogoImg src={theme.iconLogo} alt="logo" />
       </S.Logo>
-      <S.NavBurger onClick={showMenu}>
+      <S.NavBurger theme={theme} onClick={showMenu}>
         <S.NavBurgerLine theme={theme}></S.NavBurgerLine>
         <S.NavBurgerLine theme={theme}></S.NavBurgerLine>
         <S.NavBurgerLine theme={theme}></S.NavBurgerLine>

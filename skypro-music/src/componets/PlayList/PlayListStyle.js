@@ -77,7 +77,7 @@ export const ContentPlaylist = styled.div`
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  max-height: 1370px;
+  height: 680px;
   overflow-y: auto;
   padding-right: 10px;
 
