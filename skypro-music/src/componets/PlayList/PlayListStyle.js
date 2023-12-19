@@ -208,6 +208,7 @@ export const TrackTimeSvg = styled.svg`
   fill: transparent;
   stroke: #696969;
   cursor: pointer;
+  
 `;
 export const TrackTimeText = styled.span`
   font-style: normal;

@@ -2,39 +2,42 @@ import BlockFilter from "../BlockFilter/BlockFilter";
 import BlockSearch from "../BlockSearch/BlockSearch";
 import React from "react";
 import Track from "./Tracks/Track";
-import { useState, useEffect } from "react";
+// import {  useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import SkeletonTrack from "../Skeletons/SkeletonTrack";
 import * as S from "./PlayListStyle";
-import { getTrack } from "../../api/api";
+// import { getTrack } from "../../api/api";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
+import { useAllTracksQuery } from "../../redux/apiMusic";
 
 function PlayList() {
-  const [errorTrack, setErrorTrack] = useState(null);
+  const { theme } = useThemeContext();
+  const { data = [], isLoading} = useAllTracksQuery();
 
-  const [allTracks, setTracks] = useState([]);
+  // const [errorTrack, setErrorTrack] = useState(null);
 
-  const [isLoading, setIsLoading] = useState(true);
+  // const [allTracks, setTracks] = useState([]);
+
+  // const [isLoading, setIsLoading] = useState(true);
   // const [serchTrack, setSearchTrack] = useState(allTracks)
   // console.log(serchTrack);
 
-  useEffect(() => {
-    console.log(allTracks);
-  }, [allTracks]);
+  // useEffect(() => {
+  //   console.log(Error);
+  // }, [Error]);
 
-  useEffect(() => {
-    getTrack()
-      .then((tracks) => {
-        setTracks(tracks);
-        setIsLoading(false);
-      })
+  // useEffect(() => {
+  //   getTrack()
+  //     .then((tracks) => {
+  //       setTracks(tracks);
+  //       setIsLoading(false);
+  //     })
 
-      .catch((error) => {
-        setErrorTrack(error.message);
-      });
-  }, []);
+  //     .catch((error) => {
+  //       setErrorTrack(error.message);
+  //     });
+  // }, []);
   // const handelPlayer = () => setShowPlayer(!showPlayer);
-  const { theme } = useThemeContext();
 
   return (
     <S.MainCenterblock>
@@ -55,26 +58,20 @@ function PlayList() {
             </S.PlaylistTitleSvg>
           </S.TitleCol4>
         </S.ContentTitle>
-        {errorTrack ? (
+        {/* {Error ? (
           <p>Не удалось загрузить плейлист, попробуйте позже</p>
-        ) : null}
+        ) : null} */}
         <S.ContentPlaylist theme={theme}>
           {isLoading ? (
             <SkeletonTrack />
           ) : (
-            allTracks.map((item) => {
+            data.map((item) => {
               return (
                 <Track
-                  isLoading={isLoading}
                   key={item.id}
                   item={item}
-                  // name={item.name}
-                  // author={item.author}
-                  // duration_in_seconds={item.duration_in_seconds
-                  // }
-                  // album={item.album}
                   {...item}
-                  allTracks={allTracks}
+                  data={data}
                 />
               );
             })

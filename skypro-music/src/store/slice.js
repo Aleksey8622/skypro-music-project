@@ -14,8 +14,8 @@ export const sliceTrackList = createSlice({
   reducers: {
     getAllTrack: (state, action) => {
       state.currentTrack = action.payload;
-      state.trackList = action.payload.allTracks;
-      state.shuffledList = action.payload.allTracks;
+      state.trackList = action.payload.data;
+      state.shuffledList = action.payload.data;
       console.log((state.currentTrack = action.payload));
     },
     getPlayTrack: (state) => {
