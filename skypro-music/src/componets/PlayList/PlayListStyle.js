@@ -5,6 +5,7 @@ export const MainCenterblock = styled.div`
   -ms-flex-positive: 3;
   flex-grow: 3;
   padding: 20px 40px 20px 111px;
+ 
 `;
 export const CenterblockHeading = styled.div`
   font-style: normal;
@@ -23,6 +24,8 @@ export const CenterblockContent = styled.div`
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  min-height: 0px;
+  height: 70vh;
 `;
 export const ContentTitle = styled.div`
   display: -webkit-box;
@@ -77,7 +80,6 @@ export const ContentPlaylist = styled.div`
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  max-height: 1370px;
   overflow-y: auto;
   padding-right: 10px;
 

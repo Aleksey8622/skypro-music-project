@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { getAllTrack, getPauseTrack, getTracksListShuffled } from "./slice";
 export const AuthContext = createContext(null);
 
 function getAuthFromLocalStorege() {
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
   // const [isAuthenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(getAuthFromLocalStorege());
-  
+  const dispatch = useDispatch();
   
 
   const login = (newUser) => {
@@ -36,6 +37,9 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem("auth")
     navigate("/login")
+    dispatch(getAllTrack(false))
+    dispatch(getPauseTrack(false))
+    dispatch(getTracksListShuffled(false))
   };
 
   return (

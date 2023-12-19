@@ -11,6 +11,7 @@ export const Container = styled.div`
   margin: 0 auto;
   position: relative;
   background-color: ${(props) => props.theme.background};
+  
 `;
 export const Main = styled.div`
   -webkit-box-flex: 1;
@@ -24,4 +25,5 @@ export const Main = styled.div`
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+ 
 `;

@@ -11,11 +11,9 @@ import AuthPage from "./pages/Auth/AuthPage";
 import { AuthProvider } from "../src/store/AuthContext";
 
 import { ThemeContext, themes } from "../src/pages/Theme/ThemeContext";
-
-
+import { PageLayout } from "./componets/PageLayout/PageLayout";
 
 export const AppRoutes = () => {
-  
   // const [user, setUser] = useState(null);
 
   // const cancelHandler = () => {
@@ -34,23 +32,22 @@ export const AppRoutes = () => {
 
     setCurrentTheme(themes.dark);
   };
-  
+
   return (
     <AuthProvider>
       <ThemeContext.Provider value={{ toggleTheme, theme: currentTheme }}>
-      <Routes>
-        <Route element={<ProtectedRoute  />}>
-          <Route
-            path="/"
-            element={<Main  />}
-          />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/category/:id" element={<Category />} />
-        </Route>
-        <Route path="/login" element={<AuthPage isLoginMode={true} />} />
-        <Route path="/register" element={<AuthPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+        <Routes>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<PageLayout />}>
+              <Route index element={<Main />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/category/:id" element={<Category />} />
+            </Route>
+          </Route>
+          <Route path="/login" element={<AuthPage isLoginMode={true} />} />
+          <Route path="/register" element={<AuthPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </ThemeContext.Provider>
     </AuthProvider>
   );
