@@ -1,19 +1,22 @@
+// import { useSelector } from "react-redux";
+import  MainSidebar  from "../../componets/MainSidebar/MainSidebar";
 import Navigation from "../../componets/Navigation/Navigation";
-import Player from "../../componets/Player/Player";
+import MyPlayList from "../../componets/PlayList/MyPlayList/MyPlayList";
+// import PlayList from "../../componets/PlayList/PlayList";
+// import Player from "../../componets/Player/Player";
+// import BlockFilter from "../../componets/BlockFilter/BlockFilter";
+// import BlockSearch from "../../componets/BlockSearch/BlockSearch";
 import * as S from "../Main/MainStyle";
+// import { useThemeContext } from "../Theme/ThemeContext";
 
-export function Favorites({ currentTrack }) {
+export function Favorites() {
+  // const currentTrack = useSelector((state) => state.music.currentTrack);
+  // const { theme } = useThemeContext();
   return (
-    <S.Wrapper>
-      <S.Container>
-        <S.Main>
-          <Navigation />
-          <div>
-            <h2>Favorites</h2>
-          </div>
-        </S.Main>
-        {currentTrack && <Player currentTrack={currentTrack} />}
-      </S.Container>
-    </S.Wrapper>
+    <S.Main>
+      <Navigation />
+      <MyPlayList />
+      <MainSidebar />
+    </S.Main>
   );
 }
