@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./AuthPage.styles";
 import { useContext, useEffect, useState } from "react";
-import { loginUser, registerUser } from "../../api/auth";
+import { loginUser, refreshToken, registerUser } from "../../api/auth";
 import { getUserToken } from "../../api/auth";
 import { AuthContext } from "../../store/AuthContext";
 export default function AuthPage({ isLoginMode = false }) {
@@ -36,6 +36,14 @@ export default function AuthPage({ isLoginMode = false }) {
       setIsLodingButton(true);
       const userData = await loginUser({ email, password });
       console.log(userData);
+      const token = await getUserToken({ email, password });
+      localStorage.setItem("access", token.access.toString());
+      localStorage.setItem("refresh", token.refresh.toString());
+      setInterval(async () => {
+        const refresh = localStorage.getItem("refresh");
+        const refreshedToken = await refreshToken({ refresh });
+        localStorage.setItem("access", refreshedToken.access.toString());
+      }, 190 * 1000);
       login(userData);
       navigate("/");
     } catch (error) {
@@ -69,7 +77,13 @@ export default function AuthPage({ isLoginMode = false }) {
       const user = await registerUser({ email, password, username: email });
 
       const token = await getUserToken({ email, password });
-      console.log(token);
+      localStorage.setItem("access", token.access.toString());
+      localStorage.setItem("refresh", token.refresh.toString());
+      setInterval(async () => {
+        const refresh = localStorage.getItem("refresh");
+        const refreshedToken = await refreshToken({ refresh });
+        localStorage.setItem("access", refreshedToken.access.toString());
+      }, 190 * 1000);
       login(user);
       navigate("/");
     } catch (error) {

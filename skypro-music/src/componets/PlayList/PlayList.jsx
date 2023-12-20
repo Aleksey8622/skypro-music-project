@@ -12,7 +12,8 @@ import { useAllTracksQuery } from "../../redux/apiMusic";
 
 function PlayList() {
   const { theme } = useThemeContext();
-  const { data = [], isLoading} = useAllTracksQuery();
+  const { data = [], isLoading, refetch } = useAllTracksQuery();
+  
 
   // const [errorTrack, setErrorTrack] = useState(null);
 
@@ -68,6 +69,7 @@ function PlayList() {
             data.map((item) => {
               return (
                 <Track
+                  refetch={refetch}
                   key={item.id}
                   item={item}
                   {...item}
