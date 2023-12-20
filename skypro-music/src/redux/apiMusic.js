@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+
+
 const urlTracks = "https://skypro-music-api.skyeng.tech";
 export const apiMusic = createApi({
   reducerPath: "apiMusic",
@@ -15,6 +17,7 @@ export const apiMusic = createApi({
           Authorization: `Bearer ${token}`,
         },
       }),
+      // transformResponse: (response) => {console.log(response) }
     }),
     getAllTracksId: build.query({
       query: ({ id }) => `/catalog/selection/${id}/`,

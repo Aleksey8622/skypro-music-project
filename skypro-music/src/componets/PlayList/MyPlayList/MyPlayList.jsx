@@ -8,8 +8,10 @@ import * as S from "../PlayListStyle";
 import Track from "../Tracks/Track";
 const MyPlayList = () => {
   const { theme } = useThemeContext();
-  const { data = [], isLoading, refetch } = useMyFavoriteTracksQuery();
-  console.log(data)
+  const token = localStorage.getItem("access");
+  
+  const { data = [], isLoading, refetch } = useMyFavoriteTracksQuery({ token });
+  
   return (
     <S.MainCenterblock>
       <BlockSearch />
@@ -36,7 +38,13 @@ const MyPlayList = () => {
           ) : (
             data.map((item) => {
               return (
-                <Track refetch={refetch} key={item.id} item={item} {...item} data={data} />
+                <Track
+                  refetch={refetch}
+                  key={item.id}
+                  item={item}
+                  {...item}
+                  data={data}
+                />
               );
             })
           )}

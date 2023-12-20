@@ -37,7 +37,7 @@ const Track = ({
   const [addMyTracks, { isError }] = useAddMyTracksMutation();
   const [deleteMytrack] = useDeleteMyTrackMutation();
   const isLiked = useMemo(
-    () => stared_user.some((el) => el.id === user.id),
+    () => stared_user?.some((el) => el.id === user.id),
     [stared_user, user]
   );
   const handleAddMyTrack = async (event) => {
@@ -81,6 +81,7 @@ const Track = ({
                   track_file,
                   id,
                   data,
+                  
                 })
               )
             }
