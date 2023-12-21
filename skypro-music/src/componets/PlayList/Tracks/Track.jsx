@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllTrack } from "../../../store/slice";
 import {
   useAddMyTracksMutation,
+  useAllTracksQuery,
   useDeleteMyTrackMutation,
 } from "../../../redux/apiMusic";
 import { useContext, useMemo } from "react";
@@ -22,10 +23,11 @@ const Track = ({
   id,
   data,
   item,
-  refetch,
+  // refetch,
   stared_user,
+  isFavoriteLike,
 }) => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const dispach = useDispatch();
   const $isPlaying = useSelector((state) => state.music.$isPlaying);
   const currentTrack = useSelector((state) => state.music.currentTrack);
@@ -34,24 +36,40 @@ const Track = ({
     .utc(duration_in_seconds * 1000)
     .format("mm:ss");
 
-  const [addMyTracks, { isError }] = useAddMyTracksMutation();
-  const [deleteMytrack] = useDeleteMyTrackMutation();
+  const [addMyTracks, { error: likeError }] = useAddMyTracksMutation();
+  const [deleteMytrack, { error: dislikeError }] = useDeleteMyTrackMutation();
+  const { refetch } = useAllTracksQuery();
+  if (
+    (likeError && likeError.status === 401) ||
+    (dislikeError && dislikeError.status === 401)
+  ) {
+    logout();
+  }
+
   const isLiked = useMemo(
     () => stared_user?.some((el) => el.id === user.id),
     [stared_user, user]
   );
   const handleAddMyTrack = async (event) => {
-    event.stopPropagation();
-    const token = localStorage.getItem("access");
-    await addMyTracks({ id, token }).unwrap();
-    refetch();
+    try {
+      event.stopPropagation();
+      const token = localStorage.getItem("access");
+      await addMyTracks({ id, token }).unwrap();
+      refetch();
+    } catch (error) {
+      
+    }
   };
 
   const handleDeleteMyTrack = async (event) => {
-    event.stopPropagation();
-    const token = localStorage.getItem("access");
-    await deleteMytrack({ id, token }).unwrap();
-    refetch();
+    try {
+      event.stopPropagation();
+      const token = localStorage.getItem("access");
+      await deleteMytrack({ id, token }).unwrap();
+      refetch();
+    } catch (error) {
+      
+    }
   };
 
   return (
@@ -81,7 +99,6 @@ const Track = ({
                   track_file,
                   id,
                   data,
-                  
                 })
               )
             }
@@ -99,7 +116,7 @@ const Track = ({
           <S.TrackAlbumLink theme={theme}>{album}</S.TrackAlbumLink>
         </S.TrackAlbum>
         <div className="track__time">
-          {isLiked ? (
+          {isLiked || isFavoriteLike ? (
             <S.TrackTimeSvg alt="time" onClick={handleDeleteMyTrack}>
               <use xlinkHref="img/icon/sprite.svg#icon-like-active"></use>
             </S.TrackTimeSvg>

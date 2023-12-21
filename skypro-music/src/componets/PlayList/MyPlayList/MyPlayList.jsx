@@ -3,14 +3,14 @@ import { useThemeContext } from "../../../pages/Theme/ThemeContext";
 import { useMyFavoriteTracksQuery } from "../../../redux/apiMusic";
 import BlockFilter from "../../BlockFilter/BlockFilter";
 import BlockSearch from "../../BlockSearch/BlockSearch";
-import SkeletonTrack from "../../Skeletons/SkeletonTrack";
+// import SkeletonTrack from "../../Skeletons/SkeletonTrack";
 import * as S from "../PlayListStyle";
 import Track from "../Tracks/Track";
 const MyPlayList = () => {
   const { theme } = useThemeContext();
   const token = localStorage.getItem("access");
   
-  const { data = [], isLoading, refetch } = useMyFavoriteTracksQuery({ token });
+  const { data = [], isLoading,  } = useMyFavoriteTracksQuery({ token });
   
   return (
     <S.MainCenterblock>
@@ -34,16 +34,17 @@ const MyPlayList = () => {
 
         <S.ContentPlaylist theme={theme}>
           {isLoading ? (
-            <SkeletonTrack />
+            <p style={{textAlign: "center"}}>Loading...</p>
           ) : (
             data.map((item) => {
               return (
                 <Track
-                  refetch={refetch}
+                  // refetch={refetch}
                   key={item.id}
                   item={item}
                   {...item}
                   data={data}
+                  isFavoriteLike={true}
                 />
               );
             })

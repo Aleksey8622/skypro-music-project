@@ -1,15 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-
-
 const urlTracks = "https://skypro-music-api.skyeng.tech";
 export const apiMusic = createApi({
   reducerPath: "apiMusic",
+  tagTypes: ["Track"],
   baseQuery: fetchBaseQuery({ baseUrl: urlTracks }),
   endpoints: (build) => ({
     allTracks: build.query({
       query: () => "/catalog/track/all/",
     }),
+
     myFavoriteTracks: build.query({
       query: ({ token }) => ({
         url: "/catalog/track/favorite/all/",
@@ -17,18 +17,14 @@ export const apiMusic = createApi({
           Authorization: `Bearer ${token}`,
         },
       }),
-      // transformResponse: (response) => {console.log(response) }
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ id }) => ({ type: "Track", id })), "Track"]
+          : ["Track"],
     }),
     getAllTracksId: build.query({
       query: ({ id }) => `/catalog/selection/${id}/`,
     }),
-  }),
-});
-
-export const myTracksApiMusic = createApi({
-  reducerPath: "myTracksApiMusic",
-  baseQuery: fetchBaseQuery({ baseUrl: urlTracks }),
-  endpoints: (build) => ({
     addMyTracks: build.mutation({
       query: ({ token, id }) => ({
         url: `/catalog/track/${id}/favorite/`,
@@ -37,6 +33,7 @@ export const myTracksApiMusic = createApi({
           Authorization: `Bearer ${token}`,
         },
       }),
+      invalidatesTags: (arg) => [{ type: "Track", id: arg.id }],
     }),
     deleteMyTrack: build.mutation({
       query: ({ token, id }) => ({
@@ -46,14 +43,45 @@ export const myTracksApiMusic = createApi({
           Authorization: `Bearer ${token}`,
         },
       }),
+      invalidatesTags: (arg) => [{ type: "Track", id: arg.id }],
     }),
   }),
 });
+
+// export const myTracksApiMusic = createApi({
+//   reducerPath: "myTracksApiMusic",
+//   tagTypes: ["Track"],
+//   baseQuery: fetchBaseQuery({ baseUrl: urlTracks }),
+//   endpoints: (build) => ({
+//     addMyTracks: build.mutation({
+//       query: ({ token, id }) => ({
+//         url: `/catalog/track/${id}/favorite/`,
+//         method: "POST",
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       }),
+//       invalidatesTags: [{ type: "Track", id: "LIST" }],
+//     }),
+//     deleteMyTrack: build.mutation({
+//       query: ({ token, id }) => ({
+//         url: `/catalog/track/${id}/favorite/`,
+//         method: "DELETE",
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       }),
+//       invalidatesTags: [{ type: "Track", id: "LIST" }],
+//     }),
+//   }),
+// });
 
 export const {
   useAllTracksQuery,
   useGetAllTracksIdQuery,
   useMyFavoriteTracksQuery,
+  useAddMyTracksMutation,
+  useDeleteMyTrackMutation,
 } = apiMusic;
-export const { useAddMyTracksMutation, useDeleteMyTrackMutation } =
-  myTracksApiMusic;
+// export const { useAddMyTracksMutation, useDeleteMyTrackMutation } =
+//   myTracksApiMusic;

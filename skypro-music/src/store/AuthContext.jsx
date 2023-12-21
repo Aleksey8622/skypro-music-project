@@ -6,46 +6,44 @@ export const AuthContext = createContext(null);
 
 function getAuthFromLocalStorege() {
   try {
-    const auth = JSON.parse(localStorage.getItem("auth"))
+    const auth = JSON.parse(localStorage.getItem("auth"));
 
-    return auth
+    return auth;
   } catch (error) {
     console.log(error);
-    return null
+    return null;
   }
 }
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // const [isAuthenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(getAuthFromLocalStorege());
   const dispatch = useDispatch();
-  
 
   const login = (newUser) => {
     // setAuthenticated(true);
     setUser(newUser);
-    localStorage.setItem("auth", JSON.stringify(newUser))
-    const myValue = localStorage.getItem("auth")
+    localStorage.setItem("auth", JSON.stringify(newUser));
+    const myValue = localStorage.getItem("auth");
     console.log(JSON.parse(myValue));
-    navigate("/")
+    navigate("/");
   };
 
   const logout = () => {
     // setAuthenticated(false);
+
+    localStorage.removeItem("auth");
+    dispatch(getAllTrack(false));
+    dispatch(getPauseTrack(false));
+    dispatch(getTracksListShuffled(false));
+    navigate("/login");
     setUser(null);
-    localStorage.removeItem("auth")
-    navigate("/login")
-    dispatch(getAllTrack(false))
-    dispatch(getPauseTrack(false))
-    dispatch(getTracksListShuffled(false))
   };
 
   return (
-    <AuthContext.Provider
-      value={{ login, logout, user }}
-    >
+    <AuthContext.Provider value={{ login, logout, user }}>
       {children}
     </AuthContext.Provider>
   );
