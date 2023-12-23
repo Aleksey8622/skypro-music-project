@@ -12,14 +12,21 @@ import {
   getPrevTrack,
   getTracksListShuffled,
 } from "../../store/slice";
+import { useGetAllTracksIdQuery } from "../../redux/apiMusic";
+
 // const S.Bar = S..div``
 
 function Player() {
   const currentTrack = useSelector((state) => state.music.currentTrack);
+  const { data } = useGetAllTracksIdQuery({ id: data.id });
+
   const $isPlaying = useSelector((state) => state.music.$isPlaying);
+  // const stared_user = useSelector((state) => state.music.stared_user);
+  // console.log(stared_user);
   const isShuffledTrackList = useSelector(
     (state) => state.music.isShuffledTrackList
   );
+
   // const nextTrack = useSelector((state)=> state.music.trax)
   const dispatch = useDispatch();
   const { theme } = useThemeContext();

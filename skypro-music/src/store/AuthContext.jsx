@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAllTrack, getPauseTrack, getTracksListShuffled } from "./slice";
+
 export const AuthContext = createContext(null);
 
 function getAuthFromLocalStorege() {
@@ -31,14 +32,17 @@ export const AuthProvider = ({ children }) => {
     navigate("/");
   };
 
+
   const logout = () => {
     // setAuthenticated(false);
 
     localStorage.removeItem("auth");
+    
     dispatch(getAllTrack(false));
     dispatch(getPauseTrack(false));
     dispatch(getTracksListShuffled(false));
     navigate("/login");
+
     setUser(null);
   };
 

@@ -26,6 +26,7 @@ const Track = ({
   // refetch,
   stared_user,
   isFavoriteLike,
+
 }) => {
   const { user, logout } = useContext(AuthContext);
   const dispach = useDispatch();
@@ -57,7 +58,7 @@ const Track = ({
       await addMyTracks({ id, token }).unwrap();
       refetch();
     } catch (error) {
-      
+
     }
   };
 
@@ -68,7 +69,7 @@ const Track = ({
       await deleteMytrack({ id, token }).unwrap();
       refetch();
     } catch (error) {
-      
+
     }
   };
 

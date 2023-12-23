@@ -12,7 +12,7 @@ import { useAllTracksQuery } from "../../redux/apiMusic";
 
 function PlayList() {
   const { theme } = useThemeContext();
-  const { data = [], isLoading, } = useAllTracksQuery();
+  const { data = [], isLoading } = useAllTracksQuery();
   
 
   // const [errorTrack, setErrorTrack] = useState(null);
