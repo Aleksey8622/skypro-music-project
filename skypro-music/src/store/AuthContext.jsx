@@ -27,8 +27,8 @@ export const AuthProvider = ({ children }) => {
     // setAuthenticated(true);
     setUser(newUser);
     localStorage.setItem("auth", JSON.stringify(newUser));
-    const myValue = localStorage.getItem("auth");
-    console.log(JSON.parse(myValue));
+    // const myValue = localStorage.getItem("auth");
+    // console.log(JSON.parse(myValue));
     navigate("/");
   };
 

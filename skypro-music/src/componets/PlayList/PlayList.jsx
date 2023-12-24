@@ -2,7 +2,7 @@ import BlockFilter from "../BlockFilter/BlockFilter";
 import BlockSearch from "../BlockSearch/BlockSearch";
 import React from "react";
 import Track from "./Tracks/Track";
-// import {  useEffect } from "react";
+import {  useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import SkeletonTrack from "../Skeletons/SkeletonTrack";
 import * as S from "./PlayListStyle";
@@ -23,9 +23,9 @@ function PlayList() {
   // const [serchTrack, setSearchTrack] = useState(allTracks)
   // console.log(serchTrack);
 
-  // useEffect(() => {
-  //   console.log(Error);
-  // }, [Error]);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   // useEffect(() => {
   //   getTrack()

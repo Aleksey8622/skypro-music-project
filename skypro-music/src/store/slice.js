@@ -20,7 +20,7 @@ export const sliceTrackList = createSlice({
       state.shuffledList = action.payload.data;
       
      
-      console.log((state.currentTrack = action.payload));
+      // console.log((state.currentTrack = action.payload));
       
     },
     getPlayTrack: (state) => {
@@ -35,7 +35,7 @@ export const sliceTrackList = createSlice({
         : state.trackList;
 
       const tracksIndex = allTrackList.findIndex((track) => {
-        console.log(track.id);
+        // console.log(track.id);
         return track.id === state.currentTrack.id;
       });
 
@@ -49,7 +49,7 @@ export const sliceTrackList = createSlice({
         : state.trackList;
 
       const tracksIndex = allTrackList.findIndex((track) => {
-        console.log(track.id);
+        // console.log(track.id);
         return track.id === state.currentTrack.id;
       });
 

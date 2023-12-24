@@ -5,7 +5,7 @@ import { loginUser, refreshToken, registerUser } from "../../api/auth";
 import { getUserToken } from "../../api/auth";
 import { AuthContext } from "../../store/AuthContext";
 export default function AuthPage({ isLoginMode = false }) {
-  const { login, user } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [isLodingButton, setIsLodingButton] = useState(false);
@@ -35,7 +35,7 @@ export default function AuthPage({ isLoginMode = false }) {
       }
       setIsLodingButton(true);
       const userData = await loginUser({ email, password });
-      console.log(userData);
+      // console.log(userData);
       const token = await getUserToken({ email, password });
       localStorage.setItem("access", token.access.toString());
       localStorage.setItem("refresh", token.refresh.toString());
@@ -95,9 +95,9 @@ export default function AuthPage({ isLoginMode = false }) {
     // setError("Неизвестная ошибка регистрации");
   };
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
   useEffect(() => {

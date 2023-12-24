@@ -18,7 +18,9 @@ function MainSidebar() {
   return (
     <S.MainSidebar theme={theme}>
       <S.SidebarPersonal>
-        <S.SidebarPersonalName theme={theme}>{user.username}</S.SidebarPersonalName>
+        <S.SidebarPersonalName theme={theme}>
+          {user.username}
+        </S.SidebarPersonalName>
         <S.SidebarIcon theme={theme} onClick={() => logout()}>
           <svg alt="logout">
             <use xlinkHref={theme.iconLogout}></use>
@@ -29,19 +31,19 @@ function MainSidebar() {
       <S.SidebarBlock>
         <S.SidebarList>
           <S.SidebarItem>
-            <S.SidebarLink to={"/category/1"}>
+            <S.SidebarLink to="/category/1">
               <S.SidebarImg src="img/Frame5.png" alt="day's playlist" />
             </S.SidebarLink>
           </S.SidebarItem>
 
           <S.SidebarItem>
-            <S.SidebarLink to={"/category/2"}>
+            <S.SidebarLink to="/category/2">
               <S.SidebarImg src="/img/Frame3.png" alt="day's playlist" />
             </S.SidebarLink>
           </S.SidebarItem>
 
           <S.SidebarItem>
-            <S.SidebarLink to={"/category/3"}>
+            <S.SidebarLink to="/category/3">
               <S.SidebarImg src="img/Frame4.png" alt="day's playlist" />
             </S.SidebarLink>
           </S.SidebarItem>
