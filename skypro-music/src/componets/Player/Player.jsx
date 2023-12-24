@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import React from "react";
 // import SkeletonPlayer from "../Skeletons/SkeletonPlayer";
 import moment from "moment";
@@ -12,17 +12,60 @@ import {
   getPrevTrack,
   getTracksListShuffled,
 } from "../../store/slice";
-import { useGetAllTracksIdQuery } from "../../redux/apiMusic";
+import {
+  useAddMyTracksMutation,
+  useAllTracksQuery,
+  useDeleteMyTrackMutation,
+  useGetAllTracksIdQuery,
+} from "../../redux/apiMusic";
+import { AuthContext } from "../../store/AuthContext";
 
 // const S.Bar = S..div``
 
 function Player() {
   const currentTrack = useSelector((state) => state.music.currentTrack);
   const { data } = useGetAllTracksIdQuery({ id: currentTrack.id });
-  useEffect(()=>{
-    console.log(data);
-  },[data])
-  
+
+  const { user, logout } = useContext(AuthContext);
+
+  const isLiked = useMemo(
+    () => data?.stared_user?.some((el) => el.id === user.id),
+    [data?.stared_user, user]
+  );
+  // useEffect(() => {
+  //   console.log(isLiked);
+  //   console.log({id:data.id});
+
+  // }, [isLiked, {id:data.id}]);
+
+  const [addMyTracks, { error: likeError }] = useAddMyTracksMutation();
+  const [deleteMytrack, { error: dislikeError }] = useDeleteMyTrackMutation();
+  const { refetch } = useAllTracksQuery();
+  if (
+    (likeError && likeError.status === 401) ||
+    (dislikeError && dislikeError.status === 401)
+  ) {
+    logout();
+  }
+
+  const handleAddMyTrack = async (event) => {
+    try {
+      event.stopPropagation();
+      const token = localStorage.getItem("access");
+      await addMyTracks({ id: data.id, token }).unwrap();
+      refetch();
+    } catch (error) {}
+  };
+
+  const handleDeleteMyTrack = async (event) => {
+    try {
+      event.stopPropagation();
+      const token = localStorage.getItem("access");
+      await deleteMytrack({ id: data.id, token }).unwrap();
+      refetch();
+    } catch (error) {}
+  };
+
   const $isPlaying = useSelector((state) => state.music.$isPlaying);
   // const stared_user = useSelector((state) => state.music.stared_user);
   // console.log(stared_user);
@@ -75,11 +118,18 @@ function Player() {
     const getEndedTrack = () => {
       dispatch(getNextTrack());
     };
+
+    const handleCanplaythrough = () => {
+      audio.play();
+      dispatch(getPlayTrack());
+    };
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("ended", getEndedTrack);
+    audio.addEventListener("encanplaythroughded", handleCanplaythrough);
     return () => {
       audio.removeEventListener("timeupdate", updateTime);
       audio.removeEventListener("ended", getEndedTrack);
+      audio.removeEventListener("canplaythrough", handleCanplaythrough);
     };
   }, [dispatch]);
   const updateVolume = (event) => {
@@ -219,14 +269,30 @@ function Player() {
 
                 <S.TrackPlayLikeDis>
                   <S.TrackPlayLike>
-                    <S.TrackPlayLikeSvg alt="like">
-                      <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-                    </S.TrackPlayLikeSvg>
+                    {isLiked ? (
+                      <S.TrackPlayLikeSvg alt="like">
+                        <use xlinkHref="img/icon/sprite.svg#icon-like-active"></use>
+                      </S.TrackPlayLikeSvg>
+                    ) : (
+                      <S.TrackPlayLikeSvg alt="like" onClick={handleAddMyTrack}>
+                        <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                      </S.TrackPlayLikeSvg>
+                    )}
                   </S.TrackPlayLike>
+
                   <S.TrackPlayDislike>
-                    <S.TrackPlayDisLikeSvg alt="dislike">
-                      <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
-                    </S.TrackPlayDisLikeSvg>
+                    {isLiked ? (
+                      <S.TrackPlayDisLikeSvg
+                        alt="dislike"
+                        onClick={handleDeleteMyTrack}
+                      >
+                        <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
+                      </S.TrackPlayDisLikeSvg>
+                    ) : (
+                      <S.TrackPlayDisLikeSvg alt="dislike">
+                        <use xlinkHref="img/icon/sprite.svg#icon-dislike-active"></use>
+                      </S.TrackPlayDisLikeSvg>
+                    )}
                   </S.TrackPlayDislike>
                 </S.TrackPlayLikeDis>
               </S.PlayerTrackPlay>
