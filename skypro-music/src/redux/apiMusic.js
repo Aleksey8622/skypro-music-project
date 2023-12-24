@@ -23,7 +23,7 @@ export const apiMusic = createApi({
           : ["Track"],
     }),
     getAllTracksId: build.query({
-      query: ({ id }) => `/catalog/track/${id}`,
+      query: ({ id }) => ({ url: `/catalog/track/${id}` }),
       providesTags: ["Track"],
     }),
     addMyTracks: build.mutation({
