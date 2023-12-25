@@ -273,6 +273,7 @@ export const TrackPlayerContain = styled.div`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  margin-right: 1rem;
 `;
 export const TrackPlayImg = styled.div`
   width: 51px;
@@ -342,11 +343,10 @@ export const TrackPlayLikeDis = styled.div`
 `;
 export const TrackPlayLike = styled.div`
   padding: 5px;
-  &:hover svg {
-    fill: transparent;
-    stroke: #acacac;
-    cursor: pointer;
-  }
+`;
+export const TrackPlayLikeFlex = styled.div`
+  display: flex;
+  column-gap: 1.5rem;
 `;
 export const TrackPlayDislike = styled(TrackPlayLike)`
   margin-left: 28.5px;
@@ -356,12 +356,22 @@ export const TrackPlayLikeSvg = styled.svg`
   height: 12px;
   fill: transparent;
   stroke: #696969;
+  &:hover {
+    fill: transparent;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
 `;
 export const TrackPlayDisLikeSvg = styled.svg`
   width: 14.34px;
   height: 13px;
   fill: transparent;
   stroke: #696969;
+  &:hover {
+    fill: transparent;
+    stroke: #acacac;
+    cursor: pointer;
+  }
 `;
 export const BarVolumeBlock = styled.div`
   width: auto;

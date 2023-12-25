@@ -270,9 +270,20 @@ function Player() {
                 <S.TrackPlayLikeDis>
                   <S.TrackPlayLike>
                     {isLiked ? (
-                      <S.TrackPlayLikeSvg alt="like">
-                        <use xlinkHref="img/icon/sprite.svg#icon-like-active"></use>
-                      </S.TrackPlayLikeSvg>
+                      <S.TrackPlayLikeFlex>
+                        <S.TrackPlayLikeSvg
+                          alt="like"
+                          onClick={handleDeleteMyTrack}
+                        >
+                          <use xlinkHref="img/icon/sprite.svg#icon-like-active"></use>
+                        </S.TrackPlayLikeSvg>
+                        <S.TrackPlayDisLikeSvg
+                          alt="dislike"
+                          onClick={handleDeleteMyTrack}
+                        >
+                          <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
+                        </S.TrackPlayDisLikeSvg>
+                      </S.TrackPlayLikeFlex>
                     ) : (
                       <S.TrackPlayLikeSvg alt="like" onClick={handleAddMyTrack}>
                         <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
@@ -281,18 +292,11 @@ function Player() {
                   </S.TrackPlayLike>
 
                   <S.TrackPlayDislike>
-                    {isLiked ? (
-                      <S.TrackPlayDisLikeSvg
-                        alt="dislike"
-                        onClick={handleDeleteMyTrack}
-                      >
-                        <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
-                      </S.TrackPlayDisLikeSvg>
-                    ) : (
+                    {/* {isLiked ?  : (
                       <S.TrackPlayDisLikeSvg alt="dislike">
                         <use xlinkHref="img/icon/sprite.svg#icon-dislike-active"></use>
                       </S.TrackPlayDisLikeSvg>
-                    )}
+                    )} */}
                   </S.TrackPlayDislike>
                 </S.TrackPlayLikeDis>
               </S.PlayerTrackPlay>
