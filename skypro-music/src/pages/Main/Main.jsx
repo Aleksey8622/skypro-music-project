@@ -5,11 +5,13 @@ import MainSidebar from "../../componets/MainSidebar/MainSidebar";
 import * as S from "./MainStyle";
 
 
-export function Main() {
+
+export function Main({search, setSearch}) {
+  
   return (
     <S.Main>
       <Navigation />
-      <PlayList />
+      <PlayList setSearch={setSearch} search={search}/>
       <MainSidebar />
     </S.Main>
   );

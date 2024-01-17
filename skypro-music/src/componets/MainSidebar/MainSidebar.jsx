@@ -32,7 +32,7 @@ function MainSidebar() {
         <S.SidebarList>
           <S.SidebarItem>
             <S.SidebarLink to="/category/1">
-              <S.SidebarImg src="img/Frame5.png" alt="day's playlist" />
+              <S.SidebarImg src="/img/Frame5.png" alt="day's playlist" />
             </S.SidebarLink>
           </S.SidebarItem>
 
@@ -44,7 +44,7 @@ function MainSidebar() {
 
           <S.SidebarItem>
             <S.SidebarLink to="/category/3">
-              <S.SidebarImg src="img/Frame4.png" alt="day's playlist" />
+              <S.SidebarImg src="/img/Frame4.png" alt="day's playlist" />
             </S.SidebarLink>
           </S.SidebarItem>
         </S.SidebarList>

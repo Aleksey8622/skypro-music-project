@@ -1,8 +1,8 @@
 import BlockFilter from "../BlockFilter/BlockFilter";
 import BlockSearch from "../BlockSearch/BlockSearch";
-import React from "react";
+
 import Track from "./Tracks/Track";
-import {  useEffect } from "react";
+
 import "react-loading-skeleton/dist/skeleton.css";
 import SkeletonTrack from "../Skeletons/SkeletonTrack";
 import * as S from "./PlayListStyle";
@@ -10,22 +10,44 @@ import * as S from "./PlayListStyle";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useAllTracksQuery } from "../../redux/apiMusic";
 
-function PlayList() {
+function PlayList({ setSearch, search }) {
   const { theme } = useThemeContext();
   const { data = [], isLoading } = useAllTracksQuery();
-  
+
+  const filteredData = data.filter((track) => {
+    return (
+      track.name.toLowerCase().includes(search.toLowerCase()) ||
+      track.author.toLowerCase().includes(search.toLowerCase())
+    );
+  });
+
+  const newData = search ? filteredData : data;
 
   // const [errorTrack, setErrorTrack] = useState(null);
 
-  // const [allTracks, setTracks] = useState([]);
+  // const [allTracks, setTracks] = useState(data);
+
+  // console.log(allTracks);
 
   // const [isLoading, setIsLoading] = useState(true);
   // const [serchTrack, setSearchTrack] = useState(allTracks)
   // console.log(serchTrack);
+  // const runSearch = (search) => {
+  //   // if (!search) {
+  //   //   return data;
+  //   // }
+  //   const lowerCaseQuery = search.toLowerCase();
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  //   data.filter((track) => {
+  //     return (
+  //       track.name.toLowerCase().includes(lowerCaseQuery) ||
+  //       track.author.toLowerCase().includes(lowerCaseQuery)
+  //     );
+  //   });
+  // };
+  // useEffect(() => {
+  //   console.log(newData);
+  // }, [newData]);
 
   // useEffect(() => {
   //   getTrack()
@@ -42,7 +64,7 @@ function PlayList() {
 
   return (
     <S.MainCenterblock>
-      <BlockSearch />
+      <BlockSearch setSearch={setSearch} />
 
       <S.CenterblockHeading theme={theme}>Треки</S.CenterblockHeading>
       {/* <h1 onClick={handelTrack}>Нажать</h1> */}
@@ -66,7 +88,7 @@ function PlayList() {
           {isLoading ? (
             <SkeletonTrack />
           ) : (
-            data.map((item) => {
+            newData.map((item) => {
               return (
                 <Track
                   // refetch={refetch}

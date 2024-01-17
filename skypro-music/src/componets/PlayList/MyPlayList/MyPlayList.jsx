@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useThemeContext } from "../../../pages/Theme/ThemeContext";
 import { useMyFavoriteTracksQuery } from "../../../redux/apiMusic";
+import { AuthContext } from "../../../store/AuthContext";
 import BlockFilter from "../../BlockFilter/BlockFilter";
 import BlockSearch from "../../BlockSearch/BlockSearch";
 // import SkeletonTrack from "../../Skeletons/SkeletonTrack";
@@ -9,9 +10,23 @@ import Track from "../Tracks/Track";
 const MyPlayList = () => {
   const { theme } = useThemeContext();
   const token = localStorage.getItem("access");
-  
-  const { data = [], isLoading,  } = useMyFavoriteTracksQuery({ token });
-  
+  const { logout } = useContext(AuthContext);
+  const {
+    data = [],
+    isLoading,
+    error: likeError,
+    error: dislikeError,
+  } = useMyFavoriteTracksQuery({ token });
+
+  useEffect(() => {
+    if (
+      (likeError && likeError.status === 401) ||
+      (dislikeError && dislikeError.status === 401)
+    ) {
+      logout();
+    }
+  });
+
   return (
     <S.MainCenterblock>
       <BlockSearch />
@@ -34,7 +49,7 @@ const MyPlayList = () => {
 
         <S.ContentPlaylist theme={theme}>
           {isLoading ? (
-            <p style={{textAlign: "center"}}>Loading...</p>
+            <p style={{ textAlign: "center" }}>Loading...</p>
           ) : (
             data.map((item) => {
               return (

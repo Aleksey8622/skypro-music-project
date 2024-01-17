@@ -18,8 +18,8 @@ export const MenuLink = styled(NavLink)`
 
 `;
 export const IconThemeSvg = styled.svg`
-  width: 40px;
-  height: 40px;
+  width: 39px;
+  height: 39px;
   margin-right: 5px;
   stroke: ${(props) => props.theme.color};
   

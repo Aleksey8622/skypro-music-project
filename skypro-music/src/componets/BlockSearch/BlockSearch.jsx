@@ -1,15 +1,12 @@
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
+
 import * as S from "./BlockSearchStyle";
 
 // const S.CenterBlockSearch = S..div
 
-function BlockSearch() {
-  // const handelSearch= (event) =>{
-  //   console.log(event.target.value);
-  //   const foundTracks = runSearch(event.target.value)
-  //   setTracks(foundTracks)
-  // }
+function BlockSearch({ setSearch,  }) {
   const { theme } = useThemeContext();
+
   return (
     <S.CenterBlockSearch theme={theme}>
       <S.SearchSvg theme={theme}>
@@ -20,7 +17,7 @@ function BlockSearch() {
         type="search"
         placeholder="Поиск"
         name="search"
-        // onChange={handelSearch}
+        onChange={(event) => setSearch(event.target.value.toLocaleLowerCase())}
       />
     </S.CenterBlockSearch>
   );

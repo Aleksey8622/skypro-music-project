@@ -26,6 +26,10 @@ export const apiMusic = createApi({
       query: ({ id }) => ({ url: `/catalog/track/${id}` }),
       providesTags: ["Track"],
     }),
+    getSelectionCategory: build.query({
+      query: ({ id }) => `/catalog/selection/${id}`,
+      providesTags: ["Track"],
+    }),
     addMyTracks: build.mutation({
       query: ({ token, id }) => ({
         url: `/catalog/track/${id}/favorite/`,
@@ -83,6 +87,7 @@ export const {
   useMyFavoriteTracksQuery,
   useAddMyTracksMutation,
   useDeleteMyTrackMutation,
+  useGetSelectionCategoryQuery,
 } = apiMusic;
 // export const { useAddMyTracksMutation, useDeleteMyTrackMutation } =
 //   myTracksApiMusic;

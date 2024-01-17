@@ -19,7 +19,7 @@ function BurgerMenu() {
         </S.MenuLink>
       </S.MenuItem>
       <S.MenuItem>
-        <S.MenuLink theme={theme} to={"/favorites"}>
+        <S.MenuLink theme={theme} to="/favorites">
           Мой плейлист
         </S.MenuLink>
       </S.MenuItem>

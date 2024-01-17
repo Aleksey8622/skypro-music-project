@@ -6,8 +6,7 @@ const initialState = {
   shuffledList: [],
   isShuffledTrackList: false,
   $isPlaying: false,
-  
-  
+  filters: {genre: [], author:[], years:[]}
 };
 
 export const sliceTrackList = createSlice({
@@ -18,10 +17,8 @@ export const sliceTrackList = createSlice({
       state.currentTrack = action.payload;
       state.trackList = action.payload.data;
       state.shuffledList = action.payload.data;
-      
-     
+
       // console.log((state.currentTrack = action.payload));
-      
     },
     getPlayTrack: (state) => {
       state.$isPlaying = true;
@@ -60,6 +57,7 @@ export const sliceTrackList = createSlice({
     getTracksListShuffled: (state) => {
       state.isShuffledTrackList = !state.isShuffledTrackList;
     },
+
   },
 });
 
@@ -70,5 +68,12 @@ export const {
   getNextTrack,
   getPrevTrack,
   getTracksListShuffled,
+  
 } = sliceTrackList.actions;
 export default sliceTrackList.reducer;
+
+// создать акшен СетФилтерс
+//Создать стайт
+// Акшен передаем 2 значениея 1 значение фильтер(равен либо авторы либо года либо ) 2 значение валью 
+// акшен проверяет если пришел что и оно там есть я это удаляю если нету то добавляю
+// в самом компоненте создать функцию на кажный элемент списка

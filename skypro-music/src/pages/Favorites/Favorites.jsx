@@ -8,7 +8,7 @@ export function Favorites() {
   return (
     <S.Main>
       <Navigation />
-      <MyPlayList />
+      <MyPlayList  />
       <MainSidebar />
     </S.Main>
   );

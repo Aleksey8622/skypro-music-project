@@ -23,10 +23,9 @@ const Track = ({
   id,
   data,
   item,
-  // refetch,
   stared_user,
   isFavoriteLike,
-
+  isCategoryLike,
 }) => {
   const { user, logout } = useContext(AuthContext);
   const dispach = useDispatch();
@@ -37,8 +36,9 @@ const Track = ({
     .utc(duration_in_seconds * 1000)
     .format("mm:ss");
 
-  const [addMyTracks, { error: likeError }] = useAddMyTracksMutation();
-  const [deleteMytrack, { error: dislikeError }] = useDeleteMyTrackMutation();
+  const [addMyTracks, { error: likeError }] = useAddMyTracksMutation({});
+  const [deleteMytrack, { error: dislikeError }] = useDeleteMyTrackMutation({});
+  
   const { refetch } = useAllTracksQuery();
   if (
     (likeError && likeError.status === 401) ||
@@ -57,9 +57,7 @@ const Track = ({
       const token = localStorage.getItem("access");
       await addMyTracks({ id, token }).unwrap();
       refetch();
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   const handleDeleteMyTrack = async (event) => {
@@ -68,9 +66,7 @@ const Track = ({
       const token = localStorage.getItem("access");
       await deleteMytrack({ id, token }).unwrap();
       refetch();
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   return (
@@ -84,7 +80,7 @@ const Track = ({
               <S.TrackPlayingDot $isPlaying={$isPlaying}></S.TrackPlayingDot>
             ) : (
               <S.TrackTitleSvg alt="music">
-                <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
               </S.TrackTitleSvg>
             )}
           </S.TrackTitleImage>
@@ -117,13 +113,13 @@ const Track = ({
           <S.TrackAlbumLink theme={theme}>{album}</S.TrackAlbumLink>
         </S.TrackAlbum>
         <div className="track__time">
-          {isLiked || isFavoriteLike ? (
+          {isLiked || isFavoriteLike || isCategoryLike ? (
             <S.TrackTimeSvg alt="time" onClick={handleDeleteMyTrack}>
-              <use xlinkHref="img/icon/sprite.svg#icon-like-active"></use>
+              <use xlinkHref="/img/icon/sprite.svg#icon-like-active"></use>
             </S.TrackTimeSvg>
           ) : (
             <S.TrackTimeSvg alt="time" onClick={handleAddMyTrack}>
-              <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+              <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
             </S.TrackTimeSvg>
           )}
           <S.TrackTimeText>{formattedDuration}</S.TrackTimeText>

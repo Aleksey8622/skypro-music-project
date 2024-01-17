@@ -21,7 +21,8 @@ export const AppRoutes = () => {
 
   //   setUser(null);
   // };
-
+  const [search, setSearch] = useState("");
+ 
   const [currentTheme, setCurrentTheme] = useState(themes.dark);
 
   const toggleTheme = () => {
@@ -39,8 +40,14 @@ export const AppRoutes = () => {
         <Routes>
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<PageLayout />}>
-              <Route index element={<Main />} />
-              <Route path="/favorites" element={<Favorites />} />
+              <Route
+                index
+                element={<Main setSearch={setSearch} search={search} />}
+              />
+              <Route
+                path="/favorites"
+                element={<Favorites  />}
+              />
               <Route path="/category/:id" element={<Category />} />
             </Route>
           </Route>

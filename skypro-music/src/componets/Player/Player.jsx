@@ -227,22 +227,22 @@ function Player() {
                 <S.BarPlayerBtnIconHover theme={theme} onClick={toggleLoop}>
                   {isLoop ? (
                     <S.BarPlayerBtnRepeatSvgActive theme={theme} alt="repeat">
-                      <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                     </S.BarPlayerBtnRepeatSvgActive>
                   ) : (
                     <S.BarPlayerBtnRepeatSvg theme={theme} alt="repeat">
-                      <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                     </S.BarPlayerBtnRepeatSvg>
                   )}
                 </S.BarPlayerBtnIconHover>
                 <S.BarPlayerBtnIconHover onClick={shuffeleHandel}>
                   {isShuffledTrackList ? (
                     <S.BarPlayerBtnShuffleSvgActive alt="shuffle">
-                      <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
                     </S.BarPlayerBtnShuffleSvgActive>
                   ) : (
                     <S.BarPlayerBtnShuffleSvg alt="shuffle">
-                      <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
                     </S.BarPlayerBtnShuffleSvg>
                   )}
                 </S.BarPlayerBtnIconHover>
@@ -252,7 +252,7 @@ function Player() {
                 <S.TrackPlayerContain>
                   <S.TrackPlayImg theme={theme}>
                     <S.TrackPlaySvg alt="music">
-                      <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
                     </S.TrackPlaySvg>
                   </S.TrackPlayImg>
                   <S.TrackPlayerAuthor>
@@ -275,18 +275,18 @@ function Player() {
                           alt="like"
                           onClick={handleDeleteMyTrack}
                         >
-                          <use xlinkHref="img/icon/sprite.svg#icon-like-active"></use>
+                          <use xlinkHref="/img/icon/sprite.svg#icon-like-active"></use>
                         </S.TrackPlayLikeSvg>
                         <S.TrackPlayDisLikeSvg
                           alt="dislike"
                           onClick={handleDeleteMyTrack}
                         >
-                          <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
+                          <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use>
                         </S.TrackPlayDisLikeSvg>
                       </S.TrackPlayLikeFlex>
                     ) : (
                       <S.TrackPlayLikeSvg alt="like" onClick={handleAddMyTrack}>
-                        <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                        <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
                       </S.TrackPlayLikeSvg>
                     )}
                   </S.TrackPlayLike>
@@ -305,7 +305,7 @@ function Player() {
               <S.VolumeContent>
                 <S.VolumeImage>
                   <S.VolumeSvg alt="volume">
-                    <use xlinkHref="img/icon/sprite#icon-volume"></use>
+                    <use xlinkHref="/img/icon/sprite#icon-volume"></use>
                   </S.VolumeSvg>
                 </S.VolumeImage>
                 <S.VolumeProgress>
