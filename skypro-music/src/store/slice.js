@@ -5,8 +5,10 @@ const initialState = {
   currentTrack: null,
   shuffledList: [],
   isShuffledTrackList: false,
-  $isPlaying: false,
-  filters: {genre: [], author:[], years:[]}
+  $isPlaying: true,
+  filteredTracks: [],
+  tracksForFilter: []
+  // filters: {genre: [], author:[], years:[]}
 };
 
 export const sliceTrackList = createSlice({
@@ -57,7 +59,9 @@ export const sliceTrackList = createSlice({
     getTracksListShuffled: (state) => {
       state.isShuffledTrackList = !state.isShuffledTrackList;
     },
-
+    setTrackListForFilter: (state, action) => {
+      state.tracksForFilter = action.payload
+    }
   },
 });
 

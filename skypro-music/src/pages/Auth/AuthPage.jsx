@@ -39,11 +39,7 @@ export default function AuthPage({ isLoginMode = false }) {
       const token = await getUserToken({ email, password });
       localStorage.setItem("access", token.access.toString());
       localStorage.setItem("refresh", token.refresh.toString());
-      setInterval(async () => {
-        const refresh = localStorage.getItem("refresh");
-        const refreshedToken = await refreshToken({ refresh });
-        localStorage.setItem("access", refreshedToken.access.toString());
-      }, 190 * 1000);
+
       login(userData);
       navigate("/");
     } catch (error) {
@@ -79,11 +75,7 @@ export default function AuthPage({ isLoginMode = false }) {
       const token = await getUserToken({ email, password });
       localStorage.setItem("access", token.access.toString());
       localStorage.setItem("refresh", token.refresh.toString());
-      setInterval(async () => {
-        const refresh = localStorage.getItem("refresh");
-        const refreshedToken = await refreshToken({ refresh });
-        localStorage.setItem("access", refreshedToken.access.toString());
-      }, 190 * 1000);
+
       login(user);
       navigate("/");
     } catch (error) {

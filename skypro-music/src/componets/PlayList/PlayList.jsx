@@ -9,10 +9,16 @@ import * as S from "./PlayListStyle";
 // import { getTrack } from "../../api/api";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useAllTracksQuery } from "../../redux/apiMusic";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 function PlayList({ setSearch, search }) {
   const { theme } = useThemeContext();
   const { data = [], isLoading } = useAllTracksQuery();
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch()
+  },[data])
 
   const filteredData = data.filter((track) => {
     return (
