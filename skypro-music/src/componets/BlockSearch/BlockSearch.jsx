@@ -1,12 +1,18 @@
+import { useDispatch } from "react-redux";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
+import { setFilters } from "../../store/slice";
 
 import * as S from "./BlockSearchStyle";
 
 // const S.CenterBlockSearch = S..div
 
-function BlockSearch({ setSearch,  }) {
+function BlockSearch() {
   const { theme } = useThemeContext();
+  const dispatch = useDispatch();
 
+  const onChandeSearchValue = (value) => {
+    dispatch(setFilters({ nameFilter: "search", valueFilter: value }));
+  };
   return (
     <S.CenterBlockSearch theme={theme}>
       <S.SearchSvg theme={theme}>
@@ -17,7 +23,9 @@ function BlockSearch({ setSearch,  }) {
         type="search"
         placeholder="Поиск"
         name="search"
-        onChange={(event) => setSearch(event.target.value.toLocaleLowerCase())}
+        onChange={(event) =>
+          onChandeSearchValue(event.target.value.toLocaleLowerCase())
+        }
       />
     </S.CenterBlockSearch>
   );

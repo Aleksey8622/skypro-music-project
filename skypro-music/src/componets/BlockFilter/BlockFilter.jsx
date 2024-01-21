@@ -3,11 +3,14 @@ import * as S from "./BlockFilterStyle";
 import { useState } from "react";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useAllTracksQuery } from "../../redux/apiMusic";
+import { useDispatch } from "react-redux";
+import { setFilters } from "../../store/slice";
 
 function BlockFilter() {
   const { data = [] } = useAllTracksQuery();
   const { theme } = useThemeContext();
   const [genre, setGenre] = useState([]);
+  const dispatch = useDispatch();
 
   const [filter, setShowFilter] = useState(false);
 
@@ -44,7 +47,8 @@ function BlockFilter() {
     }
   }, [data]);
 
-  const handleFilter = (filter, value) => {
+  const handleFilter = (nameFilter, valueFilter) => {
+    dispatch(setFilters({ nameFilter, valueFilter }));
     //диспатч в который прокидываем на акшен сет фильтерс({filter, value})
   };
   return (
@@ -54,7 +58,7 @@ function BlockFilter() {
         <S.BtnActive theme={theme} onClick={showFilterAuthor}>
           исполнителю
           <S.MenuFilter theme={theme}>
-            <S.MenuList theme={theme}>
+            <S.MenuList theme={theme} onClick={handleFilter}>
               {data.map((item) => {
                 return (
                   <S.MenuItem

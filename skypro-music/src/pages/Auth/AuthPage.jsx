@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./AuthPage.styles";
 import { useContext, useEffect, useState } from "react";
-import { loginUser, refreshToken, registerUser } from "../../api/auth";
+import { loginUser, registerUser } from "../../api/auth";
 import { getUserToken } from "../../api/auth";
 import { AuthContext } from "../../store/AuthContext";
 export default function AuthPage({ isLoginMode = false }) {

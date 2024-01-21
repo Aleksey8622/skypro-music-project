@@ -9,25 +9,32 @@ import * as S from "./PlayListStyle";
 // import { getTrack } from "../../api/api";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useAllTracksQuery } from "../../redux/apiMusic";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-
-function PlayList({ setSearch, search }) {
+import { setTrackListForFilter } from "../../store/slice";
+function PlayList() {
   const { theme } = useThemeContext();
   const { data = [], isLoading } = useAllTracksQuery();
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch()
-  },[data])
+  const filtredDataRedux = useSelector((state) => state.music.filtredTracks);
+  const initialTracks = useSelector((state) => state.music.tracksForFilter);
+  const isFiltred = useSelector((state) => state.music.isFiltred);
+  let newFiltredData = isFiltred ? filtredDataRedux : initialTracks;
 
-  const filteredData = data.filter((track) => {
-    return (
-      track.name.toLowerCase().includes(search.toLowerCase()) ||
-      track.author.toLowerCase().includes(search.toLowerCase())
-    );
-  });
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(newFiltredData.data);
+    dispatch(setTrackListForFilter({ data }));
+    console.log(dispatch(setTrackListForFilter({ data })));
+  }, [isLoading]);
 
-  const newData = search ? filteredData : data;
+  // const filteredData = data.filter((track) => {
+  //   return (
+  //     track.name.toLowerCase().includes(search.toLowerCase()) ||
+  //     track.author.toLowerCase().includes(search.toLowerCase())
+  //   );
+  // });
+
+  // const newData = search ? filteredData : data;
 
   // const [errorTrack, setErrorTrack] = useState(null);
 
@@ -70,7 +77,7 @@ function PlayList({ setSearch, search }) {
 
   return (
     <S.MainCenterblock>
-      <BlockSearch setSearch={setSearch} />
+      <BlockSearch />
 
       <S.CenterblockHeading theme={theme}>Треки</S.CenterblockHeading>
       {/* <h1 onClick={handelTrack}>Нажать</h1> */}
@@ -94,7 +101,7 @@ function PlayList({ setSearch, search }) {
           {isLoading ? (
             <SkeletonTrack />
           ) : (
-            newData.map((item) => {
+            newFiltredData.data.map((item) => {
               return (
                 <Track
                   // refetch={refetch}

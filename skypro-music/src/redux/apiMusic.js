@@ -21,7 +21,7 @@ const baseQueryrefresh = async (args, api, extraOptions) => {
         url: "/user/token/refresh/",
         method: "POST",
         body: {
-          refresh:localStorage.getItem("refresh"),
+          refresh: localStorage.getItem("refresh"),
         },
       },
       api,
@@ -29,12 +29,13 @@ const baseQueryrefresh = async (args, api, extraOptions) => {
     );
     if (!refresh.data.access) {
       window.location.href = "/login";
-      return
+      return;
     }
-    const retryResult = await baseQuery(args, api, extraOptions)
-    return retryResult
+    localStorage.setItem("access", refresh.data.access);
+    const retryResult = await baseQuery(args, api, extraOptions);
+    return retryResult;
   }
-  return result
+  return result;
 };
 const urlTracks = "https://skypro-music-api.skyeng.tech";
 export const apiMusic = createApi({
