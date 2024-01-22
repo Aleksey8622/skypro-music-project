@@ -15,65 +15,16 @@ import { setTrackListForFilter } from "../../store/slice";
 function PlayList() {
   const { theme } = useThemeContext();
   const { data = [], isLoading } = useAllTracksQuery();
-  const filtredDataRedux = useSelector((state) => state.music.filtredTracks);
+  const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
   const initialTracks = useSelector((state) => state.music.tracksForFilter);
   const isFiltred = useSelector((state) => state.music.isFiltred);
   let newFiltredData = isFiltred ? filtredDataRedux : initialTracks;
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(newFiltredData.data);
-    dispatch(setTrackListForFilter({ data }));
-    console.log(dispatch(setTrackListForFilter({ data })));
+    console.log(data);
+    dispatch(setTrackListForFilter(data));
   }, [isLoading]);
-
-  // const filteredData = data.filter((track) => {
-  //   return (
-  //     track.name.toLowerCase().includes(search.toLowerCase()) ||
-  //     track.author.toLowerCase().includes(search.toLowerCase())
-  //   );
-  // });
-
-  // const newData = search ? filteredData : data;
-
-  // const [errorTrack, setErrorTrack] = useState(null);
-
-  // const [allTracks, setTracks] = useState(data);
-
-  // console.log(allTracks);
-
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [serchTrack, setSearchTrack] = useState(allTracks)
-  // console.log(serchTrack);
-  // const runSearch = (search) => {
-  //   // if (!search) {
-  //   //   return data;
-  //   // }
-  //   const lowerCaseQuery = search.toLowerCase();
-
-  //   data.filter((track) => {
-  //     return (
-  //       track.name.toLowerCase().includes(lowerCaseQuery) ||
-  //       track.author.toLowerCase().includes(lowerCaseQuery)
-  //     );
-  //   });
-  // };
-  // useEffect(() => {
-  //   console.log(newData);
-  // }, [newData]);
-
-  // useEffect(() => {
-  //   getTrack()
-  //     .then((tracks) => {
-  //       setTracks(tracks);
-  //       setIsLoading(false);
-  //     })
-
-  //     .catch((error) => {
-  //       setErrorTrack(error.message);
-  //     });
-  // }, []);
-  // const handelPlayer = () => setShowPlayer(!showPlayer);
 
   return (
     <S.MainCenterblock>
@@ -101,7 +52,7 @@ function PlayList() {
           {isLoading ? (
             <SkeletonTrack />
           ) : (
-            newFiltredData.data.map((item) => {
+            newFiltredData.map((item) => {
               return (
                 <Track
                   // refetch={refetch}

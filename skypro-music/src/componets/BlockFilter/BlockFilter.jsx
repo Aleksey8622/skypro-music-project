@@ -51,6 +51,7 @@ function BlockFilter() {
     dispatch(setFilters({ nameFilter, valueFilter }));
     //диспатч в который прокидываем на акшен сет фильтерс({filter, value})
   };
+
   return (
     <S.CenterBlockFilter theme={theme}>
       <S.FilterTitle theme={theme}>Искать по:</S.FilterTitle>
@@ -58,13 +59,15 @@ function BlockFilter() {
         <S.BtnActive theme={theme} onClick={showFilterAuthor}>
           исполнителю
           <S.MenuFilter theme={theme}>
-            <S.MenuList theme={theme} onClick={handleFilter}>
+            <S.MenuList theme={theme}>
               {data.map((item) => {
                 return (
                   <S.MenuItem
                     key={item.id}
                     theme={theme}
-                    onClick={() => handleFilter("author", item.author)}
+                    onClick={() => {
+                      handleFilter("author", item.author);
+                    }}
                   >
                     {item.author}
                   </S.MenuItem>
@@ -84,16 +87,13 @@ function BlockFilter() {
           году выпуска
           <S.MenuFilter theme={theme}>
             <S.MenuList theme={theme}>
-              <S.MenuItem theme={theme}>2013</S.MenuItem>
-              <S.MenuItem theme={theme}>2014</S.MenuItem>
-              <S.MenuItem theme={theme}>2015</S.MenuItem>
-              <S.MenuItem theme={theme}>2016</S.MenuItem>
-              <S.MenuItem theme={theme}>2017</S.MenuItem>
-              <S.MenuItem theme={theme}>2018</S.MenuItem>
-              <S.MenuItem theme={theme}>2019</S.MenuItem>
-              <S.MenuItem theme={theme}>2020</S.MenuItem>
-              <S.MenuItem theme={theme}>2020</S.MenuItem>
-              <S.MenuItem theme={theme}>2021</S.MenuItem>
+              {data.map((item) => {
+                return (
+                  <S.MenuItem theme={theme} key={item.release_date}>
+                    {item.release_date}
+                  </S.MenuItem>
+                );
+              })}
             </S.MenuList>
           </S.MenuFilter>
         </S.BtnActive>

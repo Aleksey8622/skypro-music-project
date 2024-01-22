@@ -16,10 +16,15 @@ export const sliceTrackList = createSlice({
   name: "music",
   initialState,
   reducers: {
+    getCleanTheFilter: (state) => {
+      if (!state.filters.author) {
+        state.isFiltred = false;
+        return;
+      }
+    },
     setFilters: (state, action) => {
       state.filters[action.payload.nameFilter] = action.payload.valueFilter;
       state.filteredTracks = state.tracksForFilter;
-      console.log(state.filteredTracks);
 
       if (
         !state.filters.genre &&
@@ -38,6 +43,7 @@ export const sliceTrackList = createSlice({
           (elem) => elem.genre === state.filters.genre
         );
       }
+
       if (state.filters.author) {
         state.filteredTracks = state.filteredTracks.filter(
           (elem) => elem.author === state.filters.author
