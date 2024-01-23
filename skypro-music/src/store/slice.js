@@ -17,7 +17,11 @@ export const sliceTrackList = createSlice({
   initialState,
   reducers: {
     getCleanTheFilter: (state) => {
-      if (!state.filters.author) {
+      if (state.filters.author) {
+        state.filteredTracks = state.filteredTracks.filter(
+          (elem) => elem.author !== state.filters.author
+        );
+
         state.isFiltred = false;
         return;
       }
@@ -48,6 +52,7 @@ export const sliceTrackList = createSlice({
         state.filteredTracks = state.filteredTracks.filter(
           (elem) => elem.author === state.filters.author
         );
+        // console.log(state.filters.author.substring());
       }
       if (state.filters.years) {
         state.filteredTracks = state.filteredTracks.filter(
@@ -126,6 +131,7 @@ export const {
   getTracksListShuffled,
   setFilters,
   setTrackListForFilter,
+  getCleanTheFilter,
 } = sliceTrackList.actions;
 export default sliceTrackList.reducer;
 

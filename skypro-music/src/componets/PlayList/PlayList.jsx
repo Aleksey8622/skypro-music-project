@@ -22,7 +22,8 @@ function PlayList() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(data);
+    console.log(initialTracks);
+    console.log(filtredDataRedux);
     dispatch(setTrackListForFilter(data));
   }, [isLoading]);
 

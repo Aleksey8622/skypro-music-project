@@ -3,13 +3,14 @@ import * as S from "./BlockFilterStyle";
 import { useState } from "react";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useAllTracksQuery } from "../../redux/apiMusic";
-import { useDispatch } from "react-redux";
-import { setFilters } from "../../store/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { getCleanTheFilter, setFilters } from "../../store/slice";
 
 function BlockFilter() {
   const { data = [] } = useAllTracksQuery();
   const { theme } = useThemeContext();
   const [genre, setGenre] = useState([]);
+  const [dataTrack, setDataTrack] = useState([]);
   const dispatch = useDispatch();
 
   const [filter, setShowFilter] = useState(false);
@@ -45,15 +46,36 @@ function BlockFilter() {
       console.log(ganreSet);
       setGenre(Array.from(ganreSet));
     }
+    if (data.length > 0) {
+      const dataSet = new Set();
+      data.forEach((element) => {
+        dataSet.add(element.release_date);
+      });
+      // console.log(ganreSet);
+      setDataTrack(Array.from(dataSet));
+    }
   }, [data]);
-
+  const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
+  const isFiltred = useSelector((state) => state.music.isFiltred);
   const handleFilter = (nameFilter, valueFilter) => {
-    dispatch(setFilters({ nameFilter, valueFilter }));
-    //диспатч в который прокидываем на акшен сет фильтерс({filter, value})
+    if (filtredDataRedux) {
+      dispatch(getCleanTheFilter());
+    } else {
+      dispatch(setFilters({ nameFilter, valueFilter }));
+    }
+    // dispatch(setFilters({ nameFilter, valueFilter }));
+    // console.log(dispatch(setFilters({ nameFilter, valueFilter })));
+    // console.log(filtredDataRedux[0].author);
+    // //диспатч в который прокидываем на акшен сет фильтерс({filter, value})
   };
+  // const removeHandleFilter = () => {
+  //   dispatch(getCleanTheFilter());
+  //   //диспатч в который прокидываем на акшен сет фильтерс({filter, value})
+  // };
 
   return (
     <S.CenterBlockFilter theme={theme}>
+      {/* <div onClick={() => removeHandleFilter()}>clean</div> */}
       <S.FilterTitle theme={theme}>Искать по:</S.FilterTitle>
       {filter ? (
         <S.BtnActive theme={theme} onClick={showFilterAuthor}>
@@ -87,10 +109,10 @@ function BlockFilter() {
           году выпуска
           <S.MenuFilter theme={theme}>
             <S.MenuList theme={theme}>
-              {data.map((item) => {
+              {dataTrack.map((item) => {
                 return (
-                  <S.MenuItem theme={theme} key={item.release_date}>
-                    {item.release_date}
+                  <S.MenuItem theme={theme} key={item}>
+                    {item}
                   </S.MenuItem>
                 );
               })}
