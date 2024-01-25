@@ -4,7 +4,11 @@ import { useState } from "react";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useAllTracksQuery } from "../../redux/apiMusic";
 import { useDispatch, useSelector } from "react-redux";
-import { getCleanTheFilter, setFilters } from "../../store/slice";
+import {
+  getCleanTheFilter,
+  selectedFiltered,
+  setFilters,
+} from "../../store/slice";
 
 function BlockFilter() {
   const { data = [] } = useAllTracksQuery();
@@ -57,21 +61,18 @@ function BlockFilter() {
   }, [data]);
   const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
   const isFiltred = useSelector((state) => state.music.isFiltred);
-  const handleFilter = (nameFilter, valueFilter) => {
-    if (filtredDataRedux) {
-      dispatch(getCleanTheFilter());
-    } else {
-      dispatch(setFilters({ nameFilter, valueFilter }));
-    }
+  const filteredAuthorGenreYears = useSelector(
+    (state) => state.music.filteredAuthorGenreYears
+  );
+  const handleFilter = ({ nameFilter, valueFilter }) => {
     // dispatch(setFilters({ nameFilter, valueFilter }));
-    // console.log(dispatch(setFilters({ nameFilter, valueFilter })));
-    // console.log(filtredDataRedux[0].author);
+    if (!filteredAuthorGenreYears.includes(valueFilter)) {
+      dispatch(selectedFiltered({ nameFilter, valueFilter }));
+    }
+    console.log(filteredAuthorGenreYears);
+   
     // //диспатч в который прокидываем на акшен сет фильтерс({filter, value})
   };
-  // const removeHandleFilter = () => {
-  //   dispatch(getCleanTheFilter());
-  //   //диспатч в который прокидываем на акшен сет фильтерс({filter, value})
-  // };
 
   return (
     <S.CenterBlockFilter theme={theme}>
@@ -88,7 +89,10 @@ function BlockFilter() {
                     key={item.id}
                     theme={theme}
                     onClick={() => {
-                      handleFilter("author", item.author);
+                      handleFilter({
+                        nameFilter: "author",
+                        valueFilter: item.author,
+                      });
                     }}
                   >
                     {item.author}

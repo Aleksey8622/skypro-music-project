@@ -8,6 +8,7 @@ const initialState = {
   $isPlaying: true,
   filteredTracks: [],
   tracksForFilter: [],
+  filteredAuthorGenreYears: [],
   isFiltred: false,
   filters: { genre: "", author: "", years: "", search: "" },
 };
@@ -26,9 +27,16 @@ export const sliceTrackList = createSlice({
         return;
       }
     },
+    selectedFiltered: (state, action) => {
+      const author = [...state.filteredAuthorGenreYears, action.payload];
+      state.filteredAuthorGenreYears = author;
+    },
     setFilters: (state, action) => {
       state.filters[action.payload.nameFilter] = action.payload.valueFilter;
+
+      console.log(action.payload.valueFilter);
       state.filteredTracks = state.tracksForFilter;
+      console.log(state.filters[action.payload.nameFilter]);
 
       if (
         !state.filters.genre &&
@@ -52,8 +60,10 @@ export const sliceTrackList = createSlice({
         state.filteredTracks = state.filteredTracks.filter(
           (elem) => elem.author === state.filters.author
         );
-        // console.log(state.filters.author.substring());
+        // state.filteredAuthorGenreYears.push(action.payload.filters);
       }
+
+      console.log(state.filteredAuthorGenreYears);
       if (state.filters.years) {
         state.filteredTracks = state.filteredTracks.filter(
           (elem) => elem.years === state.filters.years
@@ -132,6 +142,7 @@ export const {
   setFilters,
   setTrackListForFilter,
   getCleanTheFilter,
+  selectedFiltered,
 } = sliceTrackList.actions;
 export default sliceTrackList.reducer;
 
