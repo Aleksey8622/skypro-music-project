@@ -21,11 +21,12 @@ function PlayList() {
   let newFiltredData = isFiltred ? filtredDataRedux : initialTracks;
 
   const dispatch = useDispatch();
+
   useEffect(() => {
-    console.log(initialTracks);
-    console.log(filtredDataRedux);
     dispatch(setTrackListForFilter(data));
-  }, [isLoading]);
+    // console.log(initialTracks);
+    // console.log(filtredDataRedux);
+  }, [isLoading, dispatch, data]);
 
   return (
     <S.MainCenterblock>

@@ -37,7 +37,7 @@ const baseQueryrefresh = async (args, api, extraOptions) => {
   }
   return result;
 };
-const urlTracks = "https://skypro-music-api.skyeng.tech";
+// const urlTracks = "https://skypro-music-api.skyeng.tech";
 export const apiMusic = createApi({
   reducerPath: "apiMusic",
   tagTypes: ["Track"],
@@ -45,12 +45,14 @@ export const apiMusic = createApi({
   endpoints: (build) => ({
     allTracks: build.query({
       query: () => "/catalog/track/all/",
+      providesTags: ["Track"],
     }),
 
     myFavoriteTracks: build.query({
-      query: ({ token }) => ({
+      query: () => ({
         url: "/catalog/track/favorite/all/",
       }),
+
       providesTags: (result) =>
         result
           ? [...result.map(({ id }) => ({ type: "Track", id })), "Track"]
@@ -65,14 +67,15 @@ export const apiMusic = createApi({
       providesTags: ["Track"],
     }),
     addMyTracks: build.mutation({
-      query: ({ token, id }) => ({
+      query: ({ id }) => ({
         url: `/catalog/track/${id}/favorite/`,
         method: "POST",
       }),
+
       invalidatesTags: (arg) => [{ type: "Track", id: arg.id }],
     }),
     deleteMyTrack: build.mutation({
-      query: ({ token, id }) => ({
+      query: ({ id }) => ({
         url: `/catalog/track/${id}/favorite/`,
         method: "DELETE",
       }),

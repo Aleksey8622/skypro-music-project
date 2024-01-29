@@ -26,6 +26,7 @@ const Track = ({
   stared_user,
   isFavoriteLike,
   isCategoryLike,
+  
 }) => {
   const { user, logout } = useContext(AuthContext);
   const dispach = useDispatch();

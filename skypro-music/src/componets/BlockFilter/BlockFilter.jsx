@@ -5,9 +5,9 @@ import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useAllTracksQuery } from "../../redux/apiMusic";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getCleanTheFilter,
+  // getCleanTheFilter,
   selectedFiltered,
-  setFilters,
+  // setFilters,
 } from "../../store/slice";
 
 function BlockFilter() {
@@ -59,8 +59,8 @@ function BlockFilter() {
       setDataTrack(Array.from(dataSet));
     }
   }, [data]);
-  const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
-  const isFiltred = useSelector((state) => state.music.isFiltred);
+  // const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
+  // const isFiltred = useSelector((state) => state.music.isFiltred);
   const filteredAuthorGenreYears = useSelector(
     (state) => state.music.filteredAuthorGenreYears
   );
@@ -73,7 +73,9 @@ function BlockFilter() {
 
     // //диспатч в который прокидываем на акшен сет фильтерс({filter, value})
   };
-
+  useEffect(() => {
+    console.log(filteredAuthorGenreYears);
+  }, [filteredAuthorGenreYears]);
 
   return (
     <S.CenterBlockFilter theme={theme}>
