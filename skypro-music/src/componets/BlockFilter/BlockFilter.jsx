@@ -70,9 +70,10 @@ function BlockFilter() {
       dispatch(selectedFiltered({ nameFilter, valueFilter }));
     }
     console.log(filteredAuthorGenreYears);
-   
+
     // //диспатч в который прокидываем на акшен сет фильтерс({filter, value})
   };
+
 
   return (
     <S.CenterBlockFilter theme={theme}>
