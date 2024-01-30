@@ -6,7 +6,7 @@ import { useAllTracksQuery } from "../../redux/apiMusic";
 import { useDispatch, useSelector } from "react-redux";
 import {
   // getCleanTheFilter,
-  selectedFiltered,
+  selectedFiltered, setFilters,
   // setFilters,
 } from "../../store/slice";
 
@@ -68,6 +68,7 @@ function BlockFilter() {
     // dispatch(setFilters({ nameFilter, valueFilter }));
     if (!filteredAuthorGenreYears.includes(valueFilter)) {
       dispatch(selectedFiltered({ nameFilter, valueFilter }));
+      dispatch(setFilters({ nameFilter, valueFilter }));
     }
     console.log(filteredAuthorGenreYears);
 

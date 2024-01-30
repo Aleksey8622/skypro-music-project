@@ -14,7 +14,7 @@ import { useEffect } from "react";
 import { setTrackListForFilter } from "../../store/slice";
 function PlayList() {
   const { theme } = useThemeContext();
-  const { data = [], isLoading } = useAllTracksQuery();
+  const { data, isLoading } = useAllTracksQuery();
   const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
   const initialTracks = useSelector((state) => state.music.tracksForFilter);
   const isFiltred = useSelector((state) => state.music.isFiltred);
@@ -23,10 +23,10 @@ function PlayList() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setTrackListForFilter(data));
+    dispatch(setTrackListForFilter(data || []));
     // console.log(initialTracks);
     // console.log(filtredDataRedux);
-  }, [isLoading, dispatch, data]);
+  }, [dispatch, data]);
 
   return (
     <S.MainCenterblock>
