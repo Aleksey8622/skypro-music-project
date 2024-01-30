@@ -60,7 +60,9 @@ export const sliceTrackList = createSlice({
         console.log(state.filters.author);
         state.filteredTracks = state.filteredTracks.filter(
           (elem) => elem.author === state.filters.author
+          
         );
+       
         console.log(state.filteredTracks);
 
         // state.filteredAuthorGenreYears.push(action.payload.filters);

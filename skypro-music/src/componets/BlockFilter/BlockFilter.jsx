@@ -70,7 +70,7 @@ function BlockFilter() {
       dispatch(selectedFiltered({ nameFilter, valueFilter }));
       dispatch(setFilters({ nameFilter, valueFilter }));
     }
-    console.log(filteredAuthorGenreYears);
+    
 
     // //диспатч в который прокидываем на акшен сет фильтерс({filter, value})
   };
