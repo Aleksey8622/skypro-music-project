@@ -36,6 +36,7 @@ export const sliceTrackList = createSlice({
 
       console.log(action.payload.valueFilter);
       state.filteredTracks = state.tracksForFilter;
+
       console.log(state.filters[action.payload.nameFilter]);
 
       if (
@@ -58,13 +59,12 @@ export const sliceTrackList = createSlice({
 
       if (state.filters.author) {
         console.log(state.filters.author);
+
         state.filteredTracks = state.filteredTracks.filter(
-          (elem) => elem.author === state.filters.author
+          (elem) => elem.author === state.filters.author.includes(elem.author)
           
         );
-       
         console.log(state.filteredTracks);
-
         // state.filteredAuthorGenreYears.push(action.payload.filters);
       }
 

@@ -41,11 +41,11 @@ function PlayList() {
           <S.TitleCol1>Трек</S.TitleCol1>
           <S.TitleCol2>ИСПОЛНИТЕЛЬ</S.TitleCol2>
           <S.TitleCol3>АЛЬБОМ</S.TitleCol3>
-          <S.TitleCol4>
+          <S.TitleCol4 >
             <S.PlaylistTitleSvg alt="time">
               <use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
             </S.PlaylistTitleSvg>
-          </S.TitleCol4>
+          </S.TitleCol4 >
         </S.ContentTitle>
         {/* {Error ? (
           <p>Не удалось загрузить плейлист, попробуйте позже</p>
