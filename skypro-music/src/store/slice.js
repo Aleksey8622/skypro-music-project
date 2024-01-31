@@ -33,18 +33,26 @@ export const sliceTrackList = createSlice({
     },
     setFilters: (state, action) => {
       // state.filters[action.payload.nameFilter] = action.payload.valueFilter;
-      
 
-      if ((action.payload.nameFilter = "author")) {
-        if (state.filters[action.payload.nameFilter].includes(action.payload.valueFilter)) {
-          state.filters[action.payload.nameFilter] = state.filters[action.payload.nameFilter].filter((elem) => elem !== action.payload.valueFilter);
+      if (action.payload.nameFilter === "author") {
+        if (
+          state.filters[action.payload.nameFilter].includes(
+            action.payload.valueFilter
+          )
+        ) {
+          state.filters[action.payload.nameFilter] = state.filters[
+            action.payload.nameFilter
+          ].filter((elem) => elem !== action.payload.valueFilter);
         } else {
-          state.filters[action.payload.nameFilter].push(action.payload.valueFilter);
+          state.filters[action.payload.nameFilter].push(
+            action.payload.valueFilter
+          );
         }
       } else {
         state.filters[action.payload.nameFilter] = action.payload.valueFilter;
       }
       state.filteredTracks = state.tracksForFilter;
+      console.log(state.filters[action.payload.nameFilter]);
       // if (
       //   !state.filters.genre &&
       //   !state.filters.author &&
@@ -64,13 +72,13 @@ export const sliceTrackList = createSlice({
       }
 
       if (state.filters.author.length > 0) {
-        state.filteredTracks = state.filteredTracks.map((authorItem) => {
-          return state.filteredTracks.filter(
-            (elem) =>
-              elem.author === authorItem
-             
-          );
-        }).flat()
+        state.filteredTracks = state.filteredTracks
+          .map((authorItem) => {
+            return state.filteredTracks.filter(
+              (elem) => elem.author === authorItem
+            );
+          })
+          .flat();
         console.log(state.filteredTracks);
         // state.filteredAuthorGenreYears.push(action.payload.filters);
       }
