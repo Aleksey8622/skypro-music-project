@@ -6,7 +6,8 @@ import { useAllTracksQuery } from "../../redux/apiMusic";
 import { useDispatch, useSelector } from "react-redux";
 import {
   // getCleanTheFilter,
-  selectedFiltered, setFilters,
+  selectedFiltered,
+  setFilters,
   // setFilters,
 } from "../../store/slice";
 
@@ -56,23 +57,16 @@ function BlockFilter() {
         dataSet.add(element.release_date);
       });
       // console.log(ganreSet);
-      setDataTrack(Array.from(dataSet));
+      setDataTrack(["По умолчанию", "Сначала старые", "Сначала новые"]);
     }
   }, [data]);
-  // const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
-  // const isFiltred = useSelector((state) => state.music.isFiltred);
+  const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
+  const filterCount = useSelector((state) => state.music.filters);
   const filteredAuthorGenreYears = useSelector(
     (state) => state.music.filteredAuthorGenreYears
   );
   const handleFilter = ({ nameFilter, valueFilter }) => {
-    // dispatch(setFilters({ nameFilter, valueFilter }));
-    if (!filteredAuthorGenreYears.includes(valueFilter)) {
-      dispatch(selectedFiltered({ nameFilter, valueFilter }));
-      dispatch(setFilters({ nameFilter, valueFilter }));
-    }
-    
-
-    // //диспатч в который прокидываем на акшен сет фильтерс({filter, value})
+    dispatch(setFilters({ nameFilter, valueFilter }));
   };
   useEffect(() => {
     console.log(filteredAuthorGenreYears);
@@ -85,6 +79,9 @@ function BlockFilter() {
       {filter ? (
         <S.BtnActive theme={theme} onClick={showFilterAuthor}>
           исполнителю
+          <div>
+            {filterCount.author.length > 0 && filterCount.author.length}
+          </div>
           <S.MenuFilter theme={theme}>
             <S.MenuList theme={theme}>
               {data.map((item) => {
@@ -119,7 +116,16 @@ function BlockFilter() {
             <S.MenuList theme={theme}>
               {dataTrack.map((item) => {
                 return (
-                  <S.MenuItem theme={theme} key={item}>
+                  <S.MenuItem
+                    onClick={() => {
+                      handleFilter({
+                        nameFilter: "years",
+                        valueFilter: item,
+                      });
+                    }}
+                    theme={theme}
+                    key={item}
+                  >
                     {item}
                   </S.MenuItem>
                 );
@@ -139,7 +145,16 @@ function BlockFilter() {
             <S.MenuList theme={theme}>
               {genre.map((item) => {
                 return (
-                  <S.MenuItem key={item} theme={theme}>
+                  <S.MenuItem
+                    onClick={() => {
+                      handleFilter({
+                        nameFilter: "genre",
+                        valueFilter: item,
+                      });
+                    }}
+                    key={item}
+                    theme={theme}
+                  >
                     {item}
                   </S.MenuItem>
                 );

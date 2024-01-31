@@ -10,22 +10,16 @@ const initialState = {
   tracksForFilter: [],
   filteredAuthorGenreYears: [],
   isFiltred: false,
-  filters: { genre: "", author: [], years: "", search: "" },
+  filters: { genre: [], author: [], years: "", search: "" },
 };
 
 export const sliceTrackList = createSlice({
   name: "music",
   initialState,
   reducers: {
-    getCleanTheFilter: (state) => {
-      if (state.filters.author) {
-        state.filteredTracks = state.filteredTracks.filter(
-          (elem) => elem.author !== state.filters.author
-        );
-
-        state.isFiltred = false;
-        return;
-      }
+    clearTheFilter: (state) => {
+      state.filters = { genre: [], author: [], years: "", search: "" };
+      state.isFiltred = false;
     },
     selectedFiltered: (state, action) => {
       const author = [...state.filteredAuthorGenreYears, action.payload];
@@ -34,7 +28,10 @@ export const sliceTrackList = createSlice({
     setFilters: (state, action) => {
       // state.filters[action.payload.nameFilter] = action.payload.valueFilter;
 
-      if (action.payload.nameFilter === "author") {
+      if (
+        action.payload.nameFilter !== "search" &&
+        action.payload.nameFilter !== "years"
+      ) {
         if (
           state.filters[action.payload.nameFilter].includes(
             action.payload.valueFilter
@@ -53,26 +50,45 @@ export const sliceTrackList = createSlice({
       }
       state.filteredTracks = state.tracksForFilter;
       console.log(state.filters[action.payload.nameFilter]);
-      // if (
-      //   !state.filters.genre &&
-      //   !state.filters.author &&
-      //   !state.filters.years &&
-      //   !state.filters.search
-      // ) {
-      //   state.isFiltred = false;
-      //   return;
-      // }
+      if (
+        !state.filters.genre.length > 0 &&
+        !state.filters.author.length > 0 &&
+        !state.filters.years &&
+        !state.filters.search
+      ) {
+        state.isFiltred = false;
+        return;
+      }
 
       state.isFiltred = true;
+      if (state.filters.years) {
+        if (state.filters.years === "Сначала старые") {
+          state.filteredTracks = [...state.filteredTracks].sort(
+            (a, b) => new Date(a.release_date) - new Date(b.release_date)
+          );
+        }
+        if (state.filters.years === "Сначала новые") {
+          state.filteredTracks = [...state.filteredTracks].sort(
+            (a, b) => new Date(b.release_date) - new Date(a.release_date)
+          );
+        } 
+        if (state.filters.years === "По умолчанию") {
+          state.filteredTracks = state.tracksForFilter
+        } 
+      }
 
-      if (state.filters.genre) {
-        state.filteredTracks = state.filteredTracks.filter(
-          (elem) => elem.genre === state.filters.genre
-        );
+      if (state.filters.genre.length > 0) {
+        state.filteredTracks = state.filters.genre
+          .map((elemFilter) => {
+            return state.filteredTracks.filter(
+              (elem) => elem.genre === elemFilter
+            );
+          })
+          .flat();
       }
 
       if (state.filters.author.length > 0) {
-        state.filteredTracks = state.filteredTracks
+        state.filteredTracks = state.filters.author
           .map((authorItem) => {
             return state.filteredTracks.filter(
               (elem) => elem.author === authorItem
@@ -84,11 +100,7 @@ export const sliceTrackList = createSlice({
       }
 
       // console.log(state.filteredAuthorGenreYears);
-      if (state.filters.years) {
-        state.filteredTracks = state.filteredTracks.filter(
-          (elem) => elem.years === state.filters.years
-        );
-      }
+
       if (state.filters.search) {
         state.filteredTracks = state.filteredTracks.filter((track) => {
           return (
@@ -161,7 +173,7 @@ export const {
   getTracksListShuffled,
   setFilters,
   setTrackListForFilter,
-  getCleanTheFilter,
+  clearTheFilter,
   selectedFiltered,
 } = sliceTrackList.actions;
 export default sliceTrackList.reducer;
