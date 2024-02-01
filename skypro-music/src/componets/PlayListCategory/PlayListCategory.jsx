@@ -46,6 +46,8 @@ const PlayListCategory = () => {
   const category = ArrCategorys.find(
     (categor) => categor.id === Number(params.id)
   );
+
+  const dataItem = data.items
   return (
     <S.MainCenterblock>
       <BlockSearch />
@@ -71,13 +73,13 @@ const PlayListCategory = () => {
           <p>Не удалось загрузить плейлист, попробуйте позже</p>
         ) : null} */}
         <S.ContentPlaylist theme={theme}>
-          {data.items?.map((item) => {
+          {dataItem?.map((item) => {
             return (
               <Track
                 key={item.id}
                 item={item}
                 {...item}
-                data={data}
+                data={dataItem}
                 isCategoryLike={false}
               />
             );

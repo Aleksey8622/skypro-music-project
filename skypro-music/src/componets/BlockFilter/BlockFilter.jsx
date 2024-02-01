@@ -4,12 +4,7 @@ import { useState } from "react";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useAllTracksQuery } from "../../redux/apiMusic";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  // getCleanTheFilter,
-  selectedFiltered,
-  setFilters,
-  // setFilters,
-} from "../../store/slice";
+import { setFilters } from "../../store/slice";
 
 function BlockFilter() {
   const { data = [] } = useAllTracksQuery();
@@ -60,8 +55,9 @@ function BlockFilter() {
       setDataTrack(["По умолчанию", "Сначала старые", "Сначала новые"]);
     }
   }, [data]);
-  const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
+  // const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
   const filterCount = useSelector((state) => state.music.filters);
+  const $isAuthorClick = useSelector((state) => state.music.$isAuthorClick);
   const filteredAuthorGenreYears = useSelector(
     (state) => state.music.filteredAuthorGenreYears
   );
@@ -71,22 +67,29 @@ function BlockFilter() {
   useEffect(() => {
     console.log(filteredAuthorGenreYears);
   }, [filteredAuthorGenreYears]);
-
+  console.log(filterCount);
   return (
     <S.CenterBlockFilter theme={theme}>
       {/* <div onClick={() => removeHandleFilter()}>clean</div> */}
       <S.FilterTitle theme={theme}>Искать по:</S.FilterTitle>
+
+      {filterCount.author.length > 0 && (
+        <S.filterCount theme={theme}>{filterCount.author.length}</S.filterCount>
+      )}
+
       {filter ? (
         <S.BtnActive theme={theme} onClick={showFilterAuthor}>
           исполнителю
-          <div>
-            {filterCount.author.length > 0 && filterCount.author.length}
-          </div>
           <S.MenuFilter theme={theme}>
             <S.MenuList theme={theme}>
               {data.map((item) => {
+                console.log(filterCount.author.includes(item.author));
+                console.log($isAuthorClick);
+                
                 return (
                   <S.MenuItem
+                    $isAuthorClick={$isAuthorClick}
+                    $isAuthorSelector={filterCount.author.includes(item.author)}
                     key={item.id}
                     theme={theme}
                     onClick={() => {

@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 
 export const themes = {
   light: {
+    colorCount: "#fff",
     color: "#000000",
     background: "#FFFFFF",
     backgroundColorIcon: "FFFFFF",

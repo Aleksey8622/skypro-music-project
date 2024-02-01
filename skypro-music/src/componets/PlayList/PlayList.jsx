@@ -28,7 +28,7 @@ function PlayList() {
     dispatch(setFilters({ nameFilter: "search", valueFilter: valueSearch }));
     // console.log(initialTracks);
     // console.log(filtredDataRedux);
-  }, [dispatch, data, isLoading]);
+  }, [dispatch, data, isLoading, valueSearch]);
 
   return (
     <S.MainCenterblock>

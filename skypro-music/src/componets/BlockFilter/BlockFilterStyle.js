@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
 export const CenterBlockFilter = styled.div`
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -21,6 +22,21 @@ export const FilterTitle = styled.div`
   font-size: 16px;
   line-height: 24px;
   margin-right: 15px;
+`;
+
+export const filterCount = styled.div`
+  position: absolute;
+  top: -33%;
+  right: 79%;
+  border: 1px solid #d9b6ff;
+  border-radius: 50%;
+  background: #8215f9;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  opacity: 1;
+  z-index: 1;
+  color: ${(props) => props.theme.colorCount};
 `;
 export const FilterButton = styled.div`
   font-style: normal;
@@ -119,9 +135,12 @@ export const MenuItem = styled.li`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: ${(props) => props.theme.color};
+  color: ${(props) => (props.$isAuthorClick && props.$isAuthorSelector ? "#d9b6ff" : props.theme.color)};
   &:hover {
     color: ${(props) => props.theme.colorBtnHover};
     text-decoration: underline;
   }
+`;
+export const MenuItemActive = styled.li`
+  color: #d9b6ff;
 `;

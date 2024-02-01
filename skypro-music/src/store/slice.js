@@ -10,6 +10,7 @@ const initialState = {
   tracksForFilter: [],
   filteredAuthorGenreYears: [],
   isFiltred: false,
+  $isAuthorClick: false,
   filters: { genre: [], author: [], years: "", search: "" },
 };
 
@@ -88,6 +89,7 @@ export const sliceTrackList = createSlice({
       }
 
       if (state.filters.author.length > 0) {
+        state.$isAuthorClick = true
         state.filteredTracks = state.filters.author
           .map((authorItem) => {
             return state.filteredTracks.filter(
