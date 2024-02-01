@@ -24,10 +24,38 @@ export const FilterTitle = styled.div`
   margin-right: 15px;
 `;
 
-export const filterCount = styled.div`
+export const filterCountAuthor = styled.div`
   position: absolute;
-  top: -33%;
-  right: 79%;
+  top: -14px;
+  left: 210px;
+  border: 1px solid #d9b6ff;
+  border-radius: 50%;
+  background: #8215f9;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  opacity: 1;
+  z-index: 1;
+  color: ${(props) => props.theme.colorCount};
+`;
+export const filterCountGenre = styled.div`
+  position: absolute;
+  top: -14px;
+  left: 310px;
+  border: 1px solid #d9b6ff;
+  border-radius: 50%;
+  background: #8215f9;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  opacity: 1;
+  z-index: 1;
+  color: ${(props) => props.theme.colorCount};
+`;
+export const filterCountYears = styled.div`
+  position: absolute;
+  top: -14px;
+  left: 480px;
   border: 1px solid #d9b6ff;
   border-radius: 50%;
   background: #8215f9;
@@ -135,12 +163,46 @@ export const MenuItem = styled.li`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: ${(props) => (props.$isAuthorClick && props.$isAuthorSelector ? "#d9b6ff" : props.theme.color)};
+  color: ${(props) =>
+    props.$isAuthorClick && props.$isAuthorSelector
+      ? "#d9b6ff"
+      : props.theme.color};
   &:hover {
     color: ${(props) => props.theme.colorBtnHover};
     text-decoration: underline;
   }
 `;
-export const MenuItemActive = styled.li`
-  color: #d9b6ff;
+export const MenuItemGenre = styled.li`
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: ${(props) =>
+    props.$isGenreClick && props.$isGenreSelector
+      ? "#d9b6ff"
+      : props.theme.color};
+  &:hover {
+    color: ${(props) => props.theme.colorBtnHover};
+    text-decoration: underline;
+  }
+`;
+export const MenuItemYears = styled.li`
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: ${(props) =>
+    props.$isYearsClick && props.$isYearsSelector
+      ? "#d9b6ff"
+      : props.theme.color};
+  &:hover {
+    color: ${(props) => props.theme.colorBtnHover};
+    text-decoration: underline;
+  }
 `;

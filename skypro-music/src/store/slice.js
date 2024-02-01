@@ -11,7 +11,9 @@ const initialState = {
   filteredAuthorGenreYears: [],
   isFiltred: false,
   $isAuthorClick: false,
-  filters: { genre: [], author: [], years: "", search: "" },
+  $isGenreClick: false,
+  $isYearsClick: false,
+  filters: { genre: [], author: [], years: [], search: "" },
 };
 
 export const sliceTrackList = createSlice({
@@ -63,7 +65,8 @@ export const sliceTrackList = createSlice({
 
       state.isFiltred = true;
       if (state.filters.years) {
-        if (state.filters.years === "Сначала старые") {
+        state.$isYearsClick = true;
+        if (state.filters.years.length === "Сначала старые") {
           state.filteredTracks = [...state.filteredTracks].sort(
             (a, b) => new Date(a.release_date) - new Date(b.release_date)
           );
@@ -72,13 +75,14 @@ export const sliceTrackList = createSlice({
           state.filteredTracks = [...state.filteredTracks].sort(
             (a, b) => new Date(b.release_date) - new Date(a.release_date)
           );
-        } 
+        }
         if (state.filters.years === "По умолчанию") {
-          state.filteredTracks = state.tracksForFilter
-        } 
+          state.filteredTracks = state.tracksForFilter;
+        }
       }
 
       if (state.filters.genre.length > 0) {
+        state.$isGenreClick = true;
         state.filteredTracks = state.filters.genre
           .map((elemFilter) => {
             return state.filteredTracks.filter(
@@ -89,7 +93,7 @@ export const sliceTrackList = createSlice({
       }
 
       if (state.filters.author.length > 0) {
-        state.$isAuthorClick = true
+        state.$isAuthorClick = true;
         state.filteredTracks = state.filters.author
           .map((authorItem) => {
             return state.filteredTracks.filter(
