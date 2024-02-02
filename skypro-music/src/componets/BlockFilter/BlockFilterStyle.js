@@ -2,18 +2,29 @@ import { styled } from "styled-components";
 
 export const CenterBlockFilter = styled.div`
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  // display: -webkit-box;
+  // display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
+  // -webkit-box-orient: horizontal;
+  // -webkit-box-direction: normal;
+  // -ms-flex-direction: row;
+  // flex-direction: row;
+  // -webkit-box-align: center;
+  // -ms-flex-align: center;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 51px;
   color: ${(props) => props.theme.color};
+`;
+
+export const itemAuthorGenreBlockFilter = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const itemYearsBlockFilter = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const FilterTitle = styled.div`
@@ -55,7 +66,7 @@ export const filterCountGenre = styled.div`
 export const filterCountYears = styled.div`
   position: absolute;
   top: -14px;
-  left: 480px;
+  right: 0px;
   border: 1px solid #d9b6ff;
   border-radius: 50%;
   background: #8215f9;

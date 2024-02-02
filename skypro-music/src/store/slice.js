@@ -13,7 +13,8 @@ const initialState = {
   $isAuthorClick: false,
   $isGenreClick: false,
   $isYearsClick: false,
-  filters: { genre: [], author: [], years: [], search: "" },
+  countYears: 0,
+  filters: { genre: [], author: [], years: "По умолчанию", search: "" },
 };
 
 export const sliceTrackList = createSlice({
@@ -66,17 +67,20 @@ export const sliceTrackList = createSlice({
       state.isFiltred = true;
       if (state.filters.years) {
         state.$isYearsClick = true;
-        if (state.filters.years.length === "Сначала старые") {
+        if (state.filters.years === "Сначала старые") {
+          state.countYears = state.countYears = 1;
           state.filteredTracks = [...state.filteredTracks].sort(
             (a, b) => new Date(a.release_date) - new Date(b.release_date)
           );
         }
         if (state.filters.years === "Сначала новые") {
+          state.countYears = state.countYears = 1;
           state.filteredTracks = [...state.filteredTracks].sort(
             (a, b) => new Date(b.release_date) - new Date(a.release_date)
           );
         }
         if (state.filters.years === "По умолчанию") {
+          state.countYears = state.countYears = 0;
           state.filteredTracks = state.tracksForFilter;
         }
       }

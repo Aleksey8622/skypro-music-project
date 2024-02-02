@@ -60,6 +60,7 @@ function BlockFilter() {
   const $isAuthorClick = useSelector((state) => state.music.$isAuthorClick);
   const $isGenreClick = useSelector((state) => state.music.$isGenreClick);
   const $isYearsClick = useSelector((state) => state.music.$isYearsClick);
+  const countYears = useSelector((state) => state.music.countYears);
   const filteredAuthorGenreYears = useSelector(
     (state) => state.music.filteredAuthorGenreYears
   );
@@ -72,115 +73,120 @@ function BlockFilter() {
   console.log(filterCount);
   return (
     <S.CenterBlockFilter theme={theme}>
-      <S.FilterTitle theme={theme}>Искать по:</S.FilterTitle>
-      {filterCount.author.length > 0 && (
-        <S.filterCountAuthor theme={theme}>
-          {filterCount.author.length}
-        </S.filterCountAuthor>
-      )}
-      {filter ? (
-        <S.BtnActive theme={theme} onClick={showFilterAuthor}>
-          исполнителю
-          <S.MenuFilter theme={theme}>
-            <S.MenuList theme={theme}>
-              {data.map((item) => {
-                return (
-                  <S.MenuItem
-                    $isAuthorClick={$isAuthorClick}
-                    $isAuthorSelector={filterCount.author.includes(item.author)}
-                    key={item.id}
-                    theme={theme}
-                    onClick={() => {
-                      handleFilter({
-                        nameFilter: "author",
-                        valueFilter: item.author,
-                      });
-                    }}
-                  >
-                    {item.author}
-                  </S.MenuItem>
-                );
-              })}
-            </S.MenuList>
-          </S.MenuFilter>
-        </S.BtnActive>
-      ) : (
-        <S.FilterButton theme={theme} onClick={showFilterAuthor}>
-          исполнителю
-        </S.FilterButton>
-      )}
-      {filterCount.genre.length > 0 && (
-        <S.filterCountGenre theme={theme}>
-          {filterCount.genre.length}
-        </S.filterCountGenre>
-      )}
-      {filterGenre ? (
-        <S.BtnActive theme={theme} onClick={showFilterGenre}>
-          жанру
-          <S.MenuFilterActive theme={theme}>
-            <S.MenuList theme={theme}>
-              {genre.map((item) => {
-                return (
-                  <S.MenuItemGenre
-                    $isGenreClick={$isGenreClick}
-                    $isGenreSelector={filterCount.genre.includes(item)}
-                    onClick={() => {
-                      handleFilter({
-                        nameFilter: "genre",
-                        valueFilter: item,
-                      });
-                    }}
-                    key={item}
-                    theme={theme}
-                  >
-                    {item}
-                  </S.MenuItemGenre>
-                );
-              })}
-            </S.MenuList>
-          </S.MenuFilterActive>
-        </S.BtnActive>
-      ) : (
-        <S.FilterButton theme={theme} onClick={showFilterGenre}>
-          жанру
-        </S.FilterButton>
-      )}
-      {filterCount.years.length > 0 && (
-        <S.filterCountYears theme={theme}>
-          {filterCount.years.length}
-        </S.filterCountYears>
-      )}
-      {filterYears ? (
-        <S.BtnActive theme={theme} onClick={showFilterYears}>
-          Сортировать
-          <S.MenuFilter theme={theme}>
-            <S.MenuList theme={theme}>
-              {dataTrack.map((item) => {
-                return (
-                  <S.MenuItemYears
-                    $isYearsClick={$isYearsClick}
-                    $isYearsSelector={filterCount.years.includes(item)}
-                    onClick={() => {
-                      handleFilter({
-                        nameFilter: "years",
-                        valueFilter: item,
-                      });
-                    }}
-                    theme={theme}
-                    key={item}
-                  >
-                    {item}
-                  </S.MenuItemYears>
-                );
-              })}
-            </S.MenuList>
-          </S.MenuFilter>
-        </S.BtnActive>
-      ) : (
-        <S.FilterButton theme={theme} onClick={showFilterYears}>
-          {filterCount.years}
-        </S.FilterButton>
-      )}
+      <S.itemAuthorGenreBlockFilter>
+        <S.FilterTitle theme={theme}>Искать по:</S.FilterTitle>
+        {filterCount.author.length > 0 && (
+          <S.filterCountAuthor theme={theme}>
+            {filterCount.author.length}
+          </S.filterCountAuthor>
+        )}
+        {filter ? (
+          <S.BtnActive theme={theme} onClick={showFilterAuthor}>
+            исполнителю
+            <S.MenuFilter theme={theme}>
+              <S.MenuList theme={theme}>
+                {data.map((item) => {
+                  return (
+                    <S.MenuItem
+                      $isAuthorClick={$isAuthorClick}
+                      $isAuthorSelector={filterCount.author.includes(
+                        item.author
+                      )}
+                      key={item.id}
+                      theme={theme}
+                      onClick={() => {
+                        handleFilter({
+                          nameFilter: "author",
+                          valueFilter: item.author,
+                        });
+                      }}
+                    >
+                      {item.author}
+                    </S.MenuItem>
+                  );
+                })}
+              </S.MenuList>
+            </S.MenuFilter>
+          </S.BtnActive>
+        ) : (
+          <S.FilterButton theme={theme} onClick={showFilterAuthor}>
+            исполнителю
+          </S.FilterButton>
+        )}
+        {filterCount.genre.length > 0 && (
+          <S.filterCountGenre theme={theme}>
+            {filterCount.genre.length}
+          </S.filterCountGenre>
+        )}
+        {filterGenre ? (
+          <S.BtnActive theme={theme} onClick={showFilterGenre}>
+            жанру
+            <S.MenuFilterActive theme={theme}>
+              <S.MenuList theme={theme}>
+                {genre.map((item) => {
+                  return (
+                    <S.MenuItemGenre
+                      $isGenreClick={$isGenreClick}
+                      $isGenreSelector={filterCount.genre.includes(item)}
+                      onClick={() => {
+                        handleFilter({
+                          nameFilter: "genre",
+                          valueFilter: item,
+                        });
+                      }}
+                      key={item}
+                      theme={theme}
+                    >
+                      {item}
+                    </S.MenuItemGenre>
+                  );
+                })}
+              </S.MenuList>
+            </S.MenuFilterActive>
+          </S.BtnActive>
+        ) : (
+          <S.FilterButton theme={theme} onClick={showFilterGenre}>
+            жанру
+          </S.FilterButton>
+        )}
+      </S.itemAuthorGenreBlockFilter>
+      <S.itemYearsBlockFilter>
+        <S.FilterTitle theme={theme}>Сортировать по:</S.FilterTitle>
+        {countYears === 1 && (
+          <S.filterCountYears theme={theme}>{countYears}</S.filterCountYears>
+        )}
+        {filterYears ? (
+          <S.BtnActive theme={theme} onClick={showFilterYears}>
+            {filterCount.years}
+            <S.MenuFilter theme={theme}>
+              <S.MenuList theme={theme}>
+                {dataTrack.map((item) => {
+                  return (
+                    <S.MenuItemYears
+                      $isYearsClick={$isYearsClick}
+                      $isYearsSelector={filterCount.years.includes(item)}
+                      onClick={() => {
+                        handleFilter({
+                          nameFilter: "years",
+                          valueFilter: item,
+                        });
+                      }}
+                      theme={theme}
+                      key={item}
+                    >
+                      {item}
+                    </S.MenuItemYears>
+                  );
+                })}
+              </S.MenuList>
+            </S.MenuFilter>
+          </S.BtnActive>
+        ) : (
+          <S.FilterButton theme={theme} onClick={showFilterYears}>
+            {filterCount.years}
+          </S.FilterButton>
+        )}
+      </S.itemYearsBlockFilter>
     </S.CenterBlockFilter>
   );
 }

@@ -26,8 +26,6 @@ function PlayList() {
   useEffect(() => {
     dispatch(setTrackListForFilter(data || []));
     dispatch(setFilters({ nameFilter: "search", valueFilter: valueSearch }));
-    // console.log(initialTracks);
-    // console.log(filtredDataRedux);
   }, [dispatch, data, isLoading, valueSearch]);
 
   return (
