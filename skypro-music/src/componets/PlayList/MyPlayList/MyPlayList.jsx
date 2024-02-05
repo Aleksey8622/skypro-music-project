@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useThemeContext } from "../../../pages/Theme/ThemeContext";
 import { useMyFavoriteTracksQuery } from "../../../redux/apiMusic";
 import { AuthContext } from "../../../store/AuthContext";
-import { setFilters, setTrackListForFilter } from "../../../store/slice";
+import { setTrackListForFilter } from "../../../store/slice";
 import BlockFilter from "../../BlockFilter/BlockFilter";
 import BlockSearch from "../../BlockSearch/BlockSearch";
 // import SkeletonTrack from "../../Skeletons/SkeletonTrack";
@@ -14,28 +14,24 @@ const MyPlayList = () => {
   const token = localStorage.getItem("access");
   const { logout } = useContext(AuthContext);
   const dispatch = useDispatch();
-  const valueSearch = useSelector((state) => state.music.filters.search);
-  const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
-  const initialTracks = useSelector((state) => state.music.tracksForFilter);
-  const isFiltred = useSelector((state) => state.music.isFiltred);
-  let newFiltredData = isFiltred ? filtredDataRedux : initialTracks;
+
   const {
-    data,
+    data = [],
     isLoading,
     error: likeError,
     error: dislikeError,
   } = useMyFavoriteTracksQuery({ token });
 
   useEffect(() => {
-    dispatch(setTrackListForFilter(data || []));
-    dispatch(setFilters({ nameFilter: "search", valueFilter: valueSearch }));
+    dispatch(setTrackListForFilter(data));
+
     if (
       (likeError && likeError.status === 401) ||
       (dislikeError && dislikeError.status === 401)
     ) {
       logout();
     }
-  }, [dispatch, data, isLoading, valueSearch, likeError, dislikeError, logout]);
+  }, [dispatch, data, isLoading, likeError, dislikeError, logout]);
 
   return (
     <S.MainCenterblock>
@@ -58,11 +54,15 @@ const MyPlayList = () => {
         </S.ContentTitle>
 
         <S.ContentPlaylist theme={theme}>
-          {newFiltredData.length === 0 ? <p style={{ textAlign: "center" }}>В вашем плайлисте пока нет треков</p> : null}
+          {data.length === 0 && (
+            <p style={{ textAlign: "center" }}>
+              В вашем плайлисте пока нет треков
+            </p>
+          )}
           {isLoading ? (
             <p style={{ textAlign: "center" }}>Loading...</p>
           ) : (
-            newFiltredData.map((item) => {
+            data.map((item) => {
               return (
                 <Track
                   // refetch={refetch}

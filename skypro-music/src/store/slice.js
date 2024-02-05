@@ -13,21 +13,27 @@ const initialState = {
   $isGenreClick: false,
   $isYearsClick: false,
   countYears: 0,
-  filters: { genre: [], author: [], years: "По умолчанию", search: "" },
+  filters: {
+    genre: [],
+    author: [],
+    years: "По умолчанию",
+    search: "",
+    searchFavorite: "",
+  },
 };
 
 export const sliceTrackList = createSlice({
   name: "music",
   initialState,
   reducers: {
-    clearTheFilter: (state) => {
+    clearTheFilter: (state, action) => {
       state.filters = {
         genre: [],
         author: [],
         years: "По умолчанию",
         search: "",
       };
-      
+
       state.countYears = 0;
       state.isFiltred = false;
     },
@@ -130,6 +136,22 @@ export const sliceTrackList = createSlice({
         });
       }
     },
+    getSearchFavorite: (state, action) => {
+     
+
+      if (state.filters.searchFavorite) {
+        state.filteredTracks = state.filteredTracks.filter((track) => {
+          return (
+            track.name
+              .toLowerCase()
+              .includes(state.filters.search.toLowerCase()) ||
+            track.author
+              .toLowerCase()
+              .includes(state.filters.search.toLowerCase())
+          );
+        });
+      }
+    },
     getAllTrack: (state, action) => {
       state.currentTrack = action.payload;
       state.trackList = action.payload.data;
@@ -191,6 +213,7 @@ export const {
   setTrackListForFilter,
   clearTheFilter,
   selectedFiltered,
+  getSearchFavorite,
 } = sliceTrackList.actions;
 export default sliceTrackList.reducer;
 
