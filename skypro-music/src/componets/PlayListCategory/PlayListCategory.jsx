@@ -1,23 +1,24 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
-import { useGetSelectionCategoryQuery, useMyFavoriteTracksQuery } from "../../redux/apiMusic";
+import {
+  useGetSelectionCategoryQuery,
+  useMyFavoriteTracksQuery,
+} from "../../redux/apiMusic";
 import { AuthContext } from "../../store/AuthContext";
 import BlockFilter from "../BlockFilter/BlockFilter";
 import BlockSearch from "../BlockSearch/BlockSearch";
 import * as S from "../PlayList/PlayListStyle";
 import Track from "../PlayList/Tracks/Track";
-
 const PlayListCategory = () => {
   const { theme } = useThemeContext();
   const params = useParams();
   console.log(params);
   const token = localStorage.getItem("access");
   const { logout } = useContext(AuthContext);
-  const {
-    error: likeError,
-    error: dislikeError,
-  } = useMyFavoriteTracksQuery({ token });
+  const { error: likeError, error: dislikeError } = useMyFavoriteTracksQuery({
+    token,
+  });
 
   useEffect(() => {
     if (
@@ -47,7 +48,7 @@ const PlayListCategory = () => {
     (categor) => categor.id === Number(params.id)
   );
 
-  const dataItem = data.items
+  const dataItem = data.items;
   return (
     <S.MainCenterblock>
       <BlockSearch />
@@ -57,7 +58,8 @@ const PlayListCategory = () => {
       </S.CenterblockHeading>
       {/* <h1 onClick={handelTrack}>Нажать</h1> */}
 
-      <BlockFilter />
+      {<PlayListCategory /> ? null : <BlockFilter />}
+
       <S.CenterblockContent>
         <S.ContentTitle>
           <S.TitleCol1>Трек</S.TitleCol1>

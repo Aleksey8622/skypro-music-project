@@ -8,7 +8,6 @@ const initialState = {
   $isPlaying: true,
   filteredTracks: [],
   tracksForFilter: [],
-  filteredAuthorGenreYears: [],
   isFiltred: false,
   $isAuthorClick: false,
   $isGenreClick: false,
@@ -22,7 +21,14 @@ export const sliceTrackList = createSlice({
   initialState,
   reducers: {
     clearTheFilter: (state) => {
-      state.filters = { genre: [], author: [], years: "", search: "" };
+      state.filters = {
+        genre: [],
+        author: [],
+        years: "По умолчанию",
+        search: "",
+      };
+      
+      state.countYears = 0;
       state.isFiltred = false;
     },
     selectedFiltered: (state, action) => {

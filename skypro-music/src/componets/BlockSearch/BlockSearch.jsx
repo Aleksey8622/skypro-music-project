@@ -12,6 +12,7 @@ function BlockSearch() {
 
   const onChandeSearchValue = (value) => {
     dispatch(setFilters({ nameFilter: "search", valueFilter: value }));
+   
   };
   return (
     <S.CenterBlockSearch theme={theme}>
@@ -23,6 +24,7 @@ function BlockSearch() {
         type="search"
         placeholder="Поиск"
         name="search"
+        
         onChange={(event) =>
           onChandeSearchValue(event.target.value.toLocaleLowerCase())
         }

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useAllTracksQuery } from "../../redux/apiMusic";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilters } from "../../store/slice";
+import { clearTheFilter, setFilters } from "../../store/slice";
 
 function BlockFilter() {
   const { data = [] } = useAllTracksQuery();
@@ -66,6 +66,9 @@ function BlockFilter() {
   );
   const handleFilter = ({ nameFilter, valueFilter }) => {
     dispatch(setFilters({ nameFilter, valueFilter }));
+  };
+  const handlerClearFiltered = () => {
+    dispatch(clearTheFilter());
   };
   useEffect(() => {
     console.log(filteredAuthorGenreYears);
@@ -149,6 +152,12 @@ function BlockFilter() {
             жанру
           </S.FilterButton>
         )}
+        <S.clearFilteredButton
+          onClick={() => handlerClearFiltered()}
+          theme={theme}
+        >
+          Очистить фильтр
+        </S.clearFilteredButton>
       </S.itemAuthorGenreBlockFilter>
       <S.itemYearsBlockFilter>
         <S.FilterTitle theme={theme}>Сортировать по:</S.FilterTitle>

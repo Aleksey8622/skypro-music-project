@@ -15,6 +15,7 @@ export const MenuLink = styled(NavLink)`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+  
 
 `;
 export const IconThemeSvg = styled.svg`

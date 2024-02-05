@@ -58,6 +58,7 @@ const MyPlayList = () => {
         </S.ContentTitle>
 
         <S.ContentPlaylist theme={theme}>
+          {newFiltredData.length === 0 ? <p style={{ textAlign: "center" }}>В вашем плайлисте пока нет треков</p> : null}
           {isLoading ? (
             <p style={{ textAlign: "center" }}>Loading...</p>
           ) : (
