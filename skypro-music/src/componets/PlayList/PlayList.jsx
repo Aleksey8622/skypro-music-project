@@ -11,22 +11,27 @@ import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useAllTracksQuery } from "../../redux/apiMusic";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setFilters, setTrackListForFilter } from "../../store/slice";
+import {
+  clearTheFilter,
+  setTrackListForFilter,
+} from "../../store/slice";
+
 function PlayList() {
   const { theme } = useThemeContext();
   const { data, isLoading } = useAllTracksQuery();
   const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
   const initialTracks = useSelector((state) => state.music.tracksForFilter);
   const isFiltred = useSelector((state) => state.music.isFiltred);
-  const valueSearch = useSelector((state) => state.music.filters.search);
   let newFiltredData = isFiltred ? filtredDataRedux : initialTracks;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(clearTheFilter());
     dispatch(setTrackListForFilter(data || []));
-    dispatch(setFilters({ nameFilter: "search", valueFilter: valueSearch }));
-  }, [dispatch, data, isLoading, valueSearch]);
+    // dispatch(setFilters({ nameFilter: "search", valueFilter: valueSearch }));
+    
+  }, [dispatch, data, isLoading, ]);
 
   return (
     <S.MainCenterblock>

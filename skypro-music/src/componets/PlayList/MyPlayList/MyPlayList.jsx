@@ -1,29 +1,45 @@
 import React, { useContext, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useThemeContext } from "../../../pages/Theme/ThemeContext";
 import { useMyFavoriteTracksQuery } from "../../../redux/apiMusic";
 import { AuthContext } from "../../../store/AuthContext";
-import { setTrackListForFilter } from "../../../store/slice";
+import {
+  clearTheFilter,
+  setTrackListFavoriteFilter
+} from "../../../store/slice";
 import BlockFilter from "../../BlockFilter/BlockFilter";
 import BlockSearch from "../../BlockSearch/BlockSearch";
 // import SkeletonTrack from "../../Skeletons/SkeletonTrack";
 import * as S from "../PlayListStyle";
 import Track from "../Tracks/Track";
 const MyPlayList = () => {
+  const favoriteTracksRedux = useSelector(
+    (state) => state.music.filtredFavoriteTracks
+  );
+  const initialFavoriteTracks = useSelector(
+    (state) => state.music.tracksFavoriteForFilter
+  );
+  const isFiltredFavorite = useSelector((state) => state.music.isFiltred);
+
+  let favoriteData = isFiltredFavorite
+    ? favoriteTracksRedux
+    : initialFavoriteTracks;
+
   const { theme } = useThemeContext();
   const token = localStorage.getItem("access");
   const { logout } = useContext(AuthContext);
   const dispatch = useDispatch();
 
   const {
-    data = [],
+    data,
     isLoading,
     error: likeError,
     error: dislikeError,
   } = useMyFavoriteTracksQuery({ token });
 
   useEffect(() => {
-    dispatch(setTrackListForFilter(data));
+    dispatch(setTrackListFavoriteFilter(data || []));
+    dispatch(clearTheFilter());
 
     if (
       (likeError && likeError.status === 401) ||
@@ -54,7 +70,7 @@ const MyPlayList = () => {
         </S.ContentTitle>
 
         <S.ContentPlaylist theme={theme}>
-          {data.length === 0 && (
+          {favoriteData.length === 0 && (
             <p style={{ textAlign: "center" }}>
               В вашем плайлисте пока нет треков
             </p>
@@ -62,7 +78,7 @@ const MyPlayList = () => {
           {isLoading ? (
             <p style={{ textAlign: "center" }}>Loading...</p>
           ) : (
-            data.map((item) => {
+            favoriteData.map((item) => {
               return (
                 <Track
                   // refetch={refetch}
