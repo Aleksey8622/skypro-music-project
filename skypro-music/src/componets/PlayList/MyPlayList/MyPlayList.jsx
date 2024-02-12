@@ -5,7 +5,7 @@ import { useMyFavoriteTracksQuery } from "../../../redux/apiMusic";
 import { AuthContext } from "../../../store/AuthContext";
 import {
   clearTheFilter,
-  setTrackListFavoriteFilter
+  setTrackListFavoriteFilter,
 } from "../../../store/slice";
 import BlockFilter from "../../BlockFilter/BlockFilter";
 import BlockSearch from "../../BlockSearch/BlockSearch";
@@ -70,18 +70,17 @@ const MyPlayList = () => {
         </S.ContentTitle>
 
         <S.ContentPlaylist theme={theme}>
-          {favoriteData.length === 0 && (
+          {/* {favoriteData.length === 0 && (
             <p style={{ textAlign: "center" }}>
               В вашем плайлисте пока нет треков
             </p>
-          )}
+          )} */}
           {isLoading ? (
             <p style={{ textAlign: "center" }}>Loading...</p>
-          ) : (
+          ) : favoriteData.length > 0 ? (
             favoriteData.map((item) => {
               return (
                 <Track
-                  // refetch={refetch}
                   key={item.id}
                   item={item}
                   {...item}
@@ -90,6 +89,12 @@ const MyPlayList = () => {
                 />
               );
             })
+          ) : favoriteData.length === 0 && isFiltredFavorite === true ? (
+            <p style={{ textAlign: "center" }}>Поиск не дал результатов</p>
+          ) : (
+            <p style={{ textAlign: "center" }}>
+              В вашем плайлисте пока нет треков
+            </p>
           )}
         </S.ContentPlaylist>
       </S.CenterblockContent>

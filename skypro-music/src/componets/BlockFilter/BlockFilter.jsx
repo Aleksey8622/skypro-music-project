@@ -87,7 +87,7 @@ function BlockFilter() {
           <S.BtnActive theme={theme} onClick={showFilterAuthor}>
             исполнителю
             <S.MenuFilter theme={theme}>
-              <S.MenuList theme={theme}>
+              <S.MenuList theme={theme} onClick={(e) => e.stopPropagation()}>
                 {data.map((item) => {
                   return (
                     <S.MenuItem
@@ -125,7 +125,7 @@ function BlockFilter() {
           <S.BtnActive theme={theme} onClick={showFilterGenre}>
             жанру
             <S.MenuFilterActive theme={theme}>
-              <S.MenuList theme={theme}>
+              <S.MenuList theme={theme} onClick={(e) => e.stopPropagation()}>
                 {genre.map((item) => {
                   return (
                     <S.MenuItemGenre
@@ -168,7 +168,7 @@ function BlockFilter() {
           <S.BtnActive theme={theme} onClick={showFilterYears}>
             {filterCount.years}
             <S.MenuFilter theme={theme}>
-              <S.MenuList theme={theme}>
+              <S.MenuList theme={theme} onClick={(e) => e.stopPropagation()}>
                 {dataTrack.map((item) => {
                   return (
                     <S.MenuItemYears

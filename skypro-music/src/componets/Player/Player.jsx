@@ -167,13 +167,13 @@ function Player() {
 
   const togglePlay = $isPlaying ? stopHandel : startHandel;
 
-  // useEffect(() => {
-  //   if (currentTrack) {
-  //     startHandel();
-  //   } else {
-  //     stopHandel();
-  //   }
-  // }, [currentTrack]);
+  useEffect(() => {
+    if (currentTrack) {
+      startHandel();
+    } else {
+      stopHandel();
+    }
+  }, [currentTrack]);
 
   // const prevHandel = () => {
   //   alert("Еще не реализовано");
@@ -184,7 +184,12 @@ function Player() {
 
   return (
     <>
-      <audio autoPlay loop={false} ref={audioRef} src={currentTrack.track_file}></audio>
+      <audio
+        autoPlay
+        loop={false}
+        ref={audioRef}
+        src={currentTrack.track_file}
+      ></audio>
 
       <S.Bar theme={theme}>
         <S.TimeTrack theme={theme}>

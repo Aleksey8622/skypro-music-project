@@ -10,8 +10,6 @@ const initialState = {
   tracksForFilter: [],
   filtredFavoriteTracks: [],
   tracksFavoriteForFilter: [],
-  filterdCollectionsTracks: [],
-  filterdCollectionsForFilter: [],
   isFiltred: false,
   $isAuthorClick: false,
   $isGenreClick: false,
@@ -22,7 +20,6 @@ const initialState = {
     author: [],
     years: "По умолчанию",
     search: "",
-    // searchFavorite: "",
   },
 };
 
@@ -36,7 +33,6 @@ export const sliceTrackList = createSlice({
         author: [],
         years: "По умолчанию",
         search: "",
-        // searchFavorite: "",
       };
 
       state.countYears = 0;
@@ -47,7 +43,7 @@ export const sliceTrackList = createSlice({
       state.filteredAuthorGenreYears = author;
     },
     setFilters: (state, action) => {
-      // state.filters[action.payload.nameFilter] = action.payload.valueFilter;
+      
       if (
         !state.filters.genre.length > 0 &&
         !state.filters.author.length > 0 &&
@@ -80,7 +76,7 @@ export const sliceTrackList = createSlice({
       }
 
       state.filteredTracks = state.tracksForFilter;
-      // state.filterdCollectionsTracks = state.filterdCollectionsForFilter;
+    
       state.filtredFavoriteTracks = state.tracksFavoriteForFilter;
 
       console.log(state.filters[action.payload.nameFilter]);
@@ -127,10 +123,10 @@ export const sliceTrackList = createSlice({
           })
           .flat();
         console.log(state.filteredTracks);
-        // state.filteredAuthorGenreYears.push(action.payload.filters);
+       
       }
 
-      // console.log(state.filteredAuthorGenreYears);
+      
 
       if (state.filters.search) {
         state.filteredTracks = state.filteredTracks.filter((track) => {
@@ -158,20 +154,7 @@ export const sliceTrackList = createSlice({
           }
         );
       }
-      if (state.filters.search) {
-        
-        state.filterdCollectionsForFilter =
-          state.filterdCollectionsForFilter.filter((track) => {
-            return (
-              track.name
-                .toLowerCase()
-                .includes(state.filters.search.toLowerCase()) ||
-              track.author
-                .toLowerCase()
-                .includes(state.filters.search.toLowerCase())
-            );
-          });
-      }
+
     },
 
     getAllTrack: (state, action) => {
@@ -224,9 +207,7 @@ export const sliceTrackList = createSlice({
     setTrackListFavoriteFilter: (state, action) => {
       state.tracksFavoriteForFilter = action.payload;
     },
-    setTrackListCollectionsFilter: (state, action) => {
-      state.filterdCollectionsForFilter = action.payload;
-    },
+
   },
 });
 
@@ -242,7 +223,6 @@ export const {
   clearTheFilter,
   selectedFiltered,
   setTrackListFavoriteFilter,
-  setTrackListCollectionsFilter,
 } = sliceTrackList.actions;
 export default sliceTrackList.reducer;
 

@@ -11,10 +11,7 @@ import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useAllTracksQuery } from "../../redux/apiMusic";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {
-  clearTheFilter,
-  setTrackListForFilter,
-} from "../../store/slice";
+import { clearTheFilter, setFilters, setTrackListForFilter } from "../../store/slice";
 
 function PlayList() {
   const { theme } = useThemeContext();
@@ -22,6 +19,8 @@ function PlayList() {
   const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
   const initialTracks = useSelector((state) => state.music.tracksForFilter);
   const isFiltred = useSelector((state) => state.music.isFiltred);
+  const valueSearch = useSelector((state) => state.music.search);
+
   let newFiltredData = isFiltred ? filtredDataRedux : initialTracks;
 
   const dispatch = useDispatch();
@@ -29,9 +28,8 @@ function PlayList() {
   useEffect(() => {
     dispatch(clearTheFilter());
     dispatch(setTrackListForFilter(data || []));
-    // dispatch(setFilters({ nameFilter: "search", valueFilter: valueSearch }));
-    
-  }, [dispatch, data, isLoading, ]);
+    dispatch(setFilters({ nameFilter: "search", valueFilter: valueSearch }));
+  }, [dispatch, data, isLoading, valueSearch]);
 
   return (
     <S.MainCenterblock>
@@ -58,7 +56,7 @@ function PlayList() {
         <S.ContentPlaylist theme={theme}>
           {isLoading ? (
             <SkeletonTrack />
-          ) : (
+          ) : newFiltredData.length ? (
             newFiltredData.map((item) => {
               return (
                 <Track
@@ -71,6 +69,8 @@ function PlayList() {
                 />
               );
             })
+          ) : (
+            <p style={{ textAlign: "center" }}>Поиск не дал результатов</p>
           )}
         </S.ContentPlaylist>
       </S.CenterblockContent>
