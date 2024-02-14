@@ -77,17 +77,18 @@ const PlayListCategory = () => {
           <p>Не удалось загрузить плейлист, попробуйте позже</p>
         ) : null} */}
         <S.ContentPlaylist theme={theme}>
-          {dataItem?.map((item) => {
-            return (
-              <Track
-                key={item.id}
-                item={item}
-                {...item}
-                data={dataItem}
-                isCategoryLike={false}
-              />
-            );
-          })}
+          {dataItem.map((item) => {
+              return (
+                <Track
+                  key={item.id}
+                  item={item}
+                  {...item}
+                  data={dataItem}
+                  isCategoryLike={false}
+                />
+              );
+            })
+          }
         </S.ContentPlaylist>
       </S.CenterblockContent>
     </S.MainCenterblock>

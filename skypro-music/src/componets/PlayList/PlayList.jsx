@@ -11,11 +11,15 @@ import { useThemeContext } from "../../pages/Theme/ThemeContext";
 import { useAllTracksQuery } from "../../redux/apiMusic";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { clearTheFilter, setFilters, setTrackListForFilter } from "../../store/slice";
+import {
+  clearTheFilter,
+  setFilters,
+  setTrackListForFilter,
+} from "../../store/slice";
 
 function PlayList() {
   const { theme } = useThemeContext();
-  const { data, isLoading } = useAllTracksQuery();
+  const { data, isLoading, error } = useAllTracksQuery();
   const filtredDataRedux = useSelector((state) => state.music.filteredTracks);
   const initialTracks = useSelector((state) => state.music.tracksForFilter);
   const isFiltred = useSelector((state) => state.music.isFiltred);
@@ -50,9 +54,7 @@ function PlayList() {
             </S.PlaylistTitleSvg>
           </S.TitleCol4>
         </S.ContentTitle>
-        {/* {Error ? (
-          <p>Не удалось загрузить плейлист, попробуйте позже</p>
-        ) : null} */}
+        {/* {Error ? <p>Не удалось загрузить плейлист, попробуйте позже</p> : null} */}
         <S.ContentPlaylist theme={theme}>
           {isLoading ? (
             <SkeletonTrack />
@@ -69,6 +71,8 @@ function PlayList() {
                 />
               );
             })
+          ) : newFiltredData.length === 0 && error ? (
+            <p style={{ textAlign: "center" }}>Не удалось загрузить плейлист, попробуйте позже</p>
           ) : (
             <p style={{ textAlign: "center" }}>Поиск не дал результатов</p>
           )}
